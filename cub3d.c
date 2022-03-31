@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mal-guna <mal-guna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mal-guna <m3t9mm@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:39:32 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/03/31 11:50:11 by mal-guna         ###   ########.fr       */
+/*   Updated: 2022/03/31 15:33:16 by mal-guna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,7 @@ void	rotate(t_data *data, int dir)
 	// double y1 = data->player.y + 10;
 	// double	dist;
 	if(dir == 1 || dir == -1)
-		data->player.rot += (dir * 0.01);
+		data->player.rot += (dir * 0.05);
 	// else if ( dir == -1)
 	// 	data->player.rot -= (dir * 0.1);
 	// double s = sin(data->player.rot);
@@ -148,7 +148,7 @@ void	rotate(t_data *data, int dir)
 	//data->player.mag = 50;
 	// data->player.linex = data->player.mag *cos(data->player.rot) + data->player.x;
 	// data->player.liney = data->player.mag *sin(data->player.rot) + data->player.x;
-	data->player.linex = data->player.mag * cos(data->player.rot) + data->player.x;
+	data->player.linex = data->player.mag * cos(data->player.rot) + data->player.x;	
 	data->player.liney = data->player.mag * sin(data->player.rot) + data->player.y;
 	//printf("mag = %f\n", data->player.mag);
 	// data->player.linex = c * (data->player.linex-data->player.x) +  s *(data->player.liney - data->player.y) + data->player.x;
@@ -165,24 +165,27 @@ void	rotate(t_data *data, int dir)
 }
 int	movePlayer(int key, t_data *data)
 {
-
-	if(key == 119)
+// a =0
+// w =13
+// s =1
+// d =2
+	if(key == 13)
 	{
 		data->player.y -= 5;
 		//data->player.liney -= 5;
 
 	}
-	else if(key == 97)
+	else if(key == 0)
 	{
 		data->player.x -= 5;
 		//data->player.linex -=5;
 	}
-	else if (key == 115)
+	else if (key == 1)
 	{
 		data->player.y += 5;
 		//data->player.liney +=5;
 	}
-	else if (key == 100)
+	else if (key == 2)
 	{
 		data->player.x += 5;
 	//	data->player.linex +=5;
@@ -190,11 +193,11 @@ int	movePlayer(int key, t_data *data)
 	
 	// data->player.linex = data->player.x + 10;
 	// data->player.liney = data->player.y + 10;	
-	if (key == 65363)
+	if (key == 124)
 	{	
 		rotate(data, 1); // 1 for right
 	}
-	if (key == 65361)
+	if (key == 123)
 	{
 		rotate(data, -1); // -1 for left
 	}

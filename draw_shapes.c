@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_shapes.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mal-guna <mal-guna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mal-guna <m3t9mm@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:39:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/03/31 09:41:47 by mal-guna         ###   ########.fr       */
+/*   Updated: 2022/03/31 14:39:15 by mal-guna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	draw_circle(t_data *data, int r)
 			angle = i;
 			x1 = r * cos(angle * PI / 180);
 			y1 = r * sin(angle * PI / 180);
-			my_mlx_pixel_put(data, data->player.x + x1, data->player.y + y1, 0xFF0000FF);
+			my_mlx_pixel_put(data, data->player.x + x1, data->player.y + y1, 0x00FF0000);
 			i += 0.1;
 		}
 		r--;

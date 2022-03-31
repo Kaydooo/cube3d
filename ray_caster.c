@@ -6,7 +6,7 @@ void ray_se(t_data *data, double dx, double dy)
 	int		next_ypoint;
 	double	factorx;
 	double	factory;
-		data->player.mag = 1;
+	data->player.mag = 1;
 	rotate(data, 0);
 	while(!insdie_wall(data, 2))
 	{
