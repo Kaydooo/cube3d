@@ -6,7 +6,7 @@
 /*   By: mal-guna <mal-guna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/03/29 09:08:13 by mal-guna         ###   ########.fr       */
+/*   Updated: 2022/03/31 11:44:34 by mal-guna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,13 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	add_asset_to_image(t_data *data, int x, int y, int asset);
 void	printMap(t_data *data);
 int		movePlayer(int key, t_data *data);
+void	rotate(t_data *data, int dir);
+int		insdie_wall(t_data *data, int dir);
+
+/* ray_caster.c */
+void ray_se(t_data *data, double dx, double dy);
+void ray_ne(t_data *data, double dx, double dy);
+void ray_nw(t_data *data, double dx, double dy);
+void ray_sw(t_data *data, double dx, double dy);
 
 #endif
