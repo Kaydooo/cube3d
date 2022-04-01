@@ -6,13 +6,13 @@
 /*   By: mal-guna <mal-guna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:39:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/03/31 09:41:47 by mal-guna         ###   ########.fr       */
+/*   Updated: 2022/04/01 14:56:23 by mal-guna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	draw_circle(t_data *data, int r)
+void	draw_circle(t_data *data, int x, int y, int r)
 {
 	static const double PI = 3.1415926535;
     double i, angle, x1, y1;
@@ -25,7 +25,7 @@ void	draw_circle(t_data *data, int r)
 			angle = i;
 			x1 = r * cos(angle * PI / 180);
 			y1 = r * sin(angle * PI / 180);
-			my_mlx_pixel_put(data, data->player.x + x1, data->player.y + y1, 0xFF0000FF);
+			my_mlx_pixel_put(data, x + x1, y + y1, 0xFF0000FF);
 			i += 0.1;
 		}
 		r--;

@@ -6,7 +6,7 @@
 /*   By: mal-guna <mal-guna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:39:32 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/03/31 11:50:11 by mal-guna         ###   ########.fr       */
+/*   Updated: 2022/04/01 16:16:19 by mal-guna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,12 @@ void	add_asset_to_image(t_data *data, int x, int y, int asset)
 
 int		insdie_wall(t_data *data, int dir)
 {
-	//printf("index y = %f index x = %f    content = %d\n",data->player.liney / 32 -1, data->player.linex, data->map[((int)data->player.liney / 32) - 1][((int)data->player.linex / 32) ]);
+
+	//printf("index y = %050f index x = %f    content = %d\n",data->player.liney / 32 -1, data->player.linex, data->map[((int)data->player.liney / 32) - 1][((int)data->player.linex / 32) ]);
 	if(dir == 1) // North East
 	{
-		if(data->map[((int)data->player.liney / 32) - 1][((int)data->player.linex / 32) ] == 1)
+	//printf("index y = %.50f index x = %.50f  \n",data->player.liney, data->player.linex);	
+		if(data->map[(((int)(data->player.liney+0.001) )/ 32) - 1][((int)(data->player.linex + 0.001) / 32)] == 1)
 			return 1;
 	}
 	else if(dir == 2) // Sorth East
@@ -69,6 +71,11 @@ int		insdie_wall(t_data *data, int dir)
 		if(data->map[((int)data->player.liney / 32) ][((int)data->player.linex / 32)  - 1] == 1)
 			return 1;
 	}
+	else if(dir == 5) // South West
+	{
+		if(data->map[(((int)(data->player.liney+0.001) )/ 32)][((int)(data->player.linex + 0.001) / 32)] == 1)
+			return 1;
+	}
 	return 0;
 }
 
@@ -79,12 +86,11 @@ void	check_line(t_data *data)
 	double dx = data->player.linex - data->player.x;
 	double dy = data->player.liney - data->player.y;
 	
-	
 	if(dx >= 0 && dy >= 0)// next_point = d * factor + data->player.linex
 		ray_se(data, dx, dy);
 	else if(dx >= 0 && dy < 0)// next_point = d * factor + data->player.linex
 		ray_ne(data, dx, dy);
-	else if(dx < 0 && dy < 0)// next_point = d * factor + data->player.linex
+	else if(dx < 0 && dy <= 0)// next_point = d * factor + data->player.linex
 		ray_nw(data, dx, dy);
 	else if(dx < 0 && dy >= 0)// next_point = d * factor + data->player.linex
 		ray_ne(data, dx, dy);
@@ -117,7 +123,7 @@ void	printMap(t_data *data)
 		}
 		y++;
 	}
-	draw_circle(data, 20);
+	draw_circle(data, data->player.x, data->player.y, 20);
 	check_line(data);
 	draw_line(data, data->player.x, data->player.linex, data->player.y, data->player.liney);
 	mlx_put_image_to_window(data->mlx, data->win, data->img[0].img,0, 0);
@@ -210,7 +216,7 @@ int	main(void)
 	int mapp[24][24]=
 	{
 	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1},
 	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},

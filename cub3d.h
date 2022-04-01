@@ -6,7 +6,7 @@
 /*   By: mal-guna <mal-guna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/03/31 11:44:34 by mal-guna         ###   ########.fr       */
+/*   Updated: 2022/04/01 14:56:23 by mal-guna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ typedef	struct s_data{
 }t_data;
 
 /* draw_shapes.c */
-void	draw_circle(t_data *data, int r);
+void	draw_circle(t_data *data, int x, int y, int r);
 void	draw_square(t_data *data);
 void	draw_line(t_data *data, double x1, double x2, double y1, double y2);
 
