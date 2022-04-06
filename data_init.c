@@ -63,7 +63,7 @@ void	init_rays(t_data *data)
 	int	i;
 
 	i = -1;
-	double angel = -30.0 * 0.0174533;
+	double angel = 0.0;
 	while(++i < NUMBER_OF_RAYS)
 	{
 		data->player.rays[i].rot = angel;
