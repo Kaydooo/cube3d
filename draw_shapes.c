@@ -6,7 +6,7 @@
 /*   By: mal-guna <mal-guna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:39:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/04/01 14:56:23 by mal-guna         ###   ########.fr       */
+/*   Updated: 2022/04/05 02:15:12 by mal-guna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,28 +25,29 @@ void	draw_circle(t_data *data, int x, int y, int r)
 			angle = i;
 			x1 = r * cos(angle * PI / 180);
 			y1 = r * sin(angle * PI / 180);
-			my_mlx_pixel_put(data, x + x1, y + y1, 0xFF0000FF);
+			my_mlx_pixel_put(data, x + x1, y + y1, 0x00FF0000);
 			i += 0.1;
 		}
 		r--;
 	}
 }
-void	draw_square(t_data *data)
+void	draw_rect(t_data *data, int x, int y, int width, int height, int color)
 {
-	int a = 32;
-	int i = 0;
-	while (i<a)
-	{
-		my_mlx_pixel_put(data,data->player.x+i,data->player.y,0X00FF0000);
-		my_mlx_pixel_put(data,data->player.x,data->player.y-i,0X00FF0000);
-		i++;
-	}
+
+	int	i;
+	int	j;
+
 	i = 0;
-	while (i<=a)
+	j = 0;
+	while(j < height)
 	{
-		my_mlx_pixel_put(data, data->player.x+i,data->player.y-a,0X00FF0000);
-		my_mlx_pixel_put(data, data->player.x+a,data->player.y-i,0X00FF0000);
-		i++;
+		i = 0;
+		while (i<width)//draw bottom line // change a to change width
+		{
+			my_mlx_pixel_put(data, x+i,y-j,color);
+			i++;
+		}	
+		j++;
 	}
 }
 
