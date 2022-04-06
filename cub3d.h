@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mal-guna <mal-guna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mal-guna <m3t9mm@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/04/06 07:31:54 by mal-guna         ###   ########.fr       */
+/*   Updated: 2022/04/06 14:34:15 by mal-guna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 #define CUB3D_H
 
-#include <mlx.h>
+#include "mlx_mac/mlx.h"
 #include <unistd.h>
 #include <stdio.h>
 #include <math.h>
 #define NUMBER_OF_RAYS 61
-#define ROTATION_SPEED 0.1
+#define ROTATION_SPEED 0.001
 #define OneDegreeRad 0.0174533
 #define BLOCK_SIZE 32
 #define SPEED 1
