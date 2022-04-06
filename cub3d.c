@@ -6,7 +6,7 @@
 /*   By: mal-guna <mal-guna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:39:32 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/04/06 20:48:18 by mal-guna         ###   ########.fr       */
+/*   Updated: 2022/04/06 20:59:42 by mal-guna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,17 +173,17 @@ u =65362
 int	keyPress(int key, t_data *data)
 {
 
-	if(key == 119)//w
+	if(key == 13)//119 for linux 13 for Mac w
 		data->player.move_fw = 1; 
-	else if(key == 97)//a
+	else if(key == 0)//97 for linux 0 for Mac a
 		data->player.strafe_l= 1;
-	else if (key == 115)//s
+	else if (key ==1)// 115 for linux 1 for Mac s
 		data->player.move_bw = 1; 
-	else if (key == 100)//d
+	else if (key == 2)//100 for linux. 2 for Mac d
 		data->player.strafe_r = 1;
-	else if (key == 65363)
+	else if (key == 124)//65363 for linux. 124 for Mac r
 		data->player.rotate_r = 1;
-	else if (key == 65361)
+	else if (key == 123)// 65361 for linux 123 for Mac l
 		data->player.rotate_l = 1;
 	//printf("keyp=%d\n", key);
 	return (0);
@@ -191,17 +191,18 @@ int	keyPress(int key, t_data *data)
 
 int	keyRelease(int key, t_data *data)
 {
-	if(key == 119)//w
+
+	if(key == 13)//119 for linux 13 for Mac w
 		data->player.move_fw = 0; 
-	else if(key == 97)//a
-		data->player.strafe_l = 0;
-	else if (key == 115)//s
+	else if(key == 0)//97 for linux 0 for Mac a
+		data->player.strafe_l= 0;
+	else if (key ==1)// 115 for linux 1 for Mac s
 		data->player.move_bw = 0; 
-	else if (key == 100)//d
+	else if (key == 2)//100 for linux. 2 for Mac d
 		data->player.strafe_r = 0;
-	else if (key == 65363)
+	else if (key == 124)//65363 for linux. 124 for Mac r
 		data->player.rotate_r = 0;
-	else if (key == 65361)
+	else if (key == 123)// 65361 for linux 123 for Mac l
 		data->player.rotate_l = 0;
 	//printf("%d\n", key);
 	return (0);
