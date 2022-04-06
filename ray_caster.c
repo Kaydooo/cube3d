@@ -84,7 +84,7 @@ void ray_ne(t_data *data, double dx, double dy, int i)
 		else
 		{
 			data->player.rays[i].mag = data->player.rays[i].mag * factory;
-			data->player.rays[i].color = 0x00FFFF00;
+			data->player.rays[i].color = 0x000000FF;
 			rotate(data, 0, i);
 			//draw_circle(data, data->player.rays[i].ray_x, data->player.rays[i].ray_y, 2);
 			if(insdie_wall(data, ((int)(data->player.rays[i].ray_x) / 32), (next_ypoint/32)-1))
@@ -120,7 +120,7 @@ void ray_nw(t_data *data, double dx, double dy, int i)
 		if(factorx <= factory)
 		{
 			data->player.rays[i].mag = data->player.rays[i].mag * factorx;
-			data->player.rays[i].color = 0x00FF0000;
+			data->player.rays[i].color = 0x0000FF00;
 			rotate(data, 0, i);
 			//draw_circle(data, data->player.rays[i].ray_x, data->player.rays[i].ray_y, 1);
 			if(insdie_wall(data, ((int)(data->player.rays[i].ray_x + 0.00001) / 32) - 1, (((int)(data->player.rays[i].ray_y+0.00001) )/ 32)))
@@ -129,7 +129,7 @@ void ray_nw(t_data *data, double dx, double dy, int i)
 		else
 		{
 			data->player.rays[i].mag = data->player.rays[i].mag * factory;
-			data->player.rays[i].color = 0x00FFFF00;
+			data->player.rays[i].color = 0x000000FF;
 			rotate(data, 0, i);
 			//draw_circle(data, data->player.rays[i].ray_x, data->player.rays[i].ray_y, 1);
 			if(insdie_wall(data, ((int)(data->player.rays[i].ray_x + 0.00001) / 32), (((int)(data->player.rays[i].ray_y+0.00001) )/ 32) -1))
@@ -166,7 +166,7 @@ void ray_sw(t_data *data, double dx, double dy, int i)
 		if(factorx <= factory)
 		{
 			data->player.rays[i].mag = data->player.rays[i].mag * factorx;
-			data->player.rays[i].color = 0x00FF0000;
+			data->player.rays[i].color = 0x0000FF00;
 			rotate(data, 0, i);
 			//draw_circle(data, data->player.rays[i].ray_x, data->player.rays[i].ray_y, 1);
 			if(insdie_wall(data, ((int)(data->player.rays[i].ray_x + 0.00001) / 32) - 1, (((int)(data->player.rays[i].ray_y+0.00001) )/ 32)))

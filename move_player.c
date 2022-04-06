@@ -9,7 +9,7 @@ void	rotate(t_data *data, int dir, int i)
 	{
 		while(++j < NUMBER_OF_RAYS)
 		{
-			data->player.rays[j].rot += (dir* 0.2);
+			data->player.rays[j].rot += (dir* ROTATION_SPEED);
 			data->player.rays[j].ray_x = data->player.rays[j].mag * cos(data->player.rays[j].rot) + data->player.x;
 			data->player.rays[j].ray_y = data->player.rays[j].mag * sin(data->player.rays[j].rot) + data->player.y;
 		}

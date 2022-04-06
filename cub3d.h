@@ -6,7 +6,7 @@
 /*   By: mal-guna <mal-guna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/04/06 07:31:54 by mal-guna         ###   ########.fr       */
+/*   Updated: 2022/04/06 20:50:17 by mal-guna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <math.h>
-#define NUMBER_OF_RAYS 61
+#define NUMBER_OF_RAYS 384
 #define ROTATION_SPEED 0.1
-#define OneDegreeRad 0.0174533
+#define OneDegreeRad 0.0174533/5//0.0174533
 #define BLOCK_SIZE 32
 #define SPEED 1
 typedef	struct s_ray

@@ -6,7 +6,7 @@
 /*   By: mal-guna <mal-guna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:39:32 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/04/06 03:52:45 by mal-guna         ###   ########.fr       */
+/*   Updated: 2022/04/06 20:48:18 by mal-guna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,8 +112,8 @@ void	draw_3d(t_data *data)
 		if(height > 768)
 			height = 768;
 		y = 384 + (height/2);
-		draw_rect(data, x, y, 13, height, data->player.rays[i].color);
-		x += 13;
+		draw_rect(data, x, y, 2, height, data->player.rays[i].color);
+		x += 2;
 		i++;
 	}
 }
@@ -185,7 +185,7 @@ int	keyPress(int key, t_data *data)
 		data->player.rotate_r = 1;
 	else if (key == 65361)
 		data->player.rotate_l = 1;
-	printf("keyp=%d\n", key);
+	//printf("keyp=%d\n", key);
 	return (0);
 }
 
@@ -203,7 +203,7 @@ int	keyRelease(int key, t_data *data)
 		data->player.rotate_r = 0;
 	else if (key == 65361)
 		data->player.rotate_l = 0;
-	printf("%d\n", key);
+	//printf("%d\n", key);
 	return (0);
 }
 
