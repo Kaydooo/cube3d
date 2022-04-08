@@ -1,69 +1,49 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mal-guna <m3t9mm@gmail.com>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/03/31 14:35:09 by mal-guna         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef CUB3D_H
-#define CUB3D_H
+# define CUB3D_H
 
-#include "mlx_linux/mlx.h"
-#include <unistd.h>
-#include <stdio.h>
-#include <math.h>
+# include "mlx_linux/mlx.h"
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
+# include <string.h>
+# include <math.h>
 
-typedef	struct s_player{
-	double x;
-	double y;
-	double linex;
-	double liney;
-	double mag;
-	double rot;
+# define WIDTH 1024		// width of window
+# define HEIGHT 500		// height of window
+# define CAM 0.001 		// lower the value, the more clear image will be
+# define CAM_MAG 0.5
 
-}t_player;
-
-typedef struct	s_image {
+typedef struct	s_img {
 	void	*img;
+	void	*tmp_img;
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-	int 	width;
-	int		hieght;
-}				t_image;
+}				t_img;
 
-typedef	struct s_data{
-	void	*mlx;
-	void	*win;
-	struct s_image img[20];
-	struct s_player player;
-	int map[24][24];
+typedef struct s_player {
+	double	pos[2]; 	// player position 0:x | 1:y
+	double	dir[2];		// player direction 0:x | 1:y
+	double	c_pos[2];	// camera position 0:x | 1:y
+	double	c_dir[2];	// camera drrection 0:x | 1:y
+}				t_player;
 
-}t_data;
+typedef struct s_vars {
+	void		*mlx;
+	void		*win;
+	t_img		*img;
+	t_player	*player;
+	char		**map;
+	int			m_ht;
+	int			m_wt;
+}				t_vars;
 
-/* draw_shapes.c */
-void	draw_circle(t_data *data, int r);
-void	draw_square(t_data *data);
-void	draw_line(t_data *data, double x1, double x2, double y1, double y2);
-
-/* cub3d.c */
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-void	add_asset_to_image(t_data *data, int x, int y, int asset);
-void	printMap(t_data *data);
-int		movePlayer(int key, t_data *data);
-void	rotate(t_data *data, int dir);
-int		insdie_wall(t_data *data, int dir);
-
-/* ray_caster.c */
-void ray_se(t_data *data, double dx, double dy);
-void ray_ne(t_data *data, double dx, double dy);
-void ray_nw(t_data *data, double dx, double dy);
-void ray_sw(t_data *data, double dx, double dy);
+double	raycast(t_vars *vars, t_player *player, double *pos);
+void	draw_image(t_img *image, t_player *player, double dist, double *pos);
+int 	is_wall(t_vars *vars, double x, double y, double *diff);
 
 #endif

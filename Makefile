@@ -1,29 +1,27 @@
-# $< "include one prerequisite"
-# $@ "include target"
-# $^ "include the full list of prerequisites)"
+CC		= cc
 
-SRCS = cub3d.c draw_shapes.c ray_caster.c
+CFLAGS	= -Wall -Wextra -Werror
 
-OBJS = ${SRCS:.c=.o}
+O		= -o
 
-CC = gcc
+NAME	= cub3d
 
-CFLAGS = -Wall -Wextra -Werror -g3
+SOURCE	= cub3d.c	raycast.c	draw.c\
 
-MLX_FLAGS = -Lmlx_linux -lmlx -Imlx_linux -framework OpenGL -framework AppKit
+OBJ		= ${SOURCE:%.c=%.o}
 
-NAME = cub3d
+%.o: %.c
+	$(CC) -I/usr/include -Imlx_linux -O3 -c $< -o $@
 
-all : $(NAME)
+$(NAME): $(OBJ)
+	$(CC) $(OBJ) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o $(NAME)
 
-$(NAME): $(OBJS)
-	$(CC) $(OBJS) $(MLX_FLAGS) $(CFLAGS) -o $(NAME)
+all: $(NAME)
 
 clean:
-	rm -rf $(OBJS)
-fclean: clean
-	rm -rf $(NAME)
-	
-re:	fclean all
+	rm -f *.o
 
-.PHONY:	all clean fclean re
+fclean: clean
+	rm -f $(NAME)
+
+re: fclean all

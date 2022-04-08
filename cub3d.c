@@ -1,285 +1,191 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   cub3d.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mal-guna <m3t9mm@gmail.com>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/29 02:39:32 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/03/31 15:33:16 by mal-guna         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "cub3d.h"
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+void	set_view(t_vars *vars, t_img *image)
 {
-	void	*dst;
+	double	dist; // distance from wall to camera plane
+	double	pos[2]; // position along the camera plane relative to center of plane
+	double	shift[2]; // increment along camera plane
+	setvbuf(stdout, NULL, _IONBF, 0);
 
-	dst = data->img[0].addr + (y * data->img[0].line_length + x * (data->img[0].bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
-	
+	// initialize image
+	image->tmp_img = image->img;
+	image->img = mlx_new_image(vars->mlx, WIDTH, HEIGHT);
+	image->addr = mlx_get_data_addr(image->img, &(image->bits_per_pixel),
+		&(image->line_length), &(image->endian));
+
+	// set starting position and increment (+0.05) along camera plane
+	pos[0] = vars->player->c_pos[0] - vars->player->c_dir[0];
+	pos[1] = vars->player->c_pos[1] - vars->player->c_dir[1];
+	shift[0] = vars->player->c_dir[0] == 0 ? 0
+		: CAM / sqrt(1 + pow(vars->player->c_dir[1] / vars->player->c_dir[0], 2));
+	if (vars->player->c_dir[0] < 0)
+		shift[0] *= -1;
+	shift[1] = vars->player->c_dir[1] == 0 ? 0
+		: CAM / sqrt(1 + pow(vars->player->c_dir[0] / vars->player->c_dir[1], 2));
+	if (vars->player->c_dir[1] < 0)
+		shift[1] *= -1;
+
+	// cast rays and draw within Field of View
+	//printf("pos[0]: %f | pos[1]: %f\n", vars->player->c_pos[0] + vars->player->c_dir[0], vars->player->c_pos[1] + vars->player->c_dir[1]);
+	while (!(shift[0] > 0.000 && pos[0] > (vars->player->c_pos[0] + vars->player->c_dir[0]) 
+			|| shift[0] < 0.000 && pos[0] < (vars->player->c_pos[0] + vars->player->c_dir[0])
+			|| shift[1] > 0.000 && pos[1] > (vars->player->c_pos[1] + vars->player->c_dir[1])
+			|| shift[1] < 0.000 && pos[1] < (vars->player->c_pos[1] + vars->player->c_dir[1])))
+	{
+		dist = raycast(vars, vars->player, pos);
+		//printf("x: %f | y: %f | dist: %f\n", pos[0], pos[1], dist);
+		draw_image(image, vars->player, dist, pos);
+		pos[0] += shift[0];
+		pos[1] += shift[1];
+		if (pos[0] < 0 || pos[0] >= vars->m_wt
+			|| pos[1] < 0 || pos[1] >= vars->m_ht)
+			break ;
+	/*	if (shift[0] > 0.000 && pos[0] > (vars->player->c_pos[0] + vars->player->c_dir[0]) 
+			|| shift[0] < 0.000 && pos[0] < (vars->player->c_pos[0] + vars->player->c_dir[0])
+			|| shift[1] > 0.000 && pos[1] > (vars->player->c_pos[1] + vars->player->c_dir[1])
+			|| shift[1] < 0.000 && pos[1] < (vars->player->c_pos[1] + vars->player->c_dir[1]))
+			break ;		*/
+	}
+	mlx_put_image_to_window(vars->mlx, vars->win, image->img, 0, 0);
+	if (image->tmp_img)
+		mlx_destroy_image(vars->mlx, image->tmp_img);
 }
 
-void	add_asset_to_image(t_data *data, int x, int y, int asset)
+void set_camera(t_player *player)
 {
-	void	*dst;
-	void	*dst2;
-	int temp = x;
-	int x2 = 0;
-	int y2 = 0;
+	int mag = 1; // do not change
+
+	// set camera  starting position,
+	// which is midpoint of camera plane
+	player->c_pos[0] = player->pos[0] + player->dir[0];
+	player->c_pos[1] = player->pos[1] + player->dir[1];
 	
-	while(y2 < data->img[asset].hieght - 1)
+	// set camera direction, which is a 
+	// rightward line from camera position of length $mag
+	player->c_dir[0] = player->dir[1] == 0 ? 0
+		: CAM_MAG / sqrt((1 + pow(player->dir[0] / player->dir[1], 2)));
+	player->c_dir[1] = player->dir[0] == 0 ? 0
+		: CAM_MAG / sqrt((1 + pow(player->dir[1] / player->dir[0], 2)));
+	if (player->dir[0] >= 0.000 && player->dir[1] >= 0.000)
+		player->c_dir[0] *= -1;
+	if (player->dir[0] < 0.000 && player->dir[1] > 0.000)
 	{
-		x2 = 0;
-		x = temp;
-		while(x2 < data->img[asset].width - 1)
-		{
-			dst = data->img[0].addr + (y * data->img[0].line_length + x * (data->img[0].bits_per_pixel / 8));
-			dst2 = data->img[asset].addr + (y2 * data->img[asset].line_length + x2 * (data->img[asset].bits_per_pixel / 8));
-			*(unsigned int*)(dst) = *(unsigned int*)(dst2);
-			x2++;
-			x++;
-		}
-		y2++;
-		y++;
+		player->c_dir[0] *= -1;
+		player->c_dir[1] *= -1;
 	}
+	if (player->dir[0] <= 0.000 && player->dir[1] <= 0.000)
+		player->c_dir[1] *= -1;
 }
 
-int		insdie_wall(t_data *data, int dir)
+int	move(int key, t_vars *vars)
 {
-	//printf("index y = %f index x = %f    content = %d\n",data->player.liney / 32 -1, data->player.linex, data->map[((int)data->player.liney / 32) - 1][((int)data->player.linex / 32) ]);
-	if(dir == 1) // North East
+	double speed = 0.1;
+	double rotate = 0.0174533; // in radians (1)
+	if (key == 119) // up (w)
 	{
-		if(data->map[((int)data->player.liney / 32) - 1][((int)data->player.linex / 32) ] == 1)
-			return 1;
+		if (is_wall(vars, vars->player->pos[0] + (speed * vars->player->dir[0]),
+			vars->player->pos[1] + (speed * vars->player->dir[1]), NULL))
+			return (key);
+		vars->player->pos[0] += (speed * vars->player->dir[0]);
+		vars->player->pos[1] += (speed * vars->player->dir[1]);
+		set_camera(vars->player);
+		set_view(vars, vars->img);
 	}
-	else if(dir == 2) // Sorth East
+	if (key == 115) // down (s)
 	{
-		if(data->map[((int)data->player.liney / 32) ][((int)data->player.linex / 32) ] == 1)
-			return 1;
+		if (is_wall(vars, vars->player->pos[0] - (speed * vars->player->dir[0]),
+			vars->player->pos[1] - (speed * vars->player->dir[1]), NULL))
+			return (key);
+		vars->player->pos[0] -= (speed * vars->player->dir[0]);
+		vars->player->pos[1] -= (speed * vars->player->dir[1]);
+		set_camera(vars->player);
+		set_view(vars, vars->img);	
 	}
-	else if(dir == 3) // North West
+	if (key == 97) // left (a)
 	{
-		if(data->map[((int)data->player.liney / 32) - 1][((int)data->player.linex / 32) - 1] == 1)
-			return 1;
+		if (is_wall(vars, vars->player->pos[0] + (speed * vars->player->dir[1]),
+			vars->player->pos[1] - (speed * vars->player->dir[0]), NULL))
+			return (key);
+		vars->player->pos[0] += (speed * vars->player->dir[1]);
+		vars->player->pos[1] -= (speed * vars->player->dir[0]);
+		set_camera(vars->player);
+		set_view(vars, vars->img);	
 	}
-	else if(dir == 4) // South West
+	if (key == 100) // right (d)
 	{
-		if(data->map[((int)data->player.liney / 32) ][((int)data->player.linex / 32)  - 1] == 1)
-			return 1;
+		if (is_wall(vars, vars->player->pos[0] - (speed * vars->player->dir[1]),
+			vars->player->pos[1] + (speed * vars->player->dir[0]), NULL))
+			return (key);
+		vars->player->pos[0] -= (speed * vars->player->dir[1]);
+		vars->player->pos[1] += (speed * vars->player->dir[0]);
+		set_camera(vars->player);
+		set_view(vars, vars->img);
 	}
-	return 0;
+	// https://stackoverflow.com/questions/11773889/how-to-calculate-a-vector-from-an-angle-with-another-vector-in-2d)
+	if (key == 65361 || key == 65363) // rotate left/right
+	{
+		//printf("1\n");
+		if (key == 65363)
+			rotate *= -1;
+		double temp_x = (vars->player->dir[0] * cos(rotate)) + (vars->player->dir[1] * sin(rotate));
+		double temp_y = (-1 * vars->player->dir[0] * sin(rotate)) + (vars->player->dir[1] * cos(rotate));
+		vars->player->dir[0] = temp_x;
+		vars->player->dir[1] = temp_y;
+		set_camera(vars->player);
+		set_view(vars, vars->img);
+	}
+	return (key);
 }
 
-
-void	check_line(t_data *data)
-{
-
-	double dx = data->player.linex - data->player.x;
-	double dy = data->player.liney - data->player.y;
-	
-	
-	if(dx >= 0 && dy >= 0)// next_point = d * factor + data->player.linex
-		ray_se(data, dx, dy);
-	else if(dx >= 0 && dy < 0)// next_point = d * factor + data->player.linex
-		ray_ne(data, dx, dy);
-	else if(dx < 0 && dy < 0)// next_point = d * factor + data->player.linex
-		ray_nw(data, dx, dy);
-	else if(dx < 0 && dy >= 0)// next_point = d * factor + data->player.linex
-		ray_ne(data, dx, dy);
-	//printf("y = %f   content = %d  \n", data->player.liney/32 , data->map[((int)data->player.liney / 32)][((int)data->player.linex / 32)]);
-}
-
-void	printMap(t_data *data)
-{
-	int x = 0;
-	int y = 0;
-	add_asset_to_image(data, 0, 0, 4);
-	while(y < 24)
-	{
-		x = 0;
-		while(x < 24)
-		{
-			if(data->map[y][x] == 2)
-			{
-				data->player.x = x * 32;
-				data->player.y = y * 32;
-				data->player.linex = data->player.x + 50;
-				data->player.liney = data->player.y;
-				data->player.mag  = sqrt(pow(data->player.linex-data->player.x, 2) + pow(data->player.liney-data->player.y, 2));
-				data->map[y][x] = 0;
-			}
-			if(data->map[y][x] != 2)
-				add_asset_to_image(data, x *32, y*32, data->map[y][x] + 1);
-
-			x++;
-		}
-		y++;
-	}
-	draw_circle(data, 20);
-	check_line(data);
-	draw_line(data, data->player.x, data->player.linex, data->player.y, data->player.liney);
-	mlx_put_image_to_window(data->mlx, data->win, data->img[0].img,0, 0);
-}
-
-/*
-w = 119
-a = 97
-s = 115
-d = 100
-r =65363
-l =65361
-d =65364
-u =65362
-*/
-void	rotate(t_data *data, int dir)
-{	
-	//double PI = 3.14159265359;
-	// double x1 = data->player.x + 10;
-	// double y1 = data->player.y + 10;
-	// double	dist;
-	if(dir == 1 || dir == -1)
-		data->player.rot += (dir * 0.05);
-	// else if ( dir == -1)
-	// 	data->player.rot -= (dir * 0.1);
-	// double s = sin(data->player.rot);
-  	// double c = cos(data->player.rot);
-	//data->player.mag = 50;
-	// data->player.linex = data->player.mag *cos(data->player.rot) + data->player.x;
-	// data->player.liney = data->player.mag *sin(data->player.rot) + data->player.x;
-	data->player.linex = data->player.mag * cos(data->player.rot) + data->player.x;	
-	data->player.liney = data->player.mag * sin(data->player.rot) + data->player.y;
-	//printf("mag = %f\n", data->player.mag);
-	// data->player.linex = c * (data->player.linex-data->player.x) +  s *(data->player.liney - data->player.y) + data->player.x;
-	// data->player.liney = s * (data->player.linex-data->player.x) -  c *(data->player.linex - data->player.y) + data->player.y;
-	//my_mlx_pixel_put(data, data->player.linex, data->player.liney, 0x00FF0000);
-	//mlx_put_image_to_window(data->mlx, data->win, data->img[0].img, 0, 0);
-	// dist = hypot(data->player.linex, data->player.liney);
-	// data->player.linex /= dist;
-	// data->player.liney /= dist;
-	//printf("new x = %f , new y = %f \n", data->player.linex, data->player.liney);
-
-	
-	
-}
-int	movePlayer(int key, t_data *data)
-{
-// a =0
-// w =13
-// s =1
-// d =2
-	if(key == 13)
-	{
-		data->player.y -= 5;
-		//data->player.liney -= 5;
-
-	}
-	else if(key == 0)
-	{
-		data->player.x -= 5;
-		//data->player.linex -=5;
-	}
-	else if (key == 1)
-	{
-		data->player.y += 5;
-		//data->player.liney +=5;
-	}
-	else if (key == 2)
-	{
-		data->player.x += 5;
-	//	data->player.linex +=5;
-	}
-	
-	// data->player.linex = data->player.x + 10;
-	// data->player.liney = data->player.y + 10;	
-	if (key == 124)
-	{	
-		rotate(data, 1); // 1 for right
-	}
-	if (key == 123)
-	{
-		rotate(data, -1); // -1 for left
-	}
-
-	//if(key == 199 || key ==97 || key == 115 || key ==100  || key == 65363)
-	printMap(data);
-	printf("key =%d\n",key);
-	return (0);
-}
 int	main(void)
 {
-	t_data	data;
-	int mapp[24][24]=
-	{
-	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,1},
-	{1,0,0,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,1},
-	{1,0,0,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,1},
-	{1,0,0,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,1},
-	{1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1},
-	{1,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,1,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
-	};
-	int i = 0;
-	int j = 0;
-	while(i<24)
-	{
-		j = 0;
-		while (j < 24)
-		{
-			data.map[i][j] = mapp[i][j];
-			j++;
-		}
-		i++;
-	}
-	data.player.rot = 0;
-	data.mlx = mlx_init();
-	data.win = mlx_new_window(data.mlx, 24 * 32, 24*32, "Cub3d");
-	data.img[0].img = mlx_new_image(data.mlx, 24*32, 24*32);
-	data.img[0].addr = mlx_get_data_addr(data.img[0].img, &data.img[0].bits_per_pixel, &data.img[0].line_length, &data.img[0].endian);
-	data.img[1].img = mlx_xpm_file_to_image(data.mlx, "assets/black32.xpm", &data.img[1].width, &data.img[1].hieght);
-	data.img[1].addr = mlx_get_data_addr(data.img[1].img, &data.img[1].bits_per_pixel, &data.img[1].line_length, &data.img[1].endian);
-	data.img[2].img = mlx_xpm_file_to_image(data.mlx, "assets/white32.xpm", &data.img[2].width, &data.img[2].hieght);
-	data.img[2].addr = mlx_get_data_addr(data.img[2].img, &data.img[2].bits_per_pixel, &data.img[2].line_length, &data.img[2].endian);
-	data.img[3].img = mlx_xpm_file_to_image(data.mlx, "assets/blue32.xpm", &data.img[3].width, &data.img[3].hieght);
-	data.img[3].addr = mlx_get_data_addr(data.img[3].img, &data.img[3].bits_per_pixel, &data.img[3].line_length, &data.img[3].endian);
-	data.img[4].img = mlx_xpm_file_to_image(data.mlx, "assets/greybk.xpm", &data.img[4].width, &data.img[4].hieght);
-	data.img[4].addr = mlx_get_data_addr(data.img[4].img, &data.img[4].bits_per_pixel, &data.img[4].line_length, &data.img[4].endian);
+	t_vars		vars;
+	t_player	player;
+	t_img		image;
 
-	printMap(&data);
+	// initialize map
+	vars.map = calloc(5, sizeof(char *));
+	vars.map[0] =  strdup("111111111111111111111111");
+	vars.map[1] =  strdup("100000000000000001111111");
+	vars.map[2] =  strdup("100000000000000000000001");
+	vars.map[3] =  strdup("100000000000000000000001");
+	vars.map[4] =  strdup("100000000000000000000001");
+	vars.map[5] =  strdup("100000000000000000000001");
+	vars.map[6] =  strdup("100001111111000000000001");
+	vars.map[7] =  strdup("100001000001000000001001");
+	vars.map[8] =  strdup("100001011111000000001001");
+	vars.map[9] =  strdup("100001010001000010001001");
+	vars.map[10] = strdup("100001010000000000000001");
+	vars.map[11] = strdup("100001010000000000000001");
+	vars.map[12] = strdup("100001010000000000000001");
+	vars.map[13] = strdup("100001010000000000000001");
+	vars.map[14] = strdup("100001010000000000000001");
+	vars.map[15] = strdup("100001010000000000000001");
+	vars.map[16] = strdup("100001010000000000000001");
+	vars.map[17] = strdup("100000000000000000000001");
+	vars.map[18] = strdup("100000000000000000000001");
+	vars.map[19] = strdup("100000N00000000000000001");
+	vars.map[20] = strdup("100000100100000000000001");
+	vars.map[21] = strdup("100000000000000000000001");
+	vars.map[22] = strdup("100000000000000000000001");
+	vars.map[23] = strdup("111111111111111111111111");
+	vars.m_wt = 24; vars.m_ht = 24; // needs to be hard coded
 
-	// int a = 33;
-	// for(i=0;i<a;i++)
-	// {
-	// 	my_mlx_pixel_put(&data,data.player.x+i,data.player.y,0X00FF0000);
-	// 	my_mlx_pixel_put(&data,data.player.x,data.player.y-i,0X00FF0000);
-	// mlx_put_image_to_window(data.mlx, data.win, data.img[0].img,0, 0);
+	// initialize player
+	player.pos[0] = 7.5; player.pos[1] = 19; // needs to be hard coded
+	player.dir[0] = 0; player.dir[1] = -1;	// needs to be hard coded
+	set_camera(&player);
+	vars.player = &player;
+/*	printf("c_pos x: %f\nc_pos y: %f\nc_dir x: %f\nc_dir y: %f\n", 
+		vars.player->c_pos[0], vars.player->c_pos[1], vars.player->c_dir[0], vars.player->c_dir[1]); */
+	
+	// initialize window
+	vars.mlx = mlx_init();
+	vars.win = mlx_new_window(vars.mlx, WIDTH, HEIGHT, "cub3d");
+	image.img = NULL;
+	set_view(&vars, &image);
+	vars.img = &image;
 
-	// }
-	// for(i=0;i<=a;i++)
-	// {
-	// 	my_mlx_pixel_put(&data, data.player.x+i,data.player.y-a,0X00FF0000);
-	// 	my_mlx_pixel_put(&data, data.player.x+a,data.player.y-i,0X00FF0000);
-
-	// }
-	mlx_hook(data.win, 2, 1L<<0, movePlayer, &data);
-	//mlx_hook(data.win,  3, 0, movePlayer, &data);
-	mlx_loop(data.mlx);
+	mlx_hook(vars.win, 2, 1L<<0, move, &vars);
+	mlx_loop(vars.mlx);
 }
