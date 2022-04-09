@@ -6,7 +6,7 @@
 /*   By: mal-guna <mal-guna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/03/31 11:44:34 by mal-guna         ###   ########.fr       */
+/*   Updated: 2022/04/09 13:03:49 by mal-guna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,57 @@
 #include <stdio.h>
 #include <math.h>
 
+/* Game Settings */
+#define NUMBER_OF_RAYS 384*2
+#define ROTATION_SPEED 0.1
+#define OneDegreeRad 0.0174533/10//0.0174533
+#define BLOCK_SIZE 32
+#define SPEED 2
+
+/* Texture Indices */
+#define NORTH_TEXT 6
+#define SOUTH_TEXT 7
+#define WEST_TEXT 8
+#define EAST_TEXT 9
+
+/* Linux Keys */
+#define KEY_RIGHT 65363
+#define KEY_LEFT 65361
+#define KEY_W 119
+#define KEY_S 115
+#define KEY_A 97
+#define KEY_D 100
+
+/* Mac Keys */
+// #define KEY_RIGHT 124
+// #define KEY_LEFT 123
+// #define KEY_W 13
+// #define KEY_S 1
+// #define KEY_A 0
+// #define KEY_D 2
+
+
+typedef	struct s_ray
+{
+	double	ray_x;
+	double	ray_y;
+	double	mag;
+	double	rot;
+	int		color;
+	int		hit_point;
+	int		direction;
+}t_ray;
+
 typedef	struct s_player{
 	double x;
 	double y;
-	double linex;
-	double liney;
-	double mag;
-	double rot;
-
+	struct s_ray rays[NUMBER_OF_RAYS];
+	int	rotate_r;
+	int	rotate_l;
+	int	move_fw;
+	int	move_bw;
+	int	strafe_l;
+	int	strafe_r;
 }t_player;
 
 typedef struct	s_image {
