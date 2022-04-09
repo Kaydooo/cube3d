@@ -49,11 +49,11 @@ void	move(t_data *data, int dir)
 	}
 	if(data->player.x < 0)
 		data->player.x = 0;
-	if(data->player.x > 24*BLOCK_SIZE)
-		data->player.x = 24*BLOCK_SIZE;
+	if(data->player.x > data->map_width * BLOCK_SIZE)
+		data->player.x = data->map_width * BLOCK_SIZE;
 	if(data->player.y < 0)
 		data->player.y = 0;
-	if(data->player.y > 24*BLOCK_SIZE)
-		data->player.y = 24*BLOCK_SIZE;
+	if(data->player.y > data->map_height * BLOCK_SIZE)
+		data->player.y = data->map_height * BLOCK_SIZE;
 	init_rays_mag(data);
 }

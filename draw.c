@@ -8,7 +8,7 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;	
 }
 
-void	add_asset_to_image(t_data *data, int x, int y, int asset)
+void	add_asset_to_image_minimap(t_data *data, int x, int y, int asset)
 {
 	void	*dst;
 	void	*dst2;
@@ -35,7 +35,7 @@ void	add_asset_to_image(t_data *data, int x, int y, int asset)
 		y++;
 	}
 }
-void	add_asset_to_image2(t_data *data, int x, int y, int asset)
+void	add_asset_to_image(t_data *data, int x, int y, int asset)
 {
 	void	*dst;
 	void	*dst2;
@@ -72,7 +72,7 @@ void	draw_3d(t_data *data)
 	int playerRay = NUMBER_OF_RAYS/2;
 	double distance;
 	i = 0;
-	x = 0; //24* 32;
+	x = 0;
 	while(i < NUMBER_OF_RAYS)
 	{
 		if(i <= playerRay)
@@ -111,12 +111,12 @@ void	printMap(t_data *data)
 
 	x = 0;
 	y = 0;
-	add_asset_to_image(data, x*4, y*4, 4);
-	add_asset_to_image2(data, 0, 0, 5);
-	while(y < 24)
+	add_asset_to_image_minimap(data, x*4, y*4, 4);
+	add_asset_to_image(data, 0, 0, 5);
+	while(y < data->map_width)
 	{
 		x = 0;
-		while(x < 24)
+		while(x < data->map_height)
 		{
 			if(data->map[y][x] == 2)
 			{
@@ -126,7 +126,7 @@ void	printMap(t_data *data)
 				data->map[y][x] = 0;
 			}
 			if(data->map[y][x] != 2)
-				add_asset_to_image(data, x*5, y*5, data->map[y][x] + 1);
+				add_asset_to_image_minimap(data, x*5, y*5, data->map[y][x] + 1);
 			x++;
 		}
 		y++;

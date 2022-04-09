@@ -43,7 +43,7 @@ void ray_se(t_data *data, double dx, double dy, int i)
 		next_xpoint = (int) p1 * 32;
 		next_ypoint = (int) p2 * 32;
 
-		if(next_ypoint > 24*32 || next_xpoint > 24*32 || next_ypoint < 0 || next_xpoint < 0)
+		if(next_ypoint > data->map_height * 32 || next_xpoint > data->map_width * 32 || next_ypoint < 0 || next_xpoint < 0)
 			break ;
 		factorx = 1 + ((next_xpoint - data->player.rays[i].ray_x)) / dx;
 		factory = 1 + ((next_ypoint - data->player.rays[i].ray_y)) / dy;
@@ -87,7 +87,7 @@ void ray_ne(t_data *data, double dx, double dy, int i)
 			next_ypoint += 32;
 		if(data->player.rays[i].ray_x - (double) next_xpoint > 32)
 			next_xpoint += 32;
-		if(next_ypoint > 24*32 || next_xpoint > 24*32 || next_ypoint < 0 || next_xpoint < 0)
+		if(next_ypoint > data->map_height * 32 || next_xpoint > data->map_width * 32 || next_ypoint < 0 || next_xpoint < 0)
 			break ;
 		factorx = 1 + ((next_xpoint - data->player.rays[i].ray_x)) / dx;
 		factory = 1 + ((next_ypoint - data->player.rays[i].ray_y)) / dy;
@@ -134,7 +134,7 @@ void ray_nw(t_data *data, double dx, double dy, int i)
 			next_ypoint += 32;
 		if(data->player.rays[i].ray_x - (double) next_xpoint > 32)
 			next_xpoint += 32;
-		if(next_ypoint > 24*32 || next_xpoint > 24*32 || next_ypoint < 0 || next_xpoint < 0)
+		if(next_ypoint > data->map_height * 32 || next_xpoint > data->map_width * 32 || next_ypoint < 0 || next_xpoint < 0)
 			break ;
 		factorx = 1 + ((next_xpoint - data->player.rays[i].ray_x)) / dx;
 		factory = 1 + ((next_ypoint - data->player.rays[i].ray_y)) / dy;
@@ -180,7 +180,7 @@ void ray_sw(t_data *data, double dx, double dy, int i)
 			next_ypoint += 32;
 		if(data->player.rays[i].ray_x - (double) next_xpoint > 32)
 			next_xpoint += 32;
-		if(next_ypoint > 24*32 || next_xpoint > 24*32 || next_ypoint < 0 || next_xpoint < 0)
+		if(next_ypoint > data->map_height * 32 || next_xpoint > data->map_width * 32 || next_ypoint < 0 || next_xpoint < 0)
 			break ;
 		factorx = 1 + ((next_xpoint - data->player.rays[i].ray_x)) / dx;
 		factory = 1 + ((next_ypoint - data->player.rays[i].ray_y)) / dy;

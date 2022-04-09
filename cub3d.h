@@ -6,7 +6,7 @@
 /*   By: mal-guna <mal-guna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/04/09 12:14:05 by mal-guna         ###   ########.fr       */
+/*   Updated: 2022/04/09 12:19:26 by mal-guna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ typedef	struct s_data{
 	void	*game_win;
 	struct s_image img[20];
 	struct s_player player;
+	int		map_width;
+	int		map_height;
 	int map[24][24];
 
 }t_data;

@@ -2,6 +2,7 @@
 
 void	init_map(t_data *data)
 {
+
 	int mapp[24][24]=
 	{
 	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
@@ -29,12 +30,13 @@ void	init_map(t_data *data)
 	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
 	};
+
 	int i = 0;
 	int j = 0;
-	while(i<24)
+	while(i < data->map_width)
 	{
 		j = 0;
-		while (j < 24)
+		while (j < data->map_height)
 		{
 			data->map[i][j] = mapp[i][j];
 			j++;
@@ -45,7 +47,7 @@ void	init_map(t_data *data)
 
 void	init_imgs(t_data *data)
 {
-	data->img[0].img = mlx_new_image(data->mlx, 48*32, 24*32);
+	data->img[0].img = mlx_new_image(data->mlx, data->map_width * 32, data->map_height * 32);
 	data->img[0].addr = mlx_get_data_addr(data->img[0].img, &data->img[0].bits_per_pixel, &data->img[0].line_length, &data->img[0].endian);
 	data->img[1].img = mlx_xpm_file_to_image(data->mlx, "assets/black32.xpm", &data->img[1].width, &data->img[1].hieght);
 	data->img[1].addr = mlx_get_data_addr(data->img[1].img, &data->img[1].bits_per_pixel, &data->img[1].line_length, &data->img[1].endian);
@@ -89,8 +91,10 @@ void	init_vars(t_data *data)
 }
 void	data_init(t_data *data)
 {
+	data->map_width =24;
+	data->map_height =24;
 	data->mlx = mlx_init();
-	data->win = mlx_new_window(data->mlx, 24 * BLOCK_SIZE, 24 * BLOCK_SIZE, "Cub3d");
+	data->win = mlx_new_window(data->mlx, data->map_width * BLOCK_SIZE, data->map_height * BLOCK_SIZE, "Cub3d");
 	init_map(data);//temp
 	init_rays(data);
 	init_imgs(data);
