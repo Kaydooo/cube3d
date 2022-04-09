@@ -6,7 +6,7 @@
 /*   By: mal-guna <mal-guna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/04/09 11:38:18 by mal-guna         ###   ########.fr       */
+/*   Updated: 2022/04/09 12:14:05 by mal-guna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 /* Game Settings */
 #define NUMBER_OF_RAYS 384*2
-#define ROTATION_SPEED 0.03
+#define ROTATION_SPEED 0.05
 #define OneDegreeRad 0.0174533/10//0.0174533
 #define BLOCK_SIZE 32
 #define SPEED 2

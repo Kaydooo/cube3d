@@ -111,7 +111,7 @@ void	printMap(t_data *data)
 
 	x = 0;
 	y = 0;
-	//add_asset_to_image(data, x*4, y*4, 4);
+	add_asset_to_image(data, x*4, y*4, 4);
 	add_asset_to_image2(data, 0, 0, 5);
 	while(y < 24)
 	{
@@ -126,7 +126,7 @@ void	printMap(t_data *data)
 				data->map[y][x] = 0;
 			}
 			if(data->map[y][x] != 2)
-				add_asset_to_image(data, x*4, y*4, data->map[y][x] + 1);
+				add_asset_to_image(data, x*5, y*5, data->map[y][x] + 1);
 			x++;
 		}
 		y++;
