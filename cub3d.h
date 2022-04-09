@@ -6,7 +6,7 @@
 /*   By: mal-guna <mal-guna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/04/06 20:50:17 by mal-guna         ###   ########.fr       */
+/*   Updated: 2022/04/09 11:38:18 by mal-guna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,37 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <math.h>
-#define NUMBER_OF_RAYS 384
-#define ROTATION_SPEED 0.1
-#define OneDegreeRad 0.0174533/5//0.0174533
+
+/* Game Settings */
+#define NUMBER_OF_RAYS 384*2
+#define ROTATION_SPEED 0.03
+#define OneDegreeRad 0.0174533/10//0.0174533
 #define BLOCK_SIZE 32
-#define SPEED 1
+#define SPEED 2
+
+/* Texture Indices */
+#define NORTH_TEXT 6
+#define SOUTH_TEXT 7
+#define WEST_TEXT 8
+#define EAST_TEXT 9
+
+/* Linux Keys */
+#define KEY_RIGHT 65363
+#define KEY_LEFT 65361
+#define KEY_W 119
+#define KEY_S 115
+#define KEY_A 97
+#define KEY_D 100
+
+/* Mac Keys */
+// #define KEY_RIGHT 124
+// #define KEY_LEFT 123
+// #define KEY_W 13
+// #define KEY_S 1
+// #define KEY_A 0
+// #define KEY_D 2
+
+
 typedef	struct s_ray
 {
 	double	ray_x;
@@ -29,6 +55,8 @@ typedef	struct s_ray
 	double	mag;
 	double	rot;
 	int		color;
+	int		hit_point;
+	int		direction;
 }t_ray;
 
 typedef	struct s_player{
@@ -41,11 +69,6 @@ typedef	struct s_player{
 	int	move_bw;
 	int	strafe_l;
 	int	strafe_r;
-	// double linex;
-	// double liney;
-	// double mag;
-	// double rot;
-
 }t_player;
 
 typedef struct	s_image {
@@ -69,7 +92,7 @@ typedef	struct s_data{
 }t_data;
 
 /* draw_shapes.c */
-void	draw_circle(t_data *data, int x, int y, int r);
+void	draw_player(t_data *data, int x, int y, int r);
 void	draw_rect(t_data *data, int x, int y, int width, int height, int color);
 void	draw_line(t_data *data, double x1, double x2, double y1, double y2);
 
@@ -83,6 +106,7 @@ int		insdie_wall(t_data *data, int x, int y);
 void	init_rays_mag(t_data *data);
 
 /* ray_caster.c */
+void	check_line(t_data *data);
 void ray_se(t_data *data, double dx, double dy, int i);
 void ray_ne(t_data *data, double dx, double dy, int i);
 void ray_nw(t_data *data, double dx, double dy, int i);
@@ -101,4 +125,10 @@ void	init_rays(t_data *data);
 /* move_player.c */
 void	rotate(t_data *data, int dir, int i);
 void	move(t_data *data, int dir);
+
+/* draw.c */
+void	draw_3d(t_data *data);
+void	printMap(t_data *data);
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void	add_asset_to_image(t_data *data, int x, int y, int asset);
 #endif

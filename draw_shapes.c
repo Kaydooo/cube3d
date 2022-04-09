@@ -6,13 +6,13 @@
 /*   By: mal-guna <mal-guna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:39:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/04/05 02:15:12 by mal-guna         ###   ########.fr       */
+/*   Updated: 2022/04/09 11:38:28 by mal-guna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	draw_circle(t_data *data, int x, int y, int r)
+void	draw_player(t_data *data, int x, int y, int r)
 {
 	static const double PI = 3.1415926535;
     double i, angle, x1, y1;
