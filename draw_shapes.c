@@ -6,13 +6,17 @@
 /*   By: mal-guna <m3t9mm@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:39:28 by mal-guna          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/03/31 14:39:15 by mal-guna         ###   ########.fr       */
+=======
+/*   Updated: 2022/04/09 11:38:28 by mal-guna         ###   ########.fr       */
+>>>>>>> Moatasem
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	draw_circle(t_data *data, int r)
+void	draw_player(t_data *data, int x, int y, int r)
 {
 	static const double PI = 3.1415926535;
     double i, angle, x1, y1;
@@ -25,28 +29,33 @@ void	draw_circle(t_data *data, int r)
 			angle = i;
 			x1 = r * cos(angle * PI / 180);
 			y1 = r * sin(angle * PI / 180);
+<<<<<<< HEAD
 			my_mlx_pixel_put(data, data->player.x + x1, data->player.y + y1, 0x00FF0000);
+=======
+			my_mlx_pixel_put(data, x + x1, y + y1, 0x00FF0000);
+>>>>>>> Moatasem
 			i += 0.1;
 		}
 		r--;
 	}
 }
-void	draw_square(t_data *data)
+void	draw_rect(t_data *data, int x, int y, int width, int height, int color)
 {
-	int a = 32;
-	int i = 0;
-	while (i<a)
-	{
-		my_mlx_pixel_put(data,data->player.x+i,data->player.y,0X00FF0000);
-		my_mlx_pixel_put(data,data->player.x,data->player.y-i,0X00FF0000);
-		i++;
-	}
+
+	int	i;
+	int	j;
+
 	i = 0;
-	while (i<=a)
+	j = 0;
+	while(j < height)
 	{
-		my_mlx_pixel_put(data, data->player.x+i,data->player.y-a,0X00FF0000);
-		my_mlx_pixel_put(data, data->player.x+a,data->player.y-i,0X00FF0000);
-		i++;
+		i = 0;
+		while (i<width)//draw bottom line // change a to change width
+		{
+			my_mlx_pixel_put(data, x+i,y-j,color);
+			i++;
+		}	
+		j++;
 	}
 }
 

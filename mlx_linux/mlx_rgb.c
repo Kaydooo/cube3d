@@ -3,6 +3,10 @@
 ** the XFree86 distribution.
 */
 
+<<<<<<< HEAD
+=======
+#include	"mlx_int.h"
+>>>>>>> Moatasem
 
 struct s_col_name mlx_col_name[] =
 {
