@@ -6,7 +6,7 @@
 /*   By: mal-guna <mal-guna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/04/09 13:02:36 by mal-guna         ###   ########.fr       */
+/*   Updated: 2022/04/09 14:01:12 by mal-guna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include <math.h>
 
 /* Game Settings */
-#define NUMBER_OF_RAYS 384*2
+#define NUMBER_OF_RAYS 768
 #define ROTATION_SPEED 0.02
 #define OneDegreeRad 0.0174533/10//0.0174533
 #define BLOCK_SIZE 32
