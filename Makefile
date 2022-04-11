@@ -10,7 +10,7 @@ CC = gcc
 
 CFLAGS = -Wall -Wextra -Werror -g3
 
-MLX_FLAGS = -Lmlx_linux -lmlx -Imlx_linux -lXext -lX11 -lm -lz
+MLX_FLAGS = -Lmlx_linux -lmlx -Imlx_linux -framework OpenGL -framework AppKit
 
 NAME = cub3d
 

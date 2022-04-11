@@ -6,12 +6,9 @@ void ray_se(t_data *data, double dx, double dy)
 	int		next_ypoint;
 	double	factorx;
 	double	factory;
-	double  p1;
-	double	p2;
-	data->player.rays[i].mag = 0.1;
-	rotate(data, 0, i);
-
-	while(1)
+	data->player.mag = 1;
+	rotate(data, 0);
+	while(!insdie_wall(data, 2))
 	{
 		dx = data->player.linex - data->player.x;
 		dy = data->player.liney - data->player.y;

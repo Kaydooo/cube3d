@@ -6,7 +6,7 @@
 /*   By: mal-guna <mal-guna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:39:32 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/04/09 13:03:33 by mal-guna         ###   ########.fr       */
+/*   Updated: 2022/04/11 22:09:13 by mal-guna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,39 +172,85 @@ void	printMap(t_data *data)
 	mlx_put_image_to_window(data->mlx, data->win, data->img[0].img,0, 0);
 }
 
+/*
+w = 119
+a = 97
+s = 115
+d = 100
+r =65363
+l =65361
+d =65364
+u =65362
+*/
+void	rotate(t_data *data, int dir)
+{	
+	//double PI = 3.14159265359;
+	// double x1 = data->player.x + 10;
+	// double y1 = data->player.y + 10;
+	// double	dist;
+	if(dir == 1 || dir == -1)
+		data->player.rot += (dir * 0.05);
+	// else if ( dir == -1)
+	// 	data->player.rot -= (dir * 0.1);
+	// double s = sin(data->player.rot);
+  	// double c = cos(data->player.rot);
+	//data->player.mag = 50;
+	// data->player.linex = data->player.mag *cos(data->player.rot) + data->player.x;
+	// data->player.liney = data->player.mag *sin(data->player.rot) + data->player.x;
+	data->player.linex = data->player.mag * cos(data->player.rot) + data->player.x;	
+	data->player.liney = data->player.mag * sin(data->player.rot) + data->player.y;
+	//printf("mag = %f\n", data->player.mag);
+	// data->player.linex = c * (data->player.linex-data->player.x) +  s *(data->player.liney - data->player.y) + data->player.x;
+	// data->player.liney = s * (data->player.linex-data->player.x) -  c *(data->player.linex - data->player.y) + data->player.y;
+	//my_mlx_pixel_put(data, data->player.linex, data->player.liney, 0x00FF0000);
+	//mlx_put_image_to_window(data->mlx, data->win, data->img[0].img, 0, 0);
+	// dist = hypot(data->player.linex, data->player.liney);
+	// data->player.linex /= dist;
+	// data->player.liney /= dist;
+	//printf("new x = %f , new y = %f \n", data->player.linex, data->player.liney);
 
 int	keyPress(int key, t_data *data)
 {
-	if(key == KEY_W)//w
-		data->player.move_fw = 1; 
-	else if(key == KEY_A)//a
-		data->player.strafe_l= 1;
-	else if (key == KEY_S)//s
-		data->player.move_bw = 1; 
-	else if (key == KEY_D)//d
-		data->player.strafe_r = 1;
-	else if (key == KEY_RIGHT)
-		data->player.rotate_r = 1;
-	else if (key == KEY_LEFT)
-		data->player.rotate_l = 1;
-	return (0);
-}
+// a =0
+// w =13
+// s =1
+// d =2
+	if(key == 13)
+	{
+		data->player.y -= 5;
+		//data->player.liney -= 5;
 
-int	keyRelease(int key, t_data *data)
-{
-	if(key == KEY_W)//w
-		data->player.move_fw = 0; 
-	else if(key == KEY_A)//a
-		data->player.strafe_l= 0;
-	else if (key == KEY_S)//s
-		data->player.move_bw = 0; 
-	else if (key == KEY_D)//d
-		data->player.strafe_r = 0;
-	else if (key == KEY_RIGHT)
-		data->player.rotate_r = 0;
-	else if (key == KEY_LEFT)
-		data->player.rotate_l = 0;
-	//printf("%d\n", key);
+	}
+	else if(key == 0)
+	{
+		data->player.x -= 5;
+		//data->player.linex -=5;
+	}
+	else if (key == 1)
+	{
+		data->player.y += 5;
+		//data->player.liney +=5;
+	}
+	else if (key == 2)
+	{
+		data->player.x += 5;
+	//	data->player.linex +=5;
+	}
+	
+	// data->player.linex = data->player.x + 10;
+	// data->player.liney = data->player.y + 10;	
+	if (key == 124)
+	{	
+		rotate(data, 1); // 1 for right
+	}
+	if (key == 123)
+	{
+		rotate(data, -1); // -1 for left
+	}
+
+	//if(key == 199 || key ==97 || key == 115 || key ==100  || key == 65363)
+	printMap(data);
+	printf("key =%d\n",key);
 	return (0);
 }
 int	main(void)
