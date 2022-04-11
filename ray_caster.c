@@ -29,18 +29,12 @@ void ray_se(t_data *data, double dx, double dy, int i)
 	int		next_ypoint;
 	double	factorx;
 	double	factory;
-<<<<<<< HEAD
-	data->player.mag = 1;
-	rotate(data, 0);
-	while(!insdie_wall(data, 2))
-=======
 	double  p1;
 	double	p2;
 	data->player.rays[i].mag = 0.1;
 	rotate(data, 0, i);
 
 	while(1)
->>>>>>> Moatasem
 	{
 		dx = data->player.rays[i].ray_x - data->player.x;
 		dy = data->player.rays[i].ray_y - data->player.y;
