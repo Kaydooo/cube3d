@@ -6,7 +6,7 @@
 /*   By: mal-guna <mal-guna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/04/15 04:45:10 by mal-guna         ###   ########.fr       */
+/*   Updated: 2022/04/15 17:16:30 by mal-guna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ typedef	struct s_data{
 	int		map_height;
 	int		config_fd;
 	int map[24][24];
+	char **mapp;
 
 }t_data;
 
