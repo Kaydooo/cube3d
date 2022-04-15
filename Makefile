@@ -2,7 +2,7 @@
 # $@ "include target"
 # $^ "include the full list of prerequisites)"
 
-SRCS = cub3d.c draw_shapes.c ray_caster.c data_init.c move_player.c render.c draw.c utils.c
+SRCS = cub3d.c draw_shapes.c ray_caster.c data_init.c move_player.c render.c draw.c utils.c	objects.c
 
 OBJS = ${SRCS:.c=.o}
 

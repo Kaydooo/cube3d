@@ -63,6 +63,44 @@ void	add_asset_to_image(t_data *data, int x, int y, int asset)
 	}
 }
 
+void	draw_obj(t_data *data, int i, int x)
+{
+	int obj_index = data->player.rays[i].obj_num;
+	while (obj_index-- > 0)
+	{
+		double height;
+		int playerRay = NUMBER_OF_RAYS/2;
+		double distance;
+
+		if(i <= playerRay)
+			distance = data->player.rays[i].obj_mag[obj_index] * cos(data->player.rays[playerRay].rot - data->player.rays[i].rot);
+		else
+			distance = data->player.rays[i].obj_mag[obj_index] * cos(data->player.rays[i].rot - data->player.rays[playerRay].rot);
+		height = (BLOCK_SIZE * 768)/distance;
+
+		int drawStart = -height/2 + (768 / 2);
+		if(drawStart < 0)
+			drawStart = 0;
+		int drawEnd = (height/2) + (768 / 2);
+		if(drawEnd >= 768)
+			drawEnd = 768 - 1;
+		void	*dst;
+		void	*dst2;
+		double inc = (float)data->img[data->player.rays[i].obj_direction[obj_index]].hieght/height;
+		double texPos = (drawStart - 768/2 + height / 2) * inc;
+		int y1 = drawStart;
+		while(y1<drawEnd)
+		{
+			int texY = (int)texPos & (data->img[data->player.rays[i].obj_direction[obj_index]].hieght - 1);
+			texPos += inc;
+			dst = data->img[0].addr + (y1 * data->img[0].line_length + x * (data->img[0].bits_per_pixel / 8));
+			dst2 = data->img[data->player.rays[i].obj_direction[obj_index]].addr + ((int)texY * data->img[data->player.rays[i].obj_direction[obj_index]].line_length + data->player.rays[i].obj_hit_point[obj_index] * (data->img[data->player.rays[i].obj_direction[obj_index]].bits_per_pixel / 8));
+			*(unsigned int*)(dst) = *(unsigned int*)(dst2);
+			y1++;
+		}
+	}
+}
+
 void	draw_3d(t_data *data)
 {
 	int i;
@@ -100,16 +138,20 @@ void	draw_3d(t_data *data)
 			*(unsigned int*)(dst) = *(unsigned int*)(dst2);
 			y1++;
 		}
+		if (data->player.rays[i].obj_direction[0])
+			draw_obj(data, i, x);
 		x += 1;
 		i++;
 	}
 }
 
-void	printMap(t_data *data)
+void	printMap(t_data *data, int count)
 {
 	int x;
 	int y;
 
+	if (count)
+		x = 0;
 	x = 0;
 	y = 0;
 	add_asset_to_image_minimap(data, x*4, y*4, 4);
@@ -119,6 +161,7 @@ void	printMap(t_data *data)
 		x = 0;
 		while(x < data->map_height)
 		{
+			//printf("x: %d | y: %d\n", x, y);
 			if(data->map[y][x] == 2)
 			{
 				data->player.x = x * 32;
@@ -126,7 +169,11 @@ void	printMap(t_data *data)
 				init_rays_mag(data);
 				data->map[y][x] = 0;
 			}
-			if(data->map[y][x] != 2)
+			else if (data->map[y][x] == DOOR_MAP_C)
+				add_asset_to_image_minimap(data, x*4, y*4, DOOR_CLOS);
+			else if (data->map[y][x] == DOOR_MAP_O)
+				add_asset_to_image_minimap(data, x*4, y*4, DOOR_OPEN);
+			else if(data->map[y][x] != 2)
 				add_asset_to_image_minimap(data, x*4, y*4, data->map[y][x] + 1);
 			x++;
 		}
