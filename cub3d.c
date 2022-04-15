@@ -6,7 +6,7 @@
 /*   By: mal-guna <mal-guna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:39:32 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/04/09 18:28:16 by mal-guna         ###   ########.fr       */
+/*   Updated: 2022/04/15 04:42:58 by mal-guna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,14 +71,18 @@ int	keyRelease(int key, t_data *data)
 	return (0);
 }
 
-int	main(void)
+int	main(int argc, char **argv)
 {
-	t_data	data;
-	data_init(&data);
-	printMap(&data);
-	mlx_hook(data.win, 2, 1L<<0, keyPress, &data);
-	mlx_hook(data.win, 3, 0x2, keyRelease, &data);
+	t_data	*data;
+	data = malloc(sizeof(t_data));
+	if(parse_map(data, argc, argv))
+		return (1);
+	data_init(data);
+	printMap(data);
+	mlx_hook(data->win, 2, 1L<<0, keyPress, data);
+	mlx_hook(data->win, 3, 0x2, keyRelease, data);
 	// mlx_hook(data.win,  3, 0, movePlayer, &data);
-	mlx_loop_hook(data.mlx, render, &data);
-	mlx_loop(data.mlx);
+	mlx_loop_hook(data->mlx, render, data);
+	mlx_loop(data->mlx);
+	return (0);
 }

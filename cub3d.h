@@ -6,17 +6,22 @@
 /*   By: mal-guna <mal-guna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/04/09 14:01:12 by mal-guna         ###   ########.fr       */
+/*   Updated: 2022/04/15 04:45:10 by mal-guna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 #define CUB3D_H
 
-#include <mlx.h>
+#include "mlx.h"
+#include "libs/libft/libft.h"
+#include "libs/gnl/get_next_line.h"
 #include <unistd.h>
 #include <stdio.h>
 #include <math.h>
+#include <fcntl.h>
+#include <string.h>
+#include <errno.h>
 
 /* Game Settings */
 #define NUMBER_OF_RAYS 768
@@ -87,8 +92,15 @@ typedef	struct s_data{
 	void	*game_win;
 	struct s_image img[20];
 	struct s_player player;
+	char	*NO_PATH;
+	char	*SO_PATH;
+	char	*WE_PATH;
+	char	*EA_PATH;
+	int 	c_color;
+	int 	f_color;
 	int		map_width;
 	int		map_height;
+	int		config_fd;
 	int map[24][24];
 
 }t_data;
@@ -109,14 +121,14 @@ void	init_rays_mag(t_data *data);
 
 /* ray_caster.c */
 void	check_line(t_data *data);
-void ray_se(t_data *data, double dx, double dy, int i);
-void ray_ne(t_data *data, double dx, double dy, int i);
-void ray_nw(t_data *data, double dx, double dy, int i);
-void ray_sw(t_data *data, double dx, double dy, int i);
+void	ray_se(t_data *data, double dx, double dy, int i);
+void	ray_ne(t_data *data, double dx, double dy, int i);
+void	ray_nw(t_data *data, double dx, double dy, int i);
+void	ray_sw(t_data *data, double dx, double dy, int i);
 
 
 /* render.c */
-int	render(t_data *data);
+int		render(t_data *data);
 
 /* data_init.c */
 void	data_init(t_data *data);
@@ -133,4 +145,14 @@ void	draw_3d(t_data *data);
 void	printMap(t_data *data);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	add_asset_to_image(t_data *data, int x, int y, int asset);
+
+/* parser.c */
+int		parse_map(t_data *data, int argc, char **argv);
+
+/* utils.c */
+void	print_error(char *msg);
+void	free_2d(char ***str);
+int		ft_strlen_2d(char **str);
+int		color_atoi(const char *str);
+
 #endif

@@ -27,22 +27,22 @@ void	move(t_data *data, int dir)
 	double unit_y;	
 	unit_x = (data->player.rays[NUMBER_OF_RAYS/2].ray_x - data->player.x)/(data->player.rays[NUMBER_OF_RAYS/2].mag);
 	unit_y = (data->player.rays[NUMBER_OF_RAYS/2].ray_y - data->player.y)/(data->player.rays[NUMBER_OF_RAYS/2].mag);
-	if(dir == 1 && data->map[((int)round(data->player.y + unit_y*3.5 * SPEED)/32) & 31][((int)round(data->player.x + unit_x*3.5 * SPEED)/32) & 31] == 0)
+	if(dir == 1 && data->map[((int)round(data->player.y + unit_y*4.5 * SPEED)/32) & 31][((int)round(data->player.x + unit_x*4.5 * SPEED)/32) & 31] == 0)
 	{
 			data->player.x += unit_x * SPEED;
 			data->player.y += unit_y * SPEED;
 	}
-	else if(dir == -1 && data->map[((int)round(data->player.y - unit_y*3.5 * SPEED)/32) & 31][((int)round(data->player.x - unit_x*3.5 * SPEED)/32) & 31] == 0)
+	else if(dir == -1 && data->map[((int)round(data->player.y - unit_y*4.5 * SPEED)/32) & 31][((int)round(data->player.x - unit_x*4.5 * SPEED)/32) & 31] == 0)
 	{
 		data->player.x -= unit_x * SPEED;
 		data->player.y -= unit_y * SPEED;
 	}
-	else if(dir == 2 && data->map[((int)round(data->player.y - -unit_x*3.5 * SPEED)/32) & 31][((int)round(data->player.x - unit_y*3.5 * SPEED)/32) & 31] == 0)
+	else if(dir == 2 && data->map[((int)round(data->player.y - -unit_x*4.5 * SPEED)/32) & 31][((int)round(data->player.x - unit_y*4.5 * SPEED)/32) & 31] == 0)
 	{
 		data->player.x -= unit_y * SPEED;
 		data->player.y -= -unit_x * SPEED;
 	}
-	else if(dir == -2 && data->map[((int)round(data->player.y - unit_x*3.5 * SPEED)/32) & 31][((int)round(data->player.x - -unit_y*3.5 * SPEED)/32) & 31] == 0)
+	else if(dir == -2 && data->map[((int)round(data->player.y - unit_x*4.5 * SPEED)/32) & 31][((int)round(data->player.x - -unit_y*4.5 * SPEED)/32) & 31] == 0)
 	{
 		data->player.x -= -unit_y * SPEED;
 		data->player.y -= unit_x * SPEED;

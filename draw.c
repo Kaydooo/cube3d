@@ -105,6 +105,11 @@ void	draw_3d(t_data *data)
 	}
 }
 
+void	draw_floor_cel(t_data *data)
+{
+	draw_rect(data, 0, 0, data->map_width*BLOCK_SIZE, data->map_height*BLOCK_SIZE/2, data->c_color);
+	draw_rect(data, 0, data->map_height*BLOCK_SIZE/2, data->map_width*BLOCK_SIZE, data->map_height*BLOCK_SIZE/2, data->f_color);
+}
 void	printMap(t_data *data)
 {
 	int x;
@@ -112,8 +117,8 @@ void	printMap(t_data *data)
 
 	x = 0;
 	y = 0;
-	add_asset_to_image_minimap(data, x*4, y*4, 4);
-	add_asset_to_image(data, 0, 0, 5);
+	// add_asset_to_image(data, 0, 0, 5);
+	draw_floor_cel(data);
 	while(y < data->map_width)
 	{
 		x = 0;

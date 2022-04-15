@@ -9,7 +9,7 @@
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "/home/kaydoo/Documents/42Curses_MOA/cube3d/cub3d",
-			"args": [],
+			"args": ["/home/kaydoo/Documents/42Curses_MOA/cube3d/file.cub"],
 			"stopAtEntry": false,
 			"cwd": "${fileDirname}",
 			"environment": [],

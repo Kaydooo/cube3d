@@ -6,7 +6,7 @@
 /*   By: mal-guna <mal-guna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:39:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/04/09 11:38:28 by mal-guna         ###   ########.fr       */
+/*   Updated: 2022/04/15 04:13:01 by mal-guna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	draw_rect(t_data *data, int x, int y, int width, int height, int color)
 		i = 0;
 		while (i<width)//draw bottom line // change a to change width
 		{
-			my_mlx_pixel_put(data, x+i,y-j,color);
+			my_mlx_pixel_put(data, x+i, y+j,color);
 			i++;
 		}	
 		j++;

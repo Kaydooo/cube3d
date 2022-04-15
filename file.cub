@@ -1,0 +1,6 @@
+NO ./assets/North.xpm 
+SO ./assets/South.xpm 
+WE ./assets/West.xpm 
+EA ./assets/East.xpm 
+F 0,255,255
+C 128,128,128
