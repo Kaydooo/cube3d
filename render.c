@@ -41,6 +41,7 @@ void mouse_move(t_data *data, int input)
 {
 	int x;
 	int y;
+	int	mag;
 	static int mouse;
 	
 	if (input != -1)
@@ -49,11 +50,15 @@ void mouse_move(t_data *data, int input)
 	if (!mouse || x < 1 || x >= NUMBER_OF_RAYS || y < 1 
 		|| y >= data->map_height * BLOCK_SIZE)
 		return ;
-	if (x > (NUMBER_OF_RAYS / 2) + (NUMBER_OF_RAYS / 4))
-		rotate(data, 1, 0);
-	else if (x < (NUMBER_OF_RAYS / 2) - (NUMBER_OF_RAYS / 4))
-		rotate(data, -1, 0);
-
+	mag = 4;
+	while (--mag > 0)
+		if (x > (NUMBER_OF_RAYS / 2) + ((mag * NUMBER_OF_RAYS) / 8)
+			|| x < (NUMBER_OF_RAYS / 2) - ((mag * NUMBER_OF_RAYS) / 8))
+			break ;
+	if (x < NUMBER_OF_RAYS / 2)
+		mag *= -1;
+	if (mag)
+		rotate(data, mag, 0);
 }
 
 int	render(t_data *data)

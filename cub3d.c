@@ -14,7 +14,6 @@
 
 int		insdie_wall(t_data *data, int x, int y, int i, int hit_point) 
 {
-	//printf("x = %d   y= %d \n",x , y);
 	int index;
 	int new_size;
 
@@ -34,13 +33,6 @@ int		insdie_wall(t_data *data, int x, int y, int i, int hit_point)
 		data->player.rays[i].obj_x = realloc(data->player.rays[i].obj_x, new_size);
 		data->player.rays[i].obj_y = realloc(data->player.rays[i].obj_y, new_size);
 	}
-/*	else if (data->player.rays[i].obj_direction[0])
-	{
-		index = data->player.rays[i].obj_num;
-		while (index-- > 0)
-			data->player.rays[i].obj_direction[index] = obj_status(data,
-				data->player.rays[i].obj_x[index], data->player.rays[i].obj_y[index], 2);
-	}*/
 	if(data->map[y][x] == 1)
 		return 1;
 	return 0;
