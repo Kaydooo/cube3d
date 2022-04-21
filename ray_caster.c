@@ -21,7 +21,7 @@ static int check_wall(t_data *data, int side, int i, int *dir, int *nxt_pt)
 		y -= 1;
 	else if (dir[1] == EAST_TEXT && side)
 		x -= 1;
-	return (insdie_wall(data, x, y, i, data->player.rays[i].hit_point));
+	return (insdie_wall(data, x, y, i));
 }
 
 void	get_next_point(t_data *data, int i, int *nxt_pt, int *dir)

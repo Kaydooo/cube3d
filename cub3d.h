@@ -18,6 +18,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
+#include <limits.h>
 
 /* Game Settings */
 #define NUMBER_OF_RAYS 768
@@ -124,7 +125,7 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	add_asset_to_image(t_data *data, int x, int y, int asset);
 int		key_press(int key, t_data *data);
 int		key_release(int key, t_data *data);
-int		insdie_wall(t_data *data, int x, int y, int i, int hit_point);
+int		insdie_wall(t_data *data, int x, int y, int i);
 void	init_rays_mag(t_data *data);
 
 /* ray_caster.c */
