@@ -6,7 +6,7 @@
 /*   By: mal-guna <mal-guna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:39:32 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/04/22 07:33:15 by mal-guna         ###   ########.fr       */
+/*   Updated: 2022/04/23 00:20:26 by mal-guna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,8 @@ void	init_rays_mag(t_data *data)
 
 int	keyPress(int key, t_data *data)
 {
+	if (key == ESC)
+		close_window(data);
 	if(key == KEY_W)//w
 		data->player.move_fw = 1; 
 	else if(key == KEY_A)
@@ -230,6 +232,9 @@ int	main(int argc, char **argv)
 {
 	t_data	*data;
 	data = malloc(sizeof(t_data));
+	if (!data)
+		print_error("Malloc Error!");
+	init_vars(data);
 	if(parse_map(data, argc, argv))
 		return (1);
 	data_init(data);
@@ -241,6 +246,7 @@ int	main(int argc, char **argv)
 	mlx_hook(data->win, 3, 0x2, keyRelease, data);
 	mlx_hook(data->win, 7, 1L<<4, mouse_enter, data);
 	mlx_hook(data->win, 8, 1L<<5, mouse_leave, data);
+	mlx_hook(data->win, 17, 0, close_window, data); // close by x
 	// mlx_hook(data.win,  3, 0, movePlayer, &data);
 	mlx_loop_hook(data->mlx, render, data);
 	mlx_loop(data->mlx);

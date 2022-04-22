@@ -6,7 +6,7 @@
 /*   By: mal-guna <mal-guna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/04/22 07:59:01 by mal-guna         ###   ########.fr       */
+/*   Updated: 2022/04/23 00:21:32 by mal-guna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@
 #define KEY_A 97
 #define KEY_D 100
 #define DOORS 112
+#define ESC 65307
 
 /* Mac Keys */
 // #define KEY_RIGHT 124
@@ -67,6 +68,7 @@
 // #define KEY_A 0
 // #define KEY_D 2
 // #define DOORS ?   <-- Define!
+// #define ESC 53
 
 
 typedef	struct s_ray
@@ -157,9 +159,9 @@ void 	mouse_move(t_data *data, int input);
 
 /* data_init.c */
 void	data_init(t_data *data);
-void	init_map(t_data *data);
 void	init_imgs(t_data *data);
 void	init_rays(t_data *data);
+void	init_vars(t_data *data);
 
 /* move_player.c */
 void	rotate(t_data *data, int dir, int i);
@@ -201,5 +203,9 @@ void	print_error(char *msg);
 void	free_2d(char ***str);
 int		ft_strlen_2d(char **str);
 int		color_atoi(const char *str);
+
+/* exit.c */
+int		close_window(t_data *data);
+void	free_and_exit(t_data *data);
 
 #endif

@@ -126,6 +126,8 @@ void	calc_map_width_height(t_data *data)
 	data->map_height = i;
 	data->no_rays = BLOCK_SIZE * data->map_width;
 	data->player.rays = malloc(sizeof(struct s_ray) * data->no_rays);
+	if (!data->player.rays)
+		print_error("Malloc Error!");
 	printf("%d   %d \n",data->map_height, data->map_width);
 }
 
@@ -210,7 +212,7 @@ char	*create_spaces(int number)
 	{
 		res = malloc(sizeof(char) * (number + 1));
 		if(!res)
-			return (NULL);
+			print_error("Malloc Error!");
 	}
 	else
 		return (NULL);
@@ -239,7 +241,6 @@ void	resize_width(t_data *data)
 		}
 		i++;
 	}
-
 
 }
 
