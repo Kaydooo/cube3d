@@ -56,17 +56,15 @@ void	init_imgs(t_data *data)
 	data->img[1].addr = mlx_get_data_addr(data->img[1].img, &data->img[1].bits_per_pixel, &data->img[1].line_length, &data->img[1].endian);
 	data->img[2].img = mlx_xpm_file_to_image(data->mlx, "assets/white32.xpm", &data->img[2].width, &data->img[2].hieght);
 	data->img[2].addr = mlx_get_data_addr(data->img[2].img, &data->img[2].bits_per_pixel, &data->img[2].line_length, &data->img[2].endian);
-	// data->img[4].img = mlx_xpm_file_to_image(data->mlx, "assets/blbk.xpm", &data->img[4].width, &data->img[4].hieght);
-	// data->img[4].addr = mlx_get_data_addr(data->img[4].img, &data->img[4].bits_per_pixel, &data->img[4].line_length, &data->img[4].endian);
-	// data->img[5].img = mlx_xpm_file_to_image(data->mlx, "assets/blackbk768*768.xpm", &data->img[5].width, &data->img[5].hieght);
-	// data->img[5].addr = mlx_get_data_addr(data->img[5].img, &data->img[5].bits_per_pixel, &data->img[5].line_length, &data->img[5].endian);
 	data->img[NORTH_TEXT].img = mlx_xpm_file_to_image(data->mlx, data->NO_PATH, &data->img[NORTH_TEXT].width, &data->img[NORTH_TEXT].hieght);
-	data->img[NORTH_TEXT].addr = mlx_get_data_addr(data->img[NORTH_TEXT].img, &data->img[NORTH_TEXT].bits_per_pixel, &data->img[NORTH_TEXT].line_length, &data->img[NORTH_TEXT].endian);
 	data->img[SOUTH_TEXT].img = mlx_xpm_file_to_image(data->mlx, data->SO_PATH, &data->img[SOUTH_TEXT].width, &data->img[SOUTH_TEXT].hieght);
-	data->img[SOUTH_TEXT].addr = mlx_get_data_addr(data->img[SOUTH_TEXT].img, &data->img[SOUTH_TEXT].bits_per_pixel, &data->img[SOUTH_TEXT].line_length, &data->img[SOUTH_TEXT].endian);
 	data->img[WEST_TEXT].img = mlx_xpm_file_to_image(data->mlx, data->WE_PATH, &data->img[WEST_TEXT].width, &data->img[WEST_TEXT].hieght);
-	data->img[WEST_TEXT].addr = mlx_get_data_addr(data->img[WEST_TEXT].img, &data->img[WEST_TEXT].bits_per_pixel, &data->img[WEST_TEXT].line_length, &data->img[WEST_TEXT].endian);
 	data->img[EAST_TEXT].img = mlx_xpm_file_to_image(data->mlx, data->EA_PATH, &data->img[EAST_TEXT].width, &data->img[EAST_TEXT].hieght);
+	if(!data->img[NORTH_TEXT].img || !data->img[SOUTH_TEXT].img || !data->img[WEST_TEXT].img || !data->img[EAST_TEXT].img )
+		print_error("Couldnt Open Image.. Wrong texture path !");
+	data->img[NORTH_TEXT].addr = mlx_get_data_addr(data->img[NORTH_TEXT].img, &data->img[NORTH_TEXT].bits_per_pixel, &data->img[NORTH_TEXT].line_length, &data->img[NORTH_TEXT].endian);
+	data->img[SOUTH_TEXT].addr = mlx_get_data_addr(data->img[SOUTH_TEXT].img, &data->img[SOUTH_TEXT].bits_per_pixel, &data->img[SOUTH_TEXT].line_length, &data->img[SOUTH_TEXT].endian);
+	data->img[WEST_TEXT].addr = mlx_get_data_addr(data->img[WEST_TEXT].img, &data->img[WEST_TEXT].bits_per_pixel, &data->img[WEST_TEXT].line_length, &data->img[WEST_TEXT].endian);
 	data->img[EAST_TEXT].addr = mlx_get_data_addr(data->img[EAST_TEXT].img, &data->img[EAST_TEXT].bits_per_pixel, &data->img[EAST_TEXT].line_length, &data->img[EAST_TEXT].endian);
 	data->img[DOOR_CLOS].img = mlx_xpm_file_to_image(data->mlx, "assets/door1.xpm", &data->img[DOOR_CLOS].width, &data->img[DOOR_CLOS].hieght);
 	data->img[DOOR_CLOS + 1].img = mlx_xpm_file_to_image(data->mlx, "assets/door2.xpm", &data->img[DOOR_CLOS + 1].width, &data->img[DOOR_CLOS + 1].hieght);
@@ -131,9 +129,9 @@ void	init_vars(t_data *data)
 void	data_init(t_data *data)
 {
 	data->mlx = mlx_init();
+	init_imgs(data);
 	data->win = mlx_new_window(data->mlx, data->map_width * BLOCK_SIZE, data->map_height * BLOCK_SIZE, "Cub3d");
 	//init_map(data);//temp
 	init_rays(data);
-	init_imgs(data);
 	init_vars(data);
 }
