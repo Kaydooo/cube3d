@@ -5,9 +5,9 @@ void	rotate(t_data *data, int dir, int i)
 	int j;
 
 	j = -1;
-	if(dir == 1 || dir == -1)
+	if(dir)
 	{
-		while(++j < NUMBER_OF_RAYS)
+		while(++j < data->no_rays)
 		{
 			data->player.rays[j].rot += (dir * ROTATION_SPEED);
 			data->player.rays[j].ray_x = data->player.rays[j].mag * cos(data->player.rays[j].rot) + data->player.x;
@@ -25,35 +25,38 @@ void	move(t_data *data, int dir)
 {
 	double unit_x;
 	double unit_y;	
-	unit_x = (data->player.rays[NUMBER_OF_RAYS/2].ray_x - data->player.x)/(data->player.rays[NUMBER_OF_RAYS/2].mag);
-	unit_y = (data->player.rays[NUMBER_OF_RAYS/2].ray_y - data->player.y)/(data->player.rays[NUMBER_OF_RAYS/2].mag);
-	if(dir == 1 && data->map[((int)round(data->player.y + unit_y*4.5 * SPEED)/32) & 31][((int)round(data->player.x + unit_x*4.5 * SPEED)/32) & 31] == 0)
+	int max_index;
+
+	max_index = data->map_width * BLOCK_SIZE - 1;	
+	unit_x = (data->player.rays[data->no_rays/2].ray_x - data->player.x)/(data->player.rays[data->no_rays/2].mag);
+	unit_y = (data->player.rays[data->no_rays/2].ray_y - data->player.y)/(data->player.rays[data->no_rays/2].mag);
+	if(dir == 1 && data->map[((int)round(data->player.y + unit_y*4.5 * SPEED)/BLOCK_SIZE) & max_index][((int)round(data->player.x + unit_x*4.5 * SPEED)/BLOCK_SIZE ) & max_index] != '1')
 	{
 			data->player.x += unit_x * SPEED;
 			data->player.y += unit_y * SPEED;
 	}
-	else if(dir == -1 && data->map[((int)round(data->player.y - unit_y*4.5 * SPEED)/32) & 31][((int)round(data->player.x - unit_x*4.5 * SPEED)/32) & 31] == 0)
+	else if(dir == -1 && data->map[((int)round(data->player.y - unit_y*4.5 * SPEED)/BLOCK_SIZE) & max_index][((int)round(data->player.x - unit_x*4.5 * SPEED)/BLOCK_SIZE) & max_index] != '1')
 	{
 		data->player.x -= unit_x * SPEED;
 		data->player.y -= unit_y * SPEED;
 	}
-	else if(dir == 2 && data->map[((int)round(data->player.y - -unit_x*4.5 * SPEED)/32) & 31][((int)round(data->player.x - unit_y*4.5 * SPEED)/32) & 31] == 0)
+	else if(dir == 2 && data->map[((int)round(data->player.y - -unit_x*4.5 * SPEED)/BLOCK_SIZE) & max_index][((int)round(data->player.x - unit_y*4.5 * SPEED)/BLOCK_SIZE) & max_index] != '1')
 	{
 		data->player.x -= unit_y * SPEED;
 		data->player.y -= -unit_x * SPEED;
 	}
-	else if(dir == -2 && data->map[((int)round(data->player.y - unit_x*4.5 * SPEED)/32) & 31][((int)round(data->player.x - -unit_y*4.5 * SPEED)/32) & 31] == 0)
+	else if(dir == -2 && data->map[((int)round(data->player.y - unit_x*4.5 * SPEED)/BLOCK_SIZE) & max_index][((int)round(data->player.x - -unit_y*4.5 * SPEED)/BLOCK_SIZE) & max_index] != '1')
 	{
 		data->player.x -= -unit_y * SPEED;
 		data->player.y -= unit_x * SPEED;
 	}
 	if(data->player.x < 0)
 		data->player.x = 0;
-	if(data->player.x > data->map_width * BLOCK_SIZE)
-		data->player.x = data->map_width * BLOCK_SIZE;
+	if(data->player.x >= (data->map_width) * BLOCK_SIZE)
+		data->player.x = (data->map_width-1) * BLOCK_SIZE;
 	if(data->player.y < 0)
 		data->player.y = 0;
-	if(data->player.y > data->map_height * BLOCK_SIZE)
-		data->player.y = data->map_height * BLOCK_SIZE;
+	if(data->player.y >= (data->map_height) * BLOCK_SIZE)
+		data->player.y = (data->map_height-1) * BLOCK_SIZE;
 	init_rays_mag(data);
 }

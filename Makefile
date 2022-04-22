@@ -2,8 +2,7 @@
 # $@ "include target"
 # $^ "include the full list of prerequisites)"
 
-SRCS =	cub3d.c draw_shapes.c ray_caster.c data_init.c move_player.c render.c draw.c utils.c\
-		parser.c
+SRCS = cub3d.c draw_shapes.c ray_caster.c data_init.c move_player.c render.c draw.c utils.c	objects.c parser.c
 
 OBJS = ${SRCS:.c=.o}
 
@@ -30,12 +29,11 @@ NAME = cub3d
 
 all : $(NAME)
 
-$(NAME): $(OBJS) 
+$(NAME): $(OBJS)
 	$(MAKE) -C $(MLX_PATH)
 	$(MAKE) -C $(LIBFT_PATH)
 	$(MAKE) -C $(GNL_PATH)
 	$(CC) $(OBJS) $(GNL) $(LIBFT) $(MLX_FLAGS) $(CFLAGS) -o $(NAME)
-
 
 clean:
 	$(MAKE) clean -C $(MLX_PATH)
