@@ -193,7 +193,15 @@ void	check_chars(t_data *data)
 					print_error("Map Includes Not-allowed chars232!");
 				}
 			if(c == 'N' || c == 'S' || c == 'W' || c == 'E')
+			{
 				x++;
+				if(c == 'N')
+					data->start_angle = -1.57080001;
+				if(c == 'S')
+					data->start_angle = 1.57080001;
+				if(c == 'W')
+					data->start_angle = 2.0 * 1.57080001;
+			}
 			j++;
 		}
 		i++;

@@ -2,9 +2,9 @@
 
 int	color_atoi(const char *str)
 {
-	int				i;
+	int	i;
 	int	num;
-	int				sign;
+	int	sign;
 
 	num = 0;
 	i = 0;
@@ -19,7 +19,7 @@ int	color_atoi(const char *str)
 		num = (num * 10) + (str[i] - '0');
 		i++;
 	}
-	if(i > 5 || num*sign > 255 || num*sign < 0)
+	if(i > 5 || num > 255 || sign < 0)
 		print_error("Wrong Color!");
 	
 	return ((int)(num * sign));

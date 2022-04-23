@@ -69,18 +69,20 @@ void	init_imgs(t_data *data)
 void	init_rays(t_data *data)
 {
 	int	i;
+	double angle;
 
 	i = -1;
-	double angel = 0.0;
+	
+	angle = data->start_angle - ((double)data->no_rays*OneDegreeRad/2.0);
 	while(++i < data->no_rays)
 	{
-		data->player.rays[i].rot = angel;
+		data->player.rays[i].rot = angle;
 		data->player.rays[i].obj_direction = ft_calloc(1, sizeof(int));
 		data->player.rays[i].obj_hit_point = ft_calloc(1, sizeof(int));
 		data->player.rays[i].obj_mag = ft_calloc(1, sizeof(int));
 		data->player.rays[i].obj_x = ft_calloc(1, sizeof(int));
 		data->player.rays[i].obj_y = ft_calloc(1, sizeof(int));
-		angel +=OneDegreeRad;
+		angle += OneDegreeRad;
 	}
 }
 
@@ -92,6 +94,7 @@ void	init_vars(t_data *data)
 	data->player.move_bw = 0;
 	data->player.strafe_l = 0;
 	data->player.strafe_r = 0;
+	data->start_angle = 0.00000001;
 	data->NO_PATH = NULL;
 	data->SO_PATH = NULL;
 	data->WE_PATH = NULL;
