@@ -8,33 +8,6 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;	
 }
 
-void	add_asset_to_image_minimap(t_data *data, int x, int y, int asset)
-{
-	void	*dst;
-	void	*dst2;
-	int temp;
-	int x2;
-	int y2;
-	
-	temp = x;
-	x2 = 0;
-	y2 = 0;
-	while(y2 < 4)
-	{
-		x2 = 0;
-		x = temp;
-		while(x2 < 4)
-		{
-			dst = data->img[0].addr + (y * data->img[0].line_length + x * (data->img[0].bits_per_pixel / 8));
-			dst2 = data->img[asset].addr + (y2 * data->img[asset].line_length + x2 * (data->img[asset].bits_per_pixel / 8));
-			*(unsigned int*)(dst) = ((*(unsigned int*)(dst2)) & 0x00FFFFFF);
-			x2++;
-			x++;
-		}
-		y2++;
-		y++;
-	}
-}
 void	add_asset_to_image(t_data *data, int x, int y, int asset)
 {
 	void	*dst;
@@ -82,7 +55,6 @@ void	draw_obj(t_data *data, int i, int x)
 		else
 			distance = data->player.rays[i].obj_mag[obj_index] * cos(data->player.rays[i].rot - data->player.rays[playerRay].rot);
 		height = (BLOCK_SIZE * 768)/distance;
-
 		int drawStart = -height/2 + (768 / 2);
 		if(drawStart < 0)
 			drawStart = 0;
@@ -178,8 +150,15 @@ void	printMap(t_data *data, int count)
 		x = 0;
 		while(data->map[y][x])
 		{
-			if(data->map[y][x] == '1' || data->map[y][x] == '0')
-				add_asset_to_image_minimap(data, x*4, y*4, (data->map[y][x] - '0') + 1);
+			if(data->map[y][x] == '0')
+				draw_rect(data, x*4, y*4, 4, 4, 0xFF000000);
+			if(data->map[y][x] == '1')
+				draw_rect(data, x*4, y*4, 4, 4, 0xFF154360);
+			if(data->map[y][x] == '3')
+				draw_rect(data, x*4, y*4, 4, 4, 0xFF9FE2BF);
+			if(data->map[y][x] == '5')
+				draw_rect(data, x*4, y*4, 4, 4, 0xFF8B0000);
+				// add_asset_to_image_minimap(data, x*4, y*4, (data->map[y][x] - '0') + 1);
 			x++;
 		}
 		y++;

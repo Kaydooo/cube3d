@@ -1,13 +1,5 @@
 #include "cub3d.h"
-void	init_minimap_imgs(t_data *data)
-{
-	data->img[0].img = mlx_new_image(data->mlx, data->map_width * BLOCK_SIZE, data->map_height * BLOCK_SIZE);
-	data->img[0].addr = mlx_get_data_addr(data->img[0].img, &data->img[0].bits_per_pixel, &data->img[0].line_length, &data->img[0].endian);
-	data->img[1].img = mlx_xpm_file_to_image(data->mlx, "assets/black32.xpm", &data->img[1].width, &data->img[1].hieght);
-	data->img[1].addr = mlx_get_data_addr(data->img[1].img, &data->img[1].bits_per_pixel, &data->img[1].line_length, &data->img[1].endian);
-	data->img[2].img = mlx_xpm_file_to_image(data->mlx, "assets/white32.xpm", &data->img[2].width, &data->img[2].hieght);
-	data->img[2].addr = mlx_get_data_addr(data->img[2].img, &data->img[2].bits_per_pixel, &data->img[2].line_length, &data->img[2].endian);
-}
+
 void	init_text_imgs(t_data *data)
 {
 	data->img[NORTH_TEXT].img = mlx_xpm_file_to_image(data->mlx, data->NO_PATH, &data->img[NORTH_TEXT].width, &data->img[NORTH_TEXT].hieght);
@@ -15,7 +7,7 @@ void	init_text_imgs(t_data *data)
 	data->img[WEST_TEXT].img = mlx_xpm_file_to_image(data->mlx, data->WE_PATH, &data->img[WEST_TEXT].width, &data->img[WEST_TEXT].hieght);
 	data->img[EAST_TEXT].img = mlx_xpm_file_to_image(data->mlx, data->EA_PATH, &data->img[EAST_TEXT].width, &data->img[EAST_TEXT].hieght);
 	if(!data->img[NORTH_TEXT].img || !data->img[SOUTH_TEXT].img || !data->img[WEST_TEXT].img || !data->img[EAST_TEXT].img )
-		print_error("Couldnt Open Image.. Wrong texture path !");
+		print_error(data, "Couldnt Open Image.. Wrong texture path !");
 	data->img[NORTH_TEXT].addr = mlx_get_data_addr(data->img[NORTH_TEXT].img, &data->img[NORTH_TEXT].bits_per_pixel, &data->img[NORTH_TEXT].line_length, &data->img[NORTH_TEXT].endian);
 	data->img[SOUTH_TEXT].addr = mlx_get_data_addr(data->img[SOUTH_TEXT].img, &data->img[SOUTH_TEXT].bits_per_pixel, &data->img[SOUTH_TEXT].line_length, &data->img[SOUTH_TEXT].endian);
 	data->img[WEST_TEXT].addr = mlx_get_data_addr(data->img[WEST_TEXT].img, &data->img[WEST_TEXT].bits_per_pixel, &data->img[WEST_TEXT].line_length, &data->img[WEST_TEXT].endian);
@@ -35,7 +27,8 @@ void	init_imgs(t_data *data)
 	// Consolidation note1: init address through a while loop like below
 	// Consolidation note2: create separate functions for img and addr that take in params
 	
-	init_minimap_imgs(data);
+	data->img[0].img = mlx_new_image(data->mlx, data->map_width * BLOCK_SIZE, data->map_height * BLOCK_SIZE);
+	data->img[0].addr = mlx_get_data_addr(data->img[0].img, &data->img[0].bits_per_pixel, &data->img[0].line_length, &data->img[0].endian);
 	init_text_imgs(data);
 	init_doors_imgs(data);
 	// init_flame_imgs(data);
@@ -88,6 +81,9 @@ void	init_rays(t_data *data)
 
 void	init_vars(t_data *data)
 {
+	data->win = NULL;
+	data->player.rays = NULL;
+	data->map = NULL;
 	data->player.rotate_r = 0;
 	data->player.rotate_l = 0;
 	data->player.move_fw = 0;

@@ -3,23 +3,21 @@
 /* Checks the first argument which is supppoesed to be the configuration file path */
 void	check_map_name(t_data *data, int argc, char **argv)
 {
-	if(data)
-	{}
 	if(argc != 2)
-		print_error("Wrong number of args!");
+		print_error(data, "Wrong number of args!");
 	if(ft_strrchr(argv[1], '.'))
 	{
 		if(ft_strncmp(ft_strrchr(argv[1], '.'), ".cub", 5) || ft_strlen(argv[1]) == 4)
-			print_error("Wrong Input file!");
+			print_error(data, "Wrong Input file!");
 	}
 	else
-		print_error("Wrong Input file!\n");
+		print_error(data, "Wrong Input file!\n");
 	data->config_fd = open(argv[1], O_RDWR);
 	if(data->config_fd < 0)
-		print_error(strerror(errno));
+		print_error(data, strerror(errno));
 }
 
-void	handle_color(t_data *data, char **split_line)
+int		handle_color(t_data *data, char **split_line)
 {
 	int		color[3];
 	char	**color_split;
@@ -30,6 +28,12 @@ void	handle_color(t_data *data, char **split_line)
 		color[0] = color_atoi(ft_strtrim(color_split[0], " \n"));
 		color[1] = color_atoi(ft_strtrim(color_split[1], " \n"));
 		color[2] = color_atoi(ft_strtrim(color_split[2], " \n"));
+		if (color[0] == -1 || color[1] == -1 || color[2] == -1 )
+		{
+			free_2d(&color_split);
+			return (1);
+		}
+		free_2d(&color_split);
 		data->f_color = (0xFF << 24 | color[0] << 16 | color[1] << 8 | color[2]);
 	}
 	else if(!strncmp(split_line[0], "C", 2))
@@ -38,39 +42,48 @@ void	handle_color(t_data *data, char **split_line)
 		color[0] = color_atoi(ft_strtrim(color_split[0], " \n"));
 		color[1] = color_atoi(ft_strtrim(color_split[1], " \n"));
 		color[2] = color_atoi(ft_strtrim(color_split[2], " \n"));
+		if (color[0] == -1 || color[1] == -1 || color[2] == -1 )
+		{
+			free_2d(&color_split);
+			return (1);
+		}
+		free_2d(&color_split);
 		data->c_color = (0xFF << 24 | color[0] << 16 | color[1] << 8 | color[2]);
 	}
 	else
-		print_error("Wrong Config File!3");
+		return (1);
+	return (0);
 }
 
-void	handle_elements(t_data *data, char **split_line)
+int	handle_elements(t_data *data, char **split_line)
 { 
 	if(ft_strlen_2d(split_line) != 2)
-		print_error("Wrong Config File!1");
+		return (1);
 	if(ft_strlen(split_line[0]) == 2)
 	{
 		if(!strncmp(split_line[0], "NO", 3))
-			data->NO_PATH = split_line[1];
+			data->NO_PATH = ft_strdup(split_line[1]);
 		else if(!strncmp(split_line[0], "SO", 3))
-			data->SO_PATH = split_line[1];
+			data->SO_PATH = ft_strdup(split_line[1]);
 		else if(!strncmp(split_line[0], "WE", 3))
-			data->WE_PATH = split_line[1];
+			data->WE_PATH = ft_strdup(split_line[1]);
 		else if(!strncmp(split_line[0], "EA", 3))
-			data->EA_PATH = split_line[1];
+			data->EA_PATH = ft_strdup(split_line[1]);
 		else
-			print_error("Wrong Config File!2");
+			return (1);
 	}
 	else if(ft_strlen(split_line[0]) == 1)
-		handle_color(data, split_line);
+		return(handle_color(data, split_line));
 	else
-		print_error("Wrong Config File!4");
+		return (1);
+	return (0);
 }
 
 void	check_elements(t_data *data)
 {
-	char *line;
-	char **split_line;
+	char	*line;
+	char	**split_line;
+	char	*temp;
 	int i;
 
 	i = 0;
@@ -81,16 +94,28 @@ void	check_elements(t_data *data)
 	{
 		line = get_next_line(data->config_fd);
 		if(!line)
-			print_error("Wrong Config File5");
+			print_error(data, "Wrong Config File");
 		if(line[0] == '\n')
+		{
+			free(line);
 			continue;
+		}
+		temp = line;
 		line = ft_strtrim(line, "\n");
+		free(temp);
 		split_line = ft_split(line,' ');
-		handle_elements(data, split_line);
+		if(handle_elements(data, split_line))
+		{
+			free_2d(&split_line);
+			free(line);
+			print_error(data, "Wrong Config File");
+		}
+		free_2d(&split_line);
+		free(line);
 		i++;
 	}
 	if(!data->f_color || !data->c_color || !data->NO_PATH || !data->SO_PATH || !data->WE_PATH || !data->EA_PATH)
-		print_error("Wrong Config File6");
+		print_error(data, "Wrong Config File");
 }
 
 int	check_if_no_more_map(t_data *data)
@@ -127,8 +152,7 @@ void	calc_map_width_height(t_data *data)
 	data->no_rays = BLOCK_SIZE * data->map_width;
 	data->player.rays = malloc(sizeof(struct s_ray) * data->no_rays);
 	if (!data->player.rays)
-		print_error("Malloc Error!");
-	printf("%d   %d \n",data->map_height, data->map_width);
+		print_error(data, "Malloc Error!");
 }
 
 void	parse_map_contents(t_data *data)
@@ -136,18 +160,24 @@ void	parse_map_contents(t_data *data)
 	char *line;
 	char *map_input;
 
-	map_input = ft_strdup("");
 	while(1)
 	{
 		line = get_next_line(data->config_fd);
 		if(!line)
-			print_error("Wrong Config File7");
+			print_error(data, "Wrong Config File7");
 		if(line[0] == '\n')
+		{
+			free(line);
 			continue;
-		else
+		}
+		else	
+		{
+			map_input = line;
 			break;
+		}
+		free(line);
 	}
-	map_input = ft_strjoin(map_input, line);
+
 	while(1)
 	{
 		line = get_next_line(data->config_fd);
@@ -155,21 +185,21 @@ void	parse_map_contents(t_data *data)
 			break;
 		if(line[0] == '\n')
 		{
+			free(line);
 			if(check_if_no_more_map(data))
-				print_error("Wrong Config File9");
+			{
+				free(map_input);
+				print_error(data, "Wrong Config File9");
+			}
 			break;
 		}
 		map_input = ft_strjoin(map_input, line);
+		free(line);
 	}
 	data->map = ft_split(map_input, '\n');
+	free(map_input);
 	calc_map_width_height(data);
-	int i = 0;
-	while(data->map[i])
-	{
-		ft_putstr_fd(data->map[i], 2);
-		ft_putchar_fd('\n', 2);
-		i++;
-	}
+
 }
 
 void	check_chars(t_data *data)
@@ -190,7 +220,7 @@ void	check_chars(t_data *data)
 			if(c != '0' && c != '1' && c != 'N' && c != 'S' && c != 'W' && c != 'E' && c != '2' && c != ' ' && c != '3' && c != '5')
 				{
 					printf("|%c|\n", c);
-					print_error("Map Includes Not-allowed chars232!");
+					print_error(data, "Map Includes NON-allowed chars232!");
 				}
 			if(c == 'N' || c == 'S' || c == 'W' || c == 'E')
 			{
@@ -207,10 +237,10 @@ void	check_chars(t_data *data)
 		i++;
 	}
 	if(x != 1)
-		print_error("Map Includes Non or more than 1 starting pos!");
+		print_error(data, "Map Includes Non or more than 1 starting pos!");
 }
 
-char	*create_spaces(int number)
+char	*create_spaces(t_data *data, int number)
 {
 	char	*res;
 	int		i;
@@ -220,7 +250,7 @@ char	*create_spaces(int number)
 	{
 		res = malloc(sizeof(char) * (number + 1));
 		if(!res)
-			print_error("Malloc Error!");
+			print_error(data, "Malloc Error!");
 	}
 	else
 		return (NULL);
@@ -235,7 +265,7 @@ void	resize_width(t_data *data)
 {
 	int		i;
 	int		width;
-	char	*temp;
+	char	*spaces;
 
 	i = 0;
 	while(data->map[i])
@@ -243,9 +273,9 @@ void	resize_width(t_data *data)
 		width = ft_strlen(data->map[i]);
 		if(width < data->map_width)
 		{
-			temp = data->map[i];
-			data->map[i] = ft_strjoin(data->map[i], create_spaces(data->map_width - width));
-			free(temp);
+			spaces = create_spaces(data, data->map_width - width);
+			data->map[i] = ft_strjoin(data->map[i], spaces);
+			free(spaces);
 		}
 		i++;
 	}
@@ -288,7 +318,7 @@ void	check_if_closed_by_walls(t_data *data)
 		i++;
 		free(temp);
 		if (x == 1)
-			print_error("Map Not Closed by walls!");
+			print_error(data, "Map Not Closed by walls!");
 	}
 }
 
@@ -322,16 +352,16 @@ void	check_spaces_from_all_dir(t_data *data)
 			{
 				if(i + 1 < data->map_height)
 					if(data->map[i + 1][j] != ' ' && data->map[i + 1][j] != '1')
-						print_error("Map Not Closed by walls4!");
+						print_error(data, "Map Not Closed by walls4!");
 				if(i - 1 >= 0)
 					if(data->map[i - 1][j] != ' ' && data->map[i - 1][j] != '1')
-						print_error("Map Not Closed by walls5!");
+						print_error(data, "Map Not Closed by walls5!");
 				if(j + 1 < data->map_width)
 					if(data->map[i][j + 1] != ' ' && data->map[i][j + 1] != '1')
-						print_error("Map Not Closed by walls6!");
+						print_error(data, "Map Not Closed by walls6!");
 				if(j - 1 >= 0)
 					if(data->map[i][j - 1] != ' ' && data->map[i][j - 1] != '1')
-						print_error("Map Not Closed by walls7!");
+						print_error(data, "Map Not Closed by walls7!");
 			}
 			j++;
 		}
@@ -341,11 +371,13 @@ void	check_spaces_from_all_dir(t_data *data)
 
 void	check_if_valid_doors(t_data *data)
 {
-int		i;
+	int		i;
 	int		j;
 	char	*temp;
+	int		x;
 	
 	i = 0;
+	x = 0;
 	while(data->map[i])
 	{
 		j = 0;
@@ -353,8 +385,16 @@ int		i;
 		while(data->map[i][j])
 		{
 			if(temp[j] == '3')
-				if(!((data->map[i + 1][j] == '1' && data->map[i - 1][j] == '1') || (data->map[i][j + 1] == '1' && data->map[i][j + 1] == '1')))
-					print_error("Wrong Door Postion!");
+			{	
+				if(i + 1 < data->map_height && i - 1 >= 0)
+					if(data->map[i + 1][j] == '1' && data->map[i - 1][j] == '1')
+						x++;
+				if(j + 1 < data->map_width && j - 1 >= 0)
+					if(data->map[i][j + 1] == '1' && data->map[i][j + 1] == '1')		
+						x++;
+				if(x == 0)
+					print_error(data, "Wrong Door Postion!");
+			}
 			j++;
 		}
 		i++;

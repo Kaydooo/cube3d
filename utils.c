@@ -20,8 +20,11 @@ int	color_atoi(const char *str)
 		i++;
 	}
 	if(i > 5 || num > 255 || sign < 0)
-		print_error("Wrong Color!");
-	
+	{
+		free((char*)str);
+		return (-1);
+	}
+	free((char*)str);
 	return ((int)(num * sign));
 }
 
@@ -49,11 +52,12 @@ void	free_2d(char ***str)
 		*str = NULL;
 	}
 }
-void	print_error(char *msg)
+void	print_error(t_data *data, char *msg)
 {
 	ft_putstr_fd(msg, 2);
 	ft_putchar_fd('\n', 2);
-	exit(1);
+	free_all(data);
+	exit(EXIT_FAILURE);
 }
 
 void	clear_ray_obj(t_data *data, int reinit)

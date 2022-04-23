@@ -6,7 +6,7 @@
 /*   By: mal-guna <mal-guna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:39:32 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/04/23 05:46:16 by mal-guna         ###   ########.fr       */
+/*   Updated: 2022/04/23 06:50:26 by mal-guna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,7 +233,7 @@ int	main(int argc, char **argv)
 	t_data	*data;
 	data = malloc(sizeof(t_data));
 	if (!data)
-		print_error("Malloc Error!");
+		print_error(data, "Malloc Error!");
 	init_vars(data);
 	if(parse_map(data, argc, argv))
 		return (1);

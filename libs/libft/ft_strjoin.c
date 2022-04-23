@@ -6,7 +6,7 @@
 /*   By: mal-guna <mal-guna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 11:08:34 by mal-guna          #+#    #+#             */
-/*   Updated: 2021/10/04 00:43:01 by mal-guna         ###   ########.fr       */
+/*   Updated: 2022/04/23 09:48:58 by mal-guna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		b++;
 	}
 	join[b] = '\0';
+	free((char*)s1);
 	return (join);
 }
