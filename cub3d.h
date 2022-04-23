@@ -20,6 +20,9 @@
 #include <stdlib.h>
 #include <limits.h>
 
+#define Y 0
+#define X 1
+
 /* Game Settings */
 #define NUMBER_OF_RAYS 768
 #define ROTATION_SPEED 0.02
@@ -161,6 +164,9 @@ void	add_asset_to_image(t_data *data, int x, int y, int asset);
 int 	obj_status(t_data *data, int x, int y, int to_do);
 void	change_door_status(t_data *data, int count);
 void	change_flame_status(t_data *data, int count);
+
+/* sprite.c */
+void	raycast_sprite(t_data *data, int i, int *pos, int *dir);
 
 /* utils.c */
 void	clear_ray_obj(t_data *data, int reinit);

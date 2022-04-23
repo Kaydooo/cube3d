@@ -61,7 +61,6 @@ static void	calc_sprite_val(t_data *data, int i, int x, int y)
 	
 	ray_slope[0] = ray_temp[0] - data->player.y;
 	ray_slope[1] = ray_temp[0] - data->player.x;
-	// problem may lie in how shift is calc. Try raycaster
 	ray_shift[0] = 0;
 	if (ray_slope[0] != 0)
 		ray_shift[0] = 1 / sqrt(1 + pow(ray_slope[1] / ray_slope[0], 2));
