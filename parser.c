@@ -128,9 +128,16 @@ int	check_if_no_more_map(t_data *data)
 		if(!line)
 			return (0);
 		if(line[0] == '\n')
+		{
+			free(line);
 			continue;
+		}
 		else
+		{
+			free(line);
 			return (1);
+		}
+		free(line);
 	}
 }
 

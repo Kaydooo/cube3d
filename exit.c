@@ -17,6 +17,18 @@ void	free_text(t_data *data)
 	if (data->EA_PATH)
 		free(data->EA_PATH);
 }
+void	free_imgs(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while(i<32)
+	{
+		if(data->img[i].img)
+			mlx_destroy_image(data->mlx, data->img[i].img);
+		i++;
+	}
+}
 void	free_all(t_data *data)
 {
 
@@ -28,9 +40,11 @@ void	free_all(t_data *data)
 			mlx_destroy_window(data->mlx, data->win);
 		if(data->map)
 			free_2d(&(data->map));
-		//destory imgs here
+		free_imgs(data);//destory imgs here
 		free_text(data);//free texture paths here
 		//.......
+		if(data->mlx)
+			free(data->mlx);
 		free(data);
 	}
 	

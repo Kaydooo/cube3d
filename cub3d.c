@@ -6,7 +6,7 @@
 /*   By: mal-guna <mal-guna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:39:32 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/04/23 06:50:26 by mal-guna         ###   ########.fr       */
+/*   Updated: 2022/04/23 12:10:14 by mal-guna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,8 +131,8 @@ int		insdie_wall(t_data *data, int x, int y, int i)
 		data->player.rays[i].obj_y = realloc(data->player.rays[i].obj_y, new_size);
 	}
 	if(data->map[y][x] == '1')
-		return 1;
-	return 0;
+		return (1);
+	return (0);
 }
 
 void	init_rays_mag(t_data *data)

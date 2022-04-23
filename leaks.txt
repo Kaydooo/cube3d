@@ -1,528 +1,197 @@
-==147698== Memcheck, a memory error detector
-==147698== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==147698== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
-==147698== Command: ./cub3d file.cub
-==147698== Parent PID: 110867
-==147698== 
-==147698== Use of uninitialised value of size 8
-==147698==    at 0x10FBEF: insdie_wall (cub3d.c:121)
-==147698==    by 0x110AB5: check_wall (ray_caster.c:24)
-==147698==    by 0x11122A: raycast (ray_caster.c:73)
-==147698==    by 0x1113E1: check_line (ray_caster.c:102)
-==147698==    by 0x113C9F: printMap (draw.c:146)
-==147698==    by 0x110539: main (cub3d.c:244)
-==147698== 
-==147698== Use of uninitialised value of size 8
-==147698==    at 0x10FC55: insdie_wall (cub3d.c:122)
-==147698==    by 0x110AB5: check_wall (ray_caster.c:24)
-==147698==    by 0x11122A: raycast (ray_caster.c:73)
-==147698==    by 0x1113E1: check_line (ray_caster.c:102)
-==147698==    by 0x113C9F: printMap (draw.c:146)
-==147698==    by 0x110539: main (cub3d.c:244)
-==147698== 
-==147698== Use of uninitialised value of size 8
-==147698==    at 0x10FCC1: insdie_wall (cub3d.c:123)
-==147698==    by 0x110AB5: check_wall (ray_caster.c:24)
-==147698==    by 0x11122A: raycast (ray_caster.c:73)
-==147698==    by 0x1113E1: check_line (ray_caster.c:102)
-==147698==    by 0x113C9F: printMap (draw.c:146)
-==147698==    by 0x110539: main (cub3d.c:244)
-==147698== 
-==147698== Use of uninitialised value of size 8
-==147698==    at 0x10FCFF: insdie_wall (cub3d.c:124)
-==147698==    by 0x110AB5: check_wall (ray_caster.c:24)
-==147698==    by 0x11122A: raycast (ray_caster.c:73)
-==147698==    by 0x1113E1: check_line (ray_caster.c:102)
-==147698==    by 0x113C9F: printMap (draw.c:146)
-==147698==    by 0x110539: main (cub3d.c:244)
-==147698== 
-==147698== Use of uninitialised value of size 8
-==147698==    at 0x10FD3D: insdie_wall (cub3d.c:125)
-==147698==    by 0x110AB5: check_wall (ray_caster.c:24)
-==147698==    by 0x11122A: raycast (ray_caster.c:73)
-==147698==    by 0x1113E1: check_line (ray_caster.c:102)
-==147698==    by 0x113C9F: printMap (draw.c:146)
-==147698==    by 0x110539: main (cub3d.c:244)
-==147698== 
-==147698== Conditional jump or move depends on uninitialised value(s)
-==147698==    at 0x483DF65: realloc (vg_replace_malloc.c:836)
-==147698==    by 0x10FDAF: insdie_wall (cub3d.c:127)
-==147698==    by 0x110AB5: check_wall (ray_caster.c:24)
-==147698==    by 0x11122A: raycast (ray_caster.c:73)
-==147698==    by 0x1113E1: check_line (ray_caster.c:102)
-==147698==    by 0x113C9F: printMap (draw.c:146)
-==147698==    by 0x110539: main (cub3d.c:244)
-==147698== 
-==147698== Conditional jump or move depends on uninitialised value(s)
-==147698==    at 0x483DF65: realloc (vg_replace_malloc.c:836)
-==147698==    by 0x10FE16: insdie_wall (cub3d.c:128)
-==147698==    by 0x110AB5: check_wall (ray_caster.c:24)
-==147698==    by 0x11122A: raycast (ray_caster.c:73)
-==147698==    by 0x1113E1: check_line (ray_caster.c:102)
-==147698==    by 0x113C9F: printMap (draw.c:146)
-==147698==    by 0x110539: main (cub3d.c:244)
-==147698== 
-==147698== Conditional jump or move depends on uninitialised value(s)
-==147698==    at 0x483DF65: realloc (vg_replace_malloc.c:836)
-==147698==    by 0x10FE7D: insdie_wall (cub3d.c:129)
-==147698==    by 0x110AB5: check_wall (ray_caster.c:24)
-==147698==    by 0x11122A: raycast (ray_caster.c:73)
-==147698==    by 0x1113E1: check_line (ray_caster.c:102)
-==147698==    by 0x113C9F: printMap (draw.c:146)
-==147698==    by 0x110539: main (cub3d.c:244)
-==147698== 
-==147698== Conditional jump or move depends on uninitialised value(s)
-==147698==    at 0x483DF65: realloc (vg_replace_malloc.c:836)
-==147698==    by 0x10FEE4: insdie_wall (cub3d.c:130)
-==147698==    by 0x110AB5: check_wall (ray_caster.c:24)
-==147698==    by 0x11122A: raycast (ray_caster.c:73)
-==147698==    by 0x1113E1: check_line (ray_caster.c:102)
-==147698==    by 0x113C9F: printMap (draw.c:146)
-==147698==    by 0x110539: main (cub3d.c:244)
-==147698== 
-==147698== Conditional jump or move depends on uninitialised value(s)
-==147698==    at 0x483DF65: realloc (vg_replace_malloc.c:836)
-==147698==    by 0x10FF4B: insdie_wall (cub3d.c:131)
-==147698==    by 0x110AB5: check_wall (ray_caster.c:24)
-==147698==    by 0x11122A: raycast (ray_caster.c:73)
-==147698==    by 0x1113E1: check_line (ray_caster.c:102)
-==147698==    by 0x113C9F: printMap (draw.c:146)
-==147698==    by 0x110539: main (cub3d.c:244)
-==147698== 
-==147698== Conditional jump or move depends on uninitialised value(s)
-==147698==    at 0x11367F: draw_obj (draw.c:47)
-==147698==    by 0x113B93: draw_3d (draw.c:121)
-==147698==    by 0x113CAB: printMap (draw.c:147)
-==147698==    by 0x110539: main (cub3d.c:244)
-==147698== 
-==147698== Use of uninitialised value of size 8
-==147698==    at 0x1131D4: draw_obj (draw.c:54)
-==147698==    by 0x113B93: draw_3d (draw.c:121)
-==147698==    by 0x113CAB: printMap (draw.c:147)
-==147698==    by 0x110539: main (cub3d.c:244)
-==147698== 
-==147698== Use of uninitialised value of size 8
-==147698==    at 0x1133C6: draw_obj (draw.c:66)
-==147698==    by 0x113B93: draw_3d (draw.c:121)
-==147698==    by 0x113CAB: printMap (draw.c:147)
-==147698==    by 0x110539: main (cub3d.c:244)
-==147698== 
-==147698== Use of uninitialised value of size 8
-==147698==    at 0x113474: draw_obj (draw.c:71)
-==147698==    by 0x113B93: draw_3d (draw.c:121)
-==147698==    by 0x113CAB: printMap (draw.c:147)
-==147698==    by 0x110539: main (cub3d.c:244)
-==147698== 
-==147698== Use of uninitialised value of size 8
-==147698==    at 0x11351A: draw_obj (draw.c:74)
-==147698==    by 0x113B93: draw_3d (draw.c:121)
-==147698==    by 0x113CAB: printMap (draw.c:147)
-==147698==    by 0x110539: main (cub3d.c:244)
-==147698== 
-==147698== Use of uninitialised value of size 8
-==147698==    at 0x113574: draw_obj (draw.c:74)
-==147698==    by 0x113B93: draw_3d (draw.c:121)
-==147698==    by 0x113CAB: printMap (draw.c:147)
-==147698==    by 0x110539: main (cub3d.c:244)
-==147698== 
-==147698== Use of uninitialised value of size 8
-==147698==    at 0x1135D3: draw_obj (draw.c:74)
-==147698==    by 0x113B93: draw_3d (draw.c:121)
-==147698==    by 0x113CAB: printMap (draw.c:147)
-==147698==    by 0x110539: main (cub3d.c:244)
-==147698== 
-==147698== Use of uninitialised value of size 8
-==147698==    at 0x11360E: draw_obj (draw.c:74)
-==147698==    by 0x113B93: draw_3d (draw.c:121)
-==147698==    by 0x113CAB: printMap (draw.c:147)
-==147698==    by 0x110539: main (cub3d.c:244)
-==147698== 
-==147698== Use of uninitialised value of size 8
-==147698==    at 0x11328A: draw_obj (draw.c:56)
-==147698==    by 0x113B93: draw_3d (draw.c:121)
-==147698==    by 0x113CAB: printMap (draw.c:147)
-==147698==    by 0x110539: main (cub3d.c:244)
-==147698== 
-==147698== 
-==147698== HEAP SUMMARY:
-==147698==     in use at exit: 117,141 bytes in 4,022 blocks
-==147698==   total heap usage: 198,992 allocs, 194,970 frees, 6,942,165 bytes allocated
-==147698== 
-==147698== 224 (88 direct, 136 indirect) bytes in 1 blocks are definitely lost in loss record 64 of 117
-==147698==    at 0x483DD99: calloc (vg_replace_malloc.c:762)
-==147698==    by 0x11761B: mlx_int_new_xshm_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x117932: mlx_new_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x11178B: init_imgs (data_init.c:30)
-==147698==    by 0x111F91: data_init (data_init.c:102)
-==147698==    by 0x1104FA: main (cub3d.c:240)
-==147698== 
-==147698== 224 (88 direct, 136 indirect) bytes in 1 blocks are definitely lost in loss record 65 of 117
-==147698==    at 0x483DD99: calloc (vg_replace_malloc.c:762)
-==147698==    by 0x11761B: mlx_int_new_xshm_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x117932: mlx_new_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x11822A: mlx_int_parse_xpm (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x118641: mlx_xpm_file_to_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x11144F: init_text_imgs (data_init.c:5)
-==147698==    by 0x1117CF: init_imgs (data_init.c:32)
-==147698==    by 0x111F91: data_init (data_init.c:102)
-==147698==    by 0x1104FA: main (cub3d.c:240)
-==147698== 
-==147698== 224 (88 direct, 136 indirect) bytes in 1 blocks are definitely lost in loss record 66 of 117
-==147698==    at 0x483DD99: calloc (vg_replace_malloc.c:762)
-==147698==    by 0x11761B: mlx_int_new_xshm_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x117932: mlx_new_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x11822A: mlx_int_parse_xpm (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x118641: mlx_xpm_file_to_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x11148A: init_text_imgs (data_init.c:6)
-==147698==    by 0x1117CF: init_imgs (data_init.c:32)
-==147698==    by 0x111F91: data_init (data_init.c:102)
-==147698==    by 0x1104FA: main (cub3d.c:240)
-==147698== 
-==147698== 224 (88 direct, 136 indirect) bytes in 1 blocks are definitely lost in loss record 67 of 117
-==147698==    at 0x483DD99: calloc (vg_replace_malloc.c:762)
-==147698==    by 0x11761B: mlx_int_new_xshm_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x117932: mlx_new_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x11822A: mlx_int_parse_xpm (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x118641: mlx_xpm_file_to_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x1114C5: init_text_imgs (data_init.c:7)
-==147698==    by 0x1117CF: init_imgs (data_init.c:32)
-==147698==    by 0x111F91: data_init (data_init.c:102)
-==147698==    by 0x1104FA: main (cub3d.c:240)
-==147698== 
-==147698== 224 (88 direct, 136 indirect) bytes in 1 blocks are definitely lost in loss record 68 of 117
-==147698==    at 0x483DD99: calloc (vg_replace_malloc.c:762)
-==147698==    by 0x11761B: mlx_int_new_xshm_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x117932: mlx_new_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x11822A: mlx_int_parse_xpm (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x118641: mlx_xpm_file_to_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x111500: init_text_imgs (data_init.c:8)
-==147698==    by 0x1117CF: init_imgs (data_init.c:32)
-==147698==    by 0x111F91: data_init (data_init.c:102)
-==147698==    by 0x1104FA: main (cub3d.c:240)
-==147698== 
-==147698== 224 (88 direct, 136 indirect) bytes in 1 blocks are definitely lost in loss record 69 of 117
-==147698==    at 0x483DD99: calloc (vg_replace_malloc.c:762)
-==147698==    by 0x11761B: mlx_int_new_xshm_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x117932: mlx_new_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x11822A: mlx_int_parse_xpm (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x118641: mlx_xpm_file_to_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x111699: init_doors_imgs (data_init.c:19)
-==147698==    by 0x1117DB: init_imgs (data_init.c:33)
-==147698==    by 0x111F91: data_init (data_init.c:102)
-==147698==    by 0x1104FA: main (cub3d.c:240)
-==147698== 
-==147698== 224 (88 direct, 136 indirect) bytes in 1 blocks are definitely lost in loss record 70 of 117
-==147698==    at 0x483DD99: calloc (vg_replace_malloc.c:762)
-==147698==    by 0x11761B: mlx_int_new_xshm_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x117932: mlx_new_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x11822A: mlx_int_parse_xpm (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x118641: mlx_xpm_file_to_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x1116D0: init_doors_imgs (data_init.c:20)
-==147698==    by 0x1117DB: init_imgs (data_init.c:33)
-==147698==    by 0x111F91: data_init (data_init.c:102)
-==147698==    by 0x1104FA: main (cub3d.c:240)
-==147698== 
-==147698== 224 (88 direct, 136 indirect) bytes in 1 blocks are definitely lost in loss record 71 of 117
-==147698==    at 0x483DD99: calloc (vg_replace_malloc.c:762)
-==147698==    by 0x11761B: mlx_int_new_xshm_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x117932: mlx_new_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x11822A: mlx_int_parse_xpm (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x118641: mlx_xpm_file_to_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x111707: init_doors_imgs (data_init.c:21)
-==147698==    by 0x1117DB: init_imgs (data_init.c:33)
-==147698==    by 0x111F91: data_init (data_init.c:102)
-==147698==    by 0x1104FA: main (cub3d.c:240)
-==147698== 
-==147698== 224 (88 direct, 136 indirect) bytes in 1 blocks are definitely lost in loss record 72 of 117
-==147698==    at 0x483DD99: calloc (vg_replace_malloc.c:762)
-==147698==    by 0x11761B: mlx_int_new_xshm_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x117932: mlx_new_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x11822A: mlx_int_parse_xpm (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x118641: mlx_xpm_file_to_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x11173E: init_doors_imgs (data_init.c:22)
-==147698==    by 0x1117DB: init_imgs (data_init.c:33)
-==147698==    by 0x111F91: data_init (data_init.c:102)
-==147698==    by 0x1104FA: main (cub3d.c:240)
-==147698== 
-==147698== 224 (88 direct, 136 indirect) bytes in 1 blocks are definitely lost in loss record 73 of 117
-==147698==    at 0x483DD99: calloc (vg_replace_malloc.c:762)
-==147698==    by 0x11761B: mlx_int_new_xshm_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x117932: mlx_new_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x11822A: mlx_int_parse_xpm (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x118641: mlx_xpm_file_to_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x111807: init_imgs (data_init.c:36)
-==147698==    by 0x111F91: data_init (data_init.c:102)
-==147698==    by 0x1104FA: main (cub3d.c:240)
-==147698== 
-==147698== 224 (88 direct, 136 indirect) bytes in 1 blocks are definitely lost in loss record 74 of 117
-==147698==    at 0x483DD99: calloc (vg_replace_malloc.c:762)
-==147698==    by 0x11761B: mlx_int_new_xshm_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x117932: mlx_new_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x11822A: mlx_int_parse_xpm (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x118641: mlx_xpm_file_to_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x11183E: init_imgs (data_init.c:37)
-==147698==    by 0x111F91: data_init (data_init.c:102)
-==147698==    by 0x1104FA: main (cub3d.c:240)
-==147698== 
-==147698== 224 (88 direct, 136 indirect) bytes in 1 blocks are definitely lost in loss record 75 of 117
-==147698==    at 0x483DD99: calloc (vg_replace_malloc.c:762)
-==147698==    by 0x11761B: mlx_int_new_xshm_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x117932: mlx_new_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x11822A: mlx_int_parse_xpm (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x118641: mlx_xpm_file_to_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x111875: init_imgs (data_init.c:38)
-==147698==    by 0x111F91: data_init (data_init.c:102)
-==147698==    by 0x1104FA: main (cub3d.c:240)
-==147698== 
-==147698== 224 (88 direct, 136 indirect) bytes in 1 blocks are definitely lost in loss record 76 of 117
-==147698==    at 0x483DD99: calloc (vg_replace_malloc.c:762)
-==147698==    by 0x11761B: mlx_int_new_xshm_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x117932: mlx_new_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x11822A: mlx_int_parse_xpm (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x118641: mlx_xpm_file_to_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x1118AC: init_imgs (data_init.c:39)
-==147698==    by 0x111F91: data_init (data_init.c:102)
-==147698==    by 0x1104FA: main (cub3d.c:240)
-==147698== 
-==147698== 224 (88 direct, 136 indirect) bytes in 1 blocks are definitely lost in loss record 77 of 117
-==147698==    at 0x483DD99: calloc (vg_replace_malloc.c:762)
-==147698==    by 0x11761B: mlx_int_new_xshm_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x117932: mlx_new_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x11822A: mlx_int_parse_xpm (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x118641: mlx_xpm_file_to_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x1118E3: init_imgs (data_init.c:40)
-==147698==    by 0x111F91: data_init (data_init.c:102)
-==147698==    by 0x1104FA: main (cub3d.c:240)
-==147698== 
-==147698== 224 (88 direct, 136 indirect) bytes in 1 blocks are definitely lost in loss record 78 of 117
-==147698==    at 0x483DD99: calloc (vg_replace_malloc.c:762)
-==147698==    by 0x11761B: mlx_int_new_xshm_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x117932: mlx_new_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x11822A: mlx_int_parse_xpm (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x118641: mlx_xpm_file_to_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x11191A: init_imgs (data_init.c:41)
-==147698==    by 0x111F91: data_init (data_init.c:102)
-==147698==    by 0x1104FA: main (cub3d.c:240)
-==147698== 
-==147698== 224 (88 direct, 136 indirect) bytes in 1 blocks are definitely lost in loss record 79 of 117
-==147698==    at 0x483DD99: calloc (vg_replace_malloc.c:762)
-==147698==    by 0x11761B: mlx_int_new_xshm_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x117932: mlx_new_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x11822A: mlx_int_parse_xpm (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x118641: mlx_xpm_file_to_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x111951: init_imgs (data_init.c:42)
-==147698==    by 0x111F91: data_init (data_init.c:102)
-==147698==    by 0x1104FA: main (cub3d.c:240)
-==147698== 
-==147698== 224 (88 direct, 136 indirect) bytes in 1 blocks are definitely lost in loss record 80 of 117
-==147698==    at 0x483DD99: calloc (vg_replace_malloc.c:762)
-==147698==    by 0x11761B: mlx_int_new_xshm_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x117932: mlx_new_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x11822A: mlx_int_parse_xpm (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x118641: mlx_xpm_file_to_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x111988: init_imgs (data_init.c:43)
-==147698==    by 0x111F91: data_init (data_init.c:102)
-==147698==    by 0x1104FA: main (cub3d.c:240)
-==147698== 
-==147698== 224 (88 direct, 136 indirect) bytes in 1 blocks are definitely lost in loss record 81 of 117
-==147698==    at 0x483DD99: calloc (vg_replace_malloc.c:762)
-==147698==    by 0x11761B: mlx_int_new_xshm_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x117932: mlx_new_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x11822A: mlx_int_parse_xpm (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x118641: mlx_xpm_file_to_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x1119BF: init_imgs (data_init.c:44)
-==147698==    by 0x111F91: data_init (data_init.c:102)
-==147698==    by 0x1104FA: main (cub3d.c:240)
-==147698== 
-==147698== 224 (88 direct, 136 indirect) bytes in 1 blocks are definitely lost in loss record 82 of 117
-==147698==    at 0x483DD99: calloc (vg_replace_malloc.c:762)
-==147698==    by 0x11761B: mlx_int_new_xshm_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x117932: mlx_new_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x11822A: mlx_int_parse_xpm (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x118641: mlx_xpm_file_to_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x1119F6: init_imgs (data_init.c:45)
-==147698==    by 0x111F91: data_init (data_init.c:102)
-==147698==    by 0x1104FA: main (cub3d.c:240)
-==147698== 
-==147698== 224 (88 direct, 136 indirect) bytes in 1 blocks are definitely lost in loss record 83 of 117
-==147698==    at 0x483DD99: calloc (vg_replace_malloc.c:762)
-==147698==    by 0x11761B: mlx_int_new_xshm_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x117932: mlx_new_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x11822A: mlx_int_parse_xpm (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x118641: mlx_xpm_file_to_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x111A2D: init_imgs (data_init.c:46)
-==147698==    by 0x111F91: data_init (data_init.c:102)
-==147698==    by 0x1104FA: main (cub3d.c:240)
-==147698== 
-==147698== 224 (88 direct, 136 indirect) bytes in 1 blocks are definitely lost in loss record 84 of 117
-==147698==    at 0x483DD99: calloc (vg_replace_malloc.c:762)
-==147698==    by 0x11761B: mlx_int_new_xshm_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x117932: mlx_new_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x11822A: mlx_int_parse_xpm (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x118641: mlx_xpm_file_to_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x111A64: init_imgs (data_init.c:47)
-==147698==    by 0x111F91: data_init (data_init.c:102)
-==147698==    by 0x1104FA: main (cub3d.c:240)
-==147698== 
-==147698== 224 (88 direct, 136 indirect) bytes in 1 blocks are definitely lost in loss record 85 of 117
-==147698==    at 0x483DD99: calloc (vg_replace_malloc.c:762)
-==147698==    by 0x11761B: mlx_int_new_xshm_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x117932: mlx_new_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x11822A: mlx_int_parse_xpm (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x118641: mlx_xpm_file_to_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x111A9B: init_imgs (data_init.c:48)
-==147698==    by 0x111F91: data_init (data_init.c:102)
-==147698==    by 0x1104FA: main (cub3d.c:240)
-==147698== 
-==147698== 224 (88 direct, 136 indirect) bytes in 1 blocks are definitely lost in loss record 86 of 117
-==147698==    at 0x483DD99: calloc (vg_replace_malloc.c:762)
-==147698==    by 0x11761B: mlx_int_new_xshm_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x117932: mlx_new_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x11822A: mlx_int_parse_xpm (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x118641: mlx_xpm_file_to_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x111AD2: init_imgs (data_init.c:49)
-==147698==    by 0x111F91: data_init (data_init.c:102)
-==147698==    by 0x1104FA: main (cub3d.c:240)
-==147698== 
-==147698== 224 (88 direct, 136 indirect) bytes in 1 blocks are definitely lost in loss record 87 of 117
-==147698==    at 0x483DD99: calloc (vg_replace_malloc.c:762)
-==147698==    by 0x11761B: mlx_int_new_xshm_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x117932: mlx_new_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x11822A: mlx_int_parse_xpm (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x118641: mlx_xpm_file_to_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x111B09: init_imgs (data_init.c:50)
-==147698==    by 0x111F91: data_init (data_init.c:102)
-==147698==    by 0x1104FA: main (cub3d.c:240)
-==147698== 
-==147698== 224 (88 direct, 136 indirect) bytes in 1 blocks are definitely lost in loss record 88 of 117
-==147698==    at 0x483DD99: calloc (vg_replace_malloc.c:762)
-==147698==    by 0x11761B: mlx_int_new_xshm_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x117932: mlx_new_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x11822A: mlx_int_parse_xpm (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x118641: mlx_xpm_file_to_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x111B40: init_imgs (data_init.c:51)
-==147698==    by 0x111F91: data_init (data_init.c:102)
-==147698==    by 0x1104FA: main (cub3d.c:240)
-==147698== 
-==147698== 224 (88 direct, 136 indirect) bytes in 1 blocks are definitely lost in loss record 89 of 117
-==147698==    at 0x483DD99: calloc (vg_replace_malloc.c:762)
-==147698==    by 0x11761B: mlx_int_new_xshm_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x117932: mlx_new_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x11822A: mlx_int_parse_xpm (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x118641: mlx_xpm_file_to_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x111B77: init_imgs (data_init.c:52)
-==147698==    by 0x111F91: data_init (data_init.c:102)
-==147698==    by 0x1104FA: main (cub3d.c:240)
-==147698== 
-==147698== 224 (88 direct, 136 indirect) bytes in 1 blocks are definitely lost in loss record 90 of 117
-==147698==    at 0x483DD99: calloc (vg_replace_malloc.c:762)
-==147698==    by 0x11761B: mlx_int_new_xshm_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x117932: mlx_new_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x11822A: mlx_int_parse_xpm (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x118641: mlx_xpm_file_to_image (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x111BAE: init_imgs (data_init.c:53)
-==147698==    by 0x111F91: data_init (data_init.c:102)
-==147698==    by 0x1104FA: main (cub3d.c:240)
-==147698== 
-==147698== 536 bytes in 59 blocks are definitely lost in loss record 94 of 117
-==147698==    at 0x483DFAF: realloc (vg_replace_malloc.c:836)
-==147698==    by 0x10FDAF: insdie_wall (cub3d.c:127)
-==147698==    by 0x110AB5: check_wall (ray_caster.c:24)
-==147698==    by 0x11122A: raycast (ray_caster.c:73)
-==147698==    by 0x1113E1: check_line (ray_caster.c:102)
-==147698==    by 0x113C9F: printMap (draw.c:146)
-==147698==    by 0x112F02: render (render.c:71)
-==147698==    by 0x117320: mlx_loop (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x110630: main (cub3d.c:252)
-==147698== 
-==147698== 536 bytes in 59 blocks are definitely lost in loss record 95 of 117
-==147698==    at 0x483DFAF: realloc (vg_replace_malloc.c:836)
-==147698==    by 0x10FE16: insdie_wall (cub3d.c:128)
-==147698==    by 0x110AB5: check_wall (ray_caster.c:24)
-==147698==    by 0x11122A: raycast (ray_caster.c:73)
-==147698==    by 0x1113E1: check_line (ray_caster.c:102)
-==147698==    by 0x113C9F: printMap (draw.c:146)
-==147698==    by 0x112F02: render (render.c:71)
-==147698==    by 0x117320: mlx_loop (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x110630: main (cub3d.c:252)
-==147698== 
-==147698== 536 bytes in 59 blocks are definitely lost in loss record 96 of 117
-==147698==    at 0x483DFAF: realloc (vg_replace_malloc.c:836)
-==147698==    by 0x10FE7D: insdie_wall (cub3d.c:129)
-==147698==    by 0x110AB5: check_wall (ray_caster.c:24)
-==147698==    by 0x11122A: raycast (ray_caster.c:73)
-==147698==    by 0x1113E1: check_line (ray_caster.c:102)
-==147698==    by 0x113C9F: printMap (draw.c:146)
-==147698==    by 0x112F02: render (render.c:71)
-==147698==    by 0x117320: mlx_loop (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x110630: main (cub3d.c:252)
-==147698== 
-==147698== 536 bytes in 59 blocks are definitely lost in loss record 97 of 117
-==147698==    at 0x483DFAF: realloc (vg_replace_malloc.c:836)
-==147698==    by 0x10FEE4: insdie_wall (cub3d.c:130)
-==147698==    by 0x110AB5: check_wall (ray_caster.c:24)
-==147698==    by 0x11122A: raycast (ray_caster.c:73)
-==147698==    by 0x1113E1: check_line (ray_caster.c:102)
-==147698==    by 0x113C9F: printMap (draw.c:146)
-==147698==    by 0x112F02: render (render.c:71)
-==147698==    by 0x117320: mlx_loop (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x110630: main (cub3d.c:252)
-==147698== 
-==147698== 536 bytes in 59 blocks are definitely lost in loss record 98 of 117
-==147698==    at 0x483DFAF: realloc (vg_replace_malloc.c:836)
-==147698==    by 0x10FF4B: insdie_wall (cub3d.c:131)
-==147698==    by 0x110AB5: check_wall (ray_caster.c:24)
-==147698==    by 0x11122A: raycast (ray_caster.c:73)
-==147698==    by 0x1113E1: check_line (ray_caster.c:102)
-==147698==    by 0x113C9F: printMap (draw.c:146)
-==147698==    by 0x112F02: render (render.c:71)
-==147698==    by 0x117320: mlx_loop (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x110630: main (cub3d.c:252)
-==147698== 
-==147698== 2,836 bytes in 709 blocks are definitely lost in loss record 107 of 117
-==147698==    at 0x483DD99: calloc (vg_replace_malloc.c:762)
-==147698==    by 0x1142D4: clear_ray_obj (utils.c:77)
-==147698==    by 0x112ED1: render (render.c:68)
-==147698==    by 0x117320: mlx_loop (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x110630: main (cub3d.c:252)
-==147698== 
-==147698== 2,836 bytes in 709 blocks are definitely lost in loss record 108 of 117
-==147698==    at 0x483DD99: calloc (vg_replace_malloc.c:762)
-==147698==    by 0x114310: clear_ray_obj (utils.c:78)
-==147698==    by 0x112ED1: render (render.c:68)
-==147698==    by 0x117320: mlx_loop (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x110630: main (cub3d.c:252)
-==147698== 
-==147698== 2,836 bytes in 709 blocks are definitely lost in loss record 109 of 117
-==147698==    at 0x483DD99: calloc (vg_replace_malloc.c:762)
-==147698==    by 0x11434C: clear_ray_obj (utils.c:79)
-==147698==    by 0x112ED1: render (render.c:68)
-==147698==    by 0x117320: mlx_loop (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x110630: main (cub3d.c:252)
-==147698== 
-==147698== 2,836 bytes in 709 blocks are definitely lost in loss record 110 of 117
-==147698==    at 0x483DD99: calloc (vg_replace_malloc.c:762)
-==147698==    by 0x114388: clear_ray_obj (utils.c:80)
-==147698==    by 0x112ED1: render (render.c:68)
-==147698==    by 0x117320: mlx_loop (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x110630: main (cub3d.c:252)
-==147698== 
-==147698== 2,836 bytes in 709 blocks are definitely lost in loss record 111 of 117
-==147698==    at 0x483DD99: calloc (vg_replace_malloc.c:762)
-==147698==    by 0x1143C4: clear_ray_obj (utils.c:81)
-==147698==    by 0x112ED1: render (render.c:68)
-==147698==    by 0x117320: mlx_loop (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
-==147698==    by 0x110630: main (cub3d.c:252)
-==147698== 
-==147698== LEAK SUMMARY:
-==147698==    definitely lost: 19,236 bytes in 3,867 blocks
-==147698==    indirectly lost: 3,672 bytes in 27 blocks
-==147698==      possibly lost: 0 bytes in 0 blocks
-==147698==    still reachable: 94,233 bytes in 128 blocks
-==147698==         suppressed: 0 bytes in 0 blocks
-==147698== Reachable blocks (those to which a pointer was found) are not shown.
-==147698== To see them, rerun with: --leak-check=full --show-leak-kinds=all
-==147698== 
-==147698== Use --track-origins=yes to see where uninitialised values come from
-==147698== For lists of detected and suppressed errors, rerun with: -s
-==147698== ERROR SUMMARY: 31397 errors from 56 contexts (suppressed: 1 from 1)
+==153046== Memcheck, a memory error detector
+==153046== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==153046== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==153046== Command: ./cub3d file.cub
+==153046== Parent PID: 110867
+==153046== 
+==153046== Use of uninitialised value of size 8
+==153046==    at 0x10FC0F: insdie_wall (cub3d.c:121)
+==153046==    by 0x110AD5: check_wall (ray_caster.c:24)
+==153046==    by 0x11124A: raycast (ray_caster.c:73)
+==153046==    by 0x111401: check_line (ray_caster.c:102)
+==153046==    by 0x113B84: printMap (draw.c:115)
+==153046==    by 0x110559: main (cub3d.c:244)
+==153046== 
+==153046== Use of uninitialised value of size 8
+==153046==    at 0x10FC75: insdie_wall (cub3d.c:122)
+==153046==    by 0x110AD5: check_wall (ray_caster.c:24)
+==153046==    by 0x11124A: raycast (ray_caster.c:73)
+==153046==    by 0x111401: check_line (ray_caster.c:102)
+==153046==    by 0x113B84: printMap (draw.c:115)
+==153046==    by 0x110559: main (cub3d.c:244)
+==153046== 
+==153046== Use of uninitialised value of size 8
+==153046==    at 0x10FCE1: insdie_wall (cub3d.c:123)
+==153046==    by 0x110AD5: check_wall (ray_caster.c:24)
+==153046==    by 0x11124A: raycast (ray_caster.c:73)
+==153046==    by 0x111401: check_line (ray_caster.c:102)
+==153046==    by 0x113B84: printMap (draw.c:115)
+==153046==    by 0x110559: main (cub3d.c:244)
+==153046== 
+==153046== Use of uninitialised value of size 8
+==153046==    at 0x10FD1F: insdie_wall (cub3d.c:124)
+==153046==    by 0x110AD5: check_wall (ray_caster.c:24)
+==153046==    by 0x11124A: raycast (ray_caster.c:73)
+==153046==    by 0x111401: check_line (ray_caster.c:102)
+==153046==    by 0x113B84: printMap (draw.c:115)
+==153046==    by 0x110559: main (cub3d.c:244)
+==153046== 
+==153046== Use of uninitialised value of size 8
+==153046==    at 0x10FD5D: insdie_wall (cub3d.c:125)
+==153046==    by 0x110AD5: check_wall (ray_caster.c:24)
+==153046==    by 0x11124A: raycast (ray_caster.c:73)
+==153046==    by 0x111401: check_line (ray_caster.c:102)
+==153046==    by 0x113B84: printMap (draw.c:115)
+==153046==    by 0x110559: main (cub3d.c:244)
+==153046== 
+==153046== Conditional jump or move depends on uninitialised value(s)
+==153046==    at 0x483DF65: realloc (vg_replace_malloc.c:836)
+==153046==    by 0x10FDCF: insdie_wall (cub3d.c:127)
+==153046==    by 0x110AD5: check_wall (ray_caster.c:24)
+==153046==    by 0x11124A: raycast (ray_caster.c:73)
+==153046==    by 0x111401: check_line (ray_caster.c:102)
+==153046==    by 0x113B84: printMap (draw.c:115)
+==153046==    by 0x110559: main (cub3d.c:244)
+==153046== 
+==153046== Conditional jump or move depends on uninitialised value(s)
+==153046==    at 0x483DF65: realloc (vg_replace_malloc.c:836)
+==153046==    by 0x10FE36: insdie_wall (cub3d.c:128)
+==153046==    by 0x110AD5: check_wall (ray_caster.c:24)
+==153046==    by 0x11124A: raycast (ray_caster.c:73)
+==153046==    by 0x111401: check_line (ray_caster.c:102)
+==153046==    by 0x113B84: printMap (draw.c:115)
+==153046==    by 0x110559: main (cub3d.c:244)
+==153046== 
+==153046== Conditional jump or move depends on uninitialised value(s)
+==153046==    at 0x483DF65: realloc (vg_replace_malloc.c:836)
+==153046==    by 0x10FE9D: insdie_wall (cub3d.c:129)
+==153046==    by 0x110AD5: check_wall (ray_caster.c:24)
+==153046==    by 0x11124A: raycast (ray_caster.c:73)
+==153046==    by 0x111401: check_line (ray_caster.c:102)
+==153046==    by 0x113B84: printMap (draw.c:115)
+==153046==    by 0x110559: main (cub3d.c:244)
+==153046== 
+==153046== Conditional jump or move depends on uninitialised value(s)
+==153046==    at 0x483DF65: realloc (vg_replace_malloc.c:836)
+==153046==    by 0x10FF04: insdie_wall (cub3d.c:130)
+==153046==    by 0x110AD5: check_wall (ray_caster.c:24)
+==153046==    by 0x11124A: raycast (ray_caster.c:73)
+==153046==    by 0x111401: check_line (ray_caster.c:102)
+==153046==    by 0x113B84: printMap (draw.c:115)
+==153046==    by 0x110559: main (cub3d.c:244)
+==153046== 
+==153046== Conditional jump or move depends on uninitialised value(s)
+==153046==    at 0x483DF65: realloc (vg_replace_malloc.c:836)
+==153046==    by 0x10FF6B: insdie_wall (cub3d.c:131)
+==153046==    by 0x110AD5: check_wall (ray_caster.c:24)
+==153046==    by 0x11124A: raycast (ray_caster.c:73)
+==153046==    by 0x111401: check_line (ray_caster.c:102)
+==153046==    by 0x113B84: printMap (draw.c:115)
+==153046==    by 0x110559: main (cub3d.c:244)
+==153046== 
+==153046== Conditional jump or move depends on uninitialised value(s)
+==153046==    at 0x113571: draw_obj (draw.c:19)
+==153046==    by 0x113A85: draw_3d (draw.c:93)
+==153046==    by 0x113B90: printMap (draw.c:116)
+==153046==    by 0x110559: main (cub3d.c:244)
+==153046== 
+==153046== Use of uninitialised value of size 8
+==153046==    at 0x1130C6: draw_obj (draw.c:26)
+==153046==    by 0x113A85: draw_3d (draw.c:93)
+==153046==    by 0x113B90: printMap (draw.c:116)
+==153046==    by 0x110559: main (cub3d.c:244)
+==153046== 
+==153046== Use of uninitialised value of size 8
+==153046==    at 0x1132B8: draw_obj (draw.c:38)
+==153046==    by 0x113A85: draw_3d (draw.c:93)
+==153046==    by 0x113B90: printMap (draw.c:116)
+==153046==    by 0x110559: main (cub3d.c:244)
+==153046== 
+==153046== Use of uninitialised value of size 8
+==153046==    at 0x113366: draw_obj (draw.c:43)
+==153046==    by 0x113A85: draw_3d (draw.c:93)
+==153046==    by 0x113B90: printMap (draw.c:116)
+==153046==    by 0x110559: main (cub3d.c:244)
+==153046== 
+==153046== Use of uninitialised value of size 8
+==153046==    at 0x11340C: draw_obj (draw.c:46)
+==153046==    by 0x113A85: draw_3d (draw.c:93)
+==153046==    by 0x113B90: printMap (draw.c:116)
+==153046==    by 0x110559: main (cub3d.c:244)
+==153046== 
+==153046== Use of uninitialised value of size 8
+==153046==    at 0x113466: draw_obj (draw.c:46)
+==153046==    by 0x113A85: draw_3d (draw.c:93)
+==153046==    by 0x113B90: printMap (draw.c:116)
+==153046==    by 0x110559: main (cub3d.c:244)
+==153046== 
+==153046== Use of uninitialised value of size 8
+==153046==    at 0x1134C5: draw_obj (draw.c:46)
+==153046==    by 0x113A85: draw_3d (draw.c:93)
+==153046==    by 0x113B90: printMap (draw.c:116)
+==153046==    by 0x110559: main (cub3d.c:244)
+==153046== 
+==153046== Use of uninitialised value of size 8
+==153046==    at 0x113500: draw_obj (draw.c:46)
+==153046==    by 0x113A85: draw_3d (draw.c:93)
+==153046==    by 0x113B90: printMap (draw.c:116)
+==153046==    by 0x110559: main (cub3d.c:244)
+==153046== 
+==153046== Use of uninitialised value of size 8
+==153046==    at 0x11317C: draw_obj (draw.c:28)
+==153046==    by 0x113A85: draw_3d (draw.c:93)
+==153046==    by 0x113B90: printMap (draw.c:116)
+==153046==    by 0x110559: main (cub3d.c:244)
+==153046== 
+==153046== 
+==153046== HEAP SUMMARY:
+==153046==     in use at exit: 109,457 bytes in 3,967 blocks
+==153046==   total heap usage: 247,413 allocs, 243,446 frees, 7,156,731 bytes allocated
+==153046== 
+==153046== 3,072 bytes in 768 blocks are definitely lost in loss record 47 of 57
+==153046==    at 0x483DD99: calloc (vg_replace_malloc.c:762)
+==153046==    by 0x1141B9: clear_ray_obj (utils.c:77)
+==153046==    by 0x112F37: render (render.c:68)
+==153046==    by 0x1172C0: mlx_loop (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
+==153046==    by 0x110650: main (cub3d.c:252)
+==153046== 
+==153046== 3,072 bytes in 768 blocks are definitely lost in loss record 48 of 57
+==153046==    at 0x483DD99: calloc (vg_replace_malloc.c:762)
+==153046==    by 0x1141F5: clear_ray_obj (utils.c:78)
+==153046==    by 0x112F37: render (render.c:68)
+==153046==    by 0x1172C0: mlx_loop (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
+==153046==    by 0x110650: main (cub3d.c:252)
+==153046== 
+==153046== 3,072 bytes in 768 blocks are definitely lost in loss record 49 of 57
+==153046==    at 0x483DD99: calloc (vg_replace_malloc.c:762)
+==153046==    by 0x114231: clear_ray_obj (utils.c:79)
+==153046==    by 0x112F37: render (render.c:68)
+==153046==    by 0x1172C0: mlx_loop (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
+==153046==    by 0x110650: main (cub3d.c:252)
+==153046== 
+==153046== 3,072 bytes in 768 blocks are definitely lost in loss record 50 of 57
+==153046==    at 0x483DD99: calloc (vg_replace_malloc.c:762)
+==153046==    by 0x11426D: clear_ray_obj (utils.c:80)
+==153046==    by 0x112F37: render (render.c:68)
+==153046==    by 0x1172C0: mlx_loop (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
+==153046==    by 0x110650: main (cub3d.c:252)
+==153046== 
+==153046== 3,072 bytes in 768 blocks are definitely lost in loss record 51 of 57
+==153046==    at 0x483DD99: calloc (vg_replace_malloc.c:762)
+==153046==    by 0x1142A9: clear_ray_obj (utils.c:81)
+==153046==    by 0x112F37: render (render.c:68)
+==153046==    by 0x1172C0: mlx_loop (in /home/kaydoo/Documents/42Curses_MOA/cub3d/cub3d)
+==153046==    by 0x110650: main (cub3d.c:252)
+==153046== 
+==153046== LEAK SUMMARY:
+==153046==    definitely lost: 15,360 bytes in 3,840 blocks
+==153046==    indirectly lost: 0 bytes in 0 blocks
+==153046==      possibly lost: 0 bytes in 0 blocks
+==153046==    still reachable: 94,097 bytes in 127 blocks
+==153046==         suppressed: 0 bytes in 0 blocks
+==153046== Reachable blocks (those to which a pointer was found) are not shown.
+==153046== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==153046== 
+==153046== Use --track-origins=yes to see where uninitialised values come from
+==153046== For lists of detected and suppressed errors, rerun with: -s
+==153046== ERROR SUMMARY: 31365 errors from 24 contexts (suppressed: 1 from 1)

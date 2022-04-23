@@ -81,7 +81,14 @@ void	init_rays(t_data *data)
 
 void	init_vars(t_data *data)
 {
+	int	i;
+
+	i = 0;
+
+	while(i < 32)
+		data->img[i++].img = NULL;
 	data->win = NULL;
+	data->mlx = NULL;
 	data->player.rays = NULL;
 	data->map = NULL;
 	data->player.rotate_r = 0;

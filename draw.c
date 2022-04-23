@@ -8,34 +8,6 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;	
 }
 
-void	add_asset_to_image(t_data *data, int x, int y, int asset)
-{
-	void	*dst;
-	void	*dst2;
-	int temp;
-	int x2;
-	int y2;
-	
-	temp = x;
-	x2 = 0;
-	y2 = 0;
-	while(y2 < data->img[asset].width - 1)
-	{
-		x2 = 0;
-		x = temp;
-		while(x2 < data->img[asset].hieght - 1)
-		{
-			dst = data->img[0].addr + (y * data->img[0].line_length + x * (data->img[0].bits_per_pixel / 8));
-			dst2 = data->img[asset].addr + (y2 * data->img[asset].line_length + x2 * (data->img[asset].bits_per_pixel / 8));
-			*(unsigned int*)(dst) = *(unsigned int*)(dst2);
-			x2++;
-			x++;
-		}
-		y2++;
-		y++;
-	}
-}
-
 static int	get_t(int trgb)
 {
 	return ((trgb >> 24) & 0xFF);
@@ -136,13 +108,10 @@ void	printMap(t_data *data, int count)
 	int y;
 
 	if (count)
-		x = 0;
+		{}
 	x = 0;
 	y = 0;
-	// add_asset_to_image(data, 0, 0, 5);
 	draw_floor_cel(data);
-		//write(1, "hey\n", 4);
-	//draw_player(data, data->player.x/8, data->player.y/8, 3);
 	check_line(data);
 	draw_3d(data);
 	while(data->map[y])
@@ -158,12 +127,10 @@ void	printMap(t_data *data, int count)
 				draw_rect(data, x*4, y*4, 4, 4, 0xFF9FE2BF);
 			if(data->map[y][x] == '5')
 				draw_rect(data, x*4, y*4, 4, 4, 0xFF8B0000);
-				// add_asset_to_image_minimap(data, x*4, y*4, (data->map[y][x] - '0') + 1);
 			x++;
 		}
 		y++;
 	}
-	//draw_player(data, data->player.x/8, data->player.y/8, 3);
 	draw_rect(data,data->player.x/8, data->player.y/8, 3, 3, 0x00FF00FF);//player
 	mlx_put_image_to_window(data->mlx, data->win, data->img[0].img,0, 0);
 }
