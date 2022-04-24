@@ -21,6 +21,12 @@ static int check_wall(t_data *data, int side, int i, int *dir, int *nxt_pt)
 		y -= 1;
 	else if (dir[1] == EAST_TEXT && side)
 		x -= 1;
+	if (data->map[y][x] >= FLAME_MAP_F + '0')
+	{
+		int pos[2]; pos[Y] = y; pos[X] = x;
+		raycast_sprite(data, i, pos);
+		return (0);
+	}
 	return (insdie_wall(data, x, y, i));
 }
 

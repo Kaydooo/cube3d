@@ -70,6 +70,7 @@ void	init_rays(t_data *data)
 	while(++i < data->no_rays)
 	{
 		data->player.rays[i].rot = angle;
+		data->player.rays[i].obj_num = 0;
 		data->player.rays[i].obj_direction = ft_calloc(1, sizeof(int));
 		data->player.rays[i].obj_hit_point = ft_calloc(1, sizeof(int));
 		data->player.rays[i].obj_mag = ft_calloc(1, sizeof(int));

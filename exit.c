@@ -29,13 +29,17 @@ void	free_imgs(t_data *data)
 		i++;
 	}
 }
+
 void	free_all(t_data *data)
 {
-
+	obj_status(data, 0, 0, 1);
 	if(data)
 	{
 		if(data->player.rays)
+		{
+			clear_ray_obj(data, 0);
 			free(data->player.rays);
+		}
 		if(data->win)
 			mlx_destroy_window(data->mlx, data->win);
 		if(data->map)

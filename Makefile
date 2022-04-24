@@ -2,7 +2,7 @@
 # $@ "include target"
 # $^ "include the full list of prerequisites)"
 
-SRCS = cub3d.c draw_shapes.c ray_caster.c data_init.c move_player.c render.c draw.c utils.c	objects.c parser.c exit.c
+SRCS = cub3d.c draw_shapes.c ray_caster.c data_init.c move_player.c render.c draw.c utils.c	objects.c parser.c exit.c sprite.c
 
 OBJS = ${SRCS:.c=.o}
 
@@ -17,13 +17,12 @@ LIBFT_PATH = libs/libft
 GNL_PATH = libs/gnl
 
 ifeq ($(OS), Linux)
-	MLX_FLAGS = -Lmlx_linux -lmlx -Ilibs/mlx_linux -lXext -lX11 -lm -lz
+	MLX_FLAGS = -Llibs/mlx_linux -lmlx -Ilibs/mlx_linux -lXext -lX11 -lm -lz
 	MLX_PATH = libs/mlx_linux
 else
 	MLX_FLAGS = -Lmlx_mac -lmlx -Ilibs/mlx_mac -framework OpenGL -framework AppKit
 	MLX_PATH = libs/mlx_mac
 endif
-
 
 NAME = cub3d
 

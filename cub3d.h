@@ -25,12 +25,15 @@
 #include <string.h>
 #include <errno.h>
 
+#define Y 0
+#define X 1
+
 /* Game Settings */
 #define NUMBER_OF_RAYS 768
 #define ROTATION_SPEED 0.04
 #define OneDegreeRad 0.0174533/10//0.0174533
 #define BLOCK_SIZE 32
-#define SPEED 0.5
+#define SPEED 1
 
 /* Texture Indices */
 #define NORTH_TEXT 6
@@ -196,6 +199,9 @@ void	validate_map_contents(t_data *data);
 int 	obj_status(t_data *data, int x, int y, int to_do);
 void	change_door_status(t_data *data, int count);
 void	change_flame_status(t_data *data, int count);
+
+/* sprite.c */
+void	raycast_sprite(t_data *data, int i, int *pos);
 
 /* utils.c */
 void	clear_ray_obj(t_data *data, int reinit);
