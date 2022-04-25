@@ -92,7 +92,7 @@ void	check_line(t_data *data)
 	{
 		diff[1] = data->player.rays[i].ray_x - data->player.x;
 		diff[0] = data->player.rays[i].ray_y - data->player.y;
-		data->player.rays[i].mag = 0.1;
+		data->player.rays[i].mag = 0.0001;
 		rotate(data, 0, i);
 		dir[0] = NORTH_TEXT; // assuming SE
 		dir[1] = WEST_TEXT;  // assuming SE

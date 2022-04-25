@@ -30,26 +30,27 @@ void	move(t_data *data, int dir)
 	max_index = data->map_width * BLOCK_SIZE - 1;	
 	unit_x = (data->player.rays[data->no_rays/2].ray_x - data->player.x)/(data->player.rays[data->no_rays/2].mag);
 	unit_y = (data->player.rays[data->no_rays/2].ray_y - data->player.y)/(data->player.rays[data->no_rays/2].mag);
-	if(dir == 1 && (data->map[((int)round(data->player.y + unit_y*4.5 * SPEED)/BLOCK_SIZE) & max_index][((int)round(data->player.x + unit_x*4.5 * SPEED)/BLOCK_SIZE ) & max_index] + '0') % 2 != 1)
+	if(dir == 1 && (data->map[((int)round(data->player.y + unit_y*15 * SPEED)/BLOCK_SIZE) & max_index][((int)round(data->player.x + unit_x*15 * SPEED)/BLOCK_SIZE ) & max_index] + '0') % 2 != 1)
 	{
 			data->player.x += unit_x * SPEED;
 			data->player.y += unit_y * SPEED;
 	}
-	else if(dir == -1 && (data->map[((int)round(data->player.y - unit_y*4.5 * SPEED)/BLOCK_SIZE) & max_index][((int)round(data->player.x - unit_x*4.5 * SPEED)/BLOCK_SIZE) & max_index] + '0') % 2 != 1)
+	else if(dir == -1 && (data->map[((int)round(data->player.y - unit_y*15 * SPEED)/BLOCK_SIZE) & max_index][((int)round(data->player.x - unit_x*15 * SPEED)/BLOCK_SIZE) & max_index] + '0') % 2 != 1)
 	{
 		data->player.x -= unit_x * SPEED;
 		data->player.y -= unit_y * SPEED;
 	}
-	else if(dir == 2 && (data->map[((int)round(data->player.y - -unit_x*4.5 * SPEED)/BLOCK_SIZE) & max_index][((int)round(data->player.x - unit_y*4.5 * SPEED)/BLOCK_SIZE) & max_index] + '0') % 2 != 1)
+	else if(dir == 2 && (data->map[((int)round(data->player.y - -unit_x*15 * SPEED)/BLOCK_SIZE) & max_index][((int)round(data->player.x - unit_y*15 * SPEED)/BLOCK_SIZE) & max_index] + '0') % 2 != 1)
 	{
 		data->player.x -= unit_y * SPEED;
 		data->player.y -= -unit_x * SPEED;
 	}
-	else if(dir == -2 && (data->map[((int)round(data->player.y - unit_x*4.5 * SPEED)/BLOCK_SIZE) & max_index][((int)round(data->player.x - -unit_y*4.5 * SPEED)/BLOCK_SIZE) & max_index]) + '0' % 2 != 1)
+	else if(dir == -2 && (data->map[((int)round(data->player.y - unit_x*15 * SPEED)/BLOCK_SIZE) & max_index][((int)round(data->player.x - - unit_y*15 * SPEED)/BLOCK_SIZE) & max_index] + '0') % 2 != 1)
 	{
 		data->player.x -= -unit_y * SPEED;
 		data->player.y -= unit_x * SPEED;
 	}
+
 	if(data->player.x < 0)
 		data->player.x = 0;
 	if(data->player.x >= (data->map_width) * BLOCK_SIZE)
