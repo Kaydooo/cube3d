@@ -7,7 +7,7 @@ void	rotate(t_data *data, int dir, int i)
 	j = -1;
 	if(dir)
 	{
-		while(++j < data->no_rays)
+		while(++j < WIDTH)
 		{
 			data->player.rays[j].rot += (dir * ROTATION_SPEED);
 			data->player.rays[j].ray_x = data->player.rays[j].mag * cos(data->player.rays[j].rot) + data->player.x;
@@ -28,8 +28,8 @@ void	move(t_data *data, int dir)
 	int max_index;
 
 	max_index = data->map_width * BLOCK_SIZE - 1;	
-	unit_x = (data->player.rays[data->no_rays/2].ray_x - data->player.x)/(data->player.rays[data->no_rays/2].mag);
-	unit_y = (data->player.rays[data->no_rays/2].ray_y - data->player.y)/(data->player.rays[data->no_rays/2].mag);
+	unit_x = (data->player.rays[WIDTH/2].ray_x - data->player.x)/(data->player.rays[WIDTH/2].mag);
+	unit_y = (data->player.rays[WIDTH/2].ray_y - data->player.y)/(data->player.rays[WIDTH/2].mag);
 	if(dir == 1 && (data->map[((int)round(data->player.y + unit_y*15 * SPEED)/BLOCK_SIZE) & max_index][((int)round(data->player.x + unit_x*15 * SPEED)/BLOCK_SIZE ) & max_index] + '0') % 2 != 1)
 	{
 			data->player.x += unit_x * SPEED;

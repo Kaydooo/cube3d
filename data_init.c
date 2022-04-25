@@ -27,7 +27,7 @@ void	init_imgs(t_data *data)
 	// Consolidation note1: init address through a while loop like below
 	// Consolidation note2: create separate functions for img and addr that take in params
 	
-	data->img[0].img = mlx_new_image(data->mlx, data->map_width * BLOCK_SIZE, data->map_height * BLOCK_SIZE);
+	data->img[0].img = mlx_new_image(data->mlx, WIDTH, HEIGHT);
 	data->img[0].addr = mlx_get_data_addr(data->img[0].img, &data->img[0].bits_per_pixel, &data->img[0].line_length, &data->img[0].endian);
 	init_text_imgs(data);
 	init_doors_imgs(data);
@@ -65,9 +65,8 @@ void	init_rays(t_data *data)
 	double angle;
 
 	i = -1;
-	
-	angle = data->start_angle - ((double)data->no_rays*OneDegreeRad/2.0);
-	while(++i < data->no_rays)
+	angle = data->start_angle - ((double)WIDTH*OneDegreeRad/2.0);
+	while(++i < WIDTH)
 	{
 		data->player.rays[i].rot = angle;
 		data->player.rays[i].obj_num = 0;
@@ -84,16 +83,13 @@ void	init_vars(t_data *data)
 {
 	int	i;
 
+	/* Except for the "start_angle", I don't think
+		we need to init to NULL/0 given that I've used 
+		ft_calloc for data */
 	i = 0;
-
 	while(i < 32)
 		data->img[i++].img = NULL;
 	data->player.rays = NULL;
-	// data->player.rays->obj_hit_point = NULL;
-	// data->player.rays->obj_direction = NULL;
-	// data->player.rays->obj_mag = NULL;
-	// data->player.rays->obj_x = NULL;
-	// data->player.rays->obj_y = NULL;
 	data->win = NULL;
 	data->mlx = NULL;
 	data->player.rays = NULL;
@@ -114,6 +110,6 @@ void	data_init(t_data *data)
 {
 	data->mlx = mlx_init();
 	init_imgs(data);
-	data->win = mlx_new_window(data->mlx, data->map_width * BLOCK_SIZE, data->map_height * BLOCK_SIZE, "Cub3d");
+	data->win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "Cub3d");
 	init_rays(data);
 }

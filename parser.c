@@ -156,11 +156,12 @@ void	calc_map_width_height(t_data *data)
 		i++;
 	}
 	data->map_height = i;
-	data->no_rays = BLOCK_SIZE * data->map_width;
-	data->player.rays = malloc(sizeof(struct s_ray) * data->no_rays);
+	data->player.rays = ft_calloc(WIDTH, sizeof(struct s_ray));
 	if (!data->player.rays)
 		print_error(data, "Malloc Error!");
-	clear_ray_obj(data, 1);	
+	//clear_ray_obj(data, 1);
+	/* this functions is causing leaks because rays are already
+		initialized later on */
 }
 
 void	parse_map_contents(t_data *data)

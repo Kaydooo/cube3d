@@ -18,10 +18,8 @@ int obj_status(t_data *data, int x, int y, int to_do)
 	{
 		i = -1;
 		while (++i < data->map_height)
-		{
 			if(obj_map[i])
 				free(obj_map[i]);
-		}
 		if(obj_map)
 			free(obj_map);
 		return (0);

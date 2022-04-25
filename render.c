@@ -6,16 +6,16 @@ void	door_status(t_data *data)
 	int x;
 	int y;
 
-	while (++nearest_door < data->player.rays[data->no_rays/2].obj_num)
+	while (++nearest_door < data->player.rays[WIDTH/2].obj_num)
 	{
-		if (data->player.rays[data->no_rays/2].obj_direction[nearest_door] != DOOR_CLOS
-			&& data->player.rays[data->no_rays/2].obj_direction[nearest_door] != DOOR_OPEN)
+		if (data->player.rays[WIDTH/2].obj_direction[nearest_door] != DOOR_CLOS
+			&& data->player.rays[WIDTH/2].obj_direction[nearest_door] != DOOR_OPEN)
 			continue;
-		x = data->player.rays[data->no_rays/2].obj_x[nearest_door];
-		y = data->player.rays[data->no_rays/2].obj_y[nearest_door];
-		if (data->player.rays[data->no_rays/2].obj_direction[nearest_door] == DOOR_CLOS)
+		x = data->player.rays[WIDTH/2].obj_x[nearest_door];
+		y = data->player.rays[WIDTH/2].obj_y[nearest_door];
+		if (data->player.rays[WIDTH/2].obj_direction[nearest_door] == DOOR_CLOS)
 			data->map[y][x] = DOOR_MAP_O + '0';
-		if (data->player.rays[data->no_rays/2].obj_direction[nearest_door] == DOOR_OPEN)
+		if (data->player.rays[WIDTH/2].obj_direction[nearest_door] == DOOR_OPEN)
 			data->map[y][x] = DOOR_MAP_C + '0';
 		return ;
 	}
@@ -47,15 +47,15 @@ void mouse_move(t_data *data, int input)
 	if (input != -1)
 		mouse = input;
 	mlx_mouse_get_pos(data->mlx, data->win, &x, &y);
-	if (!mouse || x < 1 || x >= data->no_rays || y < 1 
+	if (!mouse || x < 1 || x >= WIDTH || y < 1 
 		|| y >= data->map_height * BLOCK_SIZE)
 		return ;
 	mag = 4;
 	while (--mag > 0)
-		if (x > (data->no_rays / 2) + ((mag * data->no_rays) / 8)
-			|| x < (data->no_rays / 2) - ((mag * data->no_rays) / 8))
+		if (x > (WIDTH / 2) + ((mag * WIDTH) / 8)
+			|| x < (WIDTH / 2) - ((mag * WIDTH) / 8))
 			break ;
-	if (x < data->no_rays / 2)
+	if (x < WIDTH / 2)
 		mag *= -1;
 	if (mag)
 		rotate(data, mag, 0);

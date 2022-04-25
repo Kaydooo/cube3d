@@ -21,12 +21,6 @@ static int check_wall(t_data *data, int side, int i, int *dir, int *nxt_pt)
 		y -= 1;
 	else if (dir[1] == EAST_TEXT && side)
 		x -= 1;
-	if (data->map[y][x] >= FLAME_MAP_F + '0')
-	{
-		int pos[2]; pos[Y] = y; pos[X] = x;
-		raycast_sprite(data, i, pos);
-		return (0);
-	}
 	return (insdie_wall(data, x, y, i));
 }
 
@@ -88,7 +82,7 @@ void	check_line(t_data *data)
 	int		i;
 	
 	i = -1;
-	while(++i < data->no_rays)
+	while(++i < WIDTH)
 	{
 		diff[1] = data->player.rays[i].ray_x - data->player.x;
 		diff[0] = data->player.rays[i].ray_y - data->player.y;
@@ -115,7 +109,7 @@ void	check_line(t_data *data)
 	double	dx;
 	double	dy;
 	int i = 0;
-	while(i < data->no_rays)
+	while(i < WIDTH)
 	{
 		dx = data->player.rays[i].ray_x - data->player.x;
 		dy = data->player.rays[i].ray_y - data->player.y;
@@ -161,7 +155,7 @@ void ray_se(t_data *data, double dx, double dy, int i)
 			rotate(data, 0, i);
 			data->player.rays[i].direction = WEST_TEXT;
 			data->player.rays[i].hit_point = (int)round(data->player.rays[i].ray_y) % data->img[WEST_TEXT].width;
-			if(insdie_wall(data, ((int)(data->player.rays[i].ray_x + 0.00001) / 32), (((int)(data->player.rays[i].ray_y+0.000001) )/ 32), i, data->player.rays[i].hit_point))
+			if(insdie_wall(data, ((int)(data->player.rays[i].ray_x + 0.00001) / 32), (((int)(data->player.rays[i].ray_y+0.000001) )/ 32), i))
 				break;
 		}
 		else
@@ -170,7 +164,7 @@ void ray_se(t_data *data, double dx, double dy, int i)
 			rotate(data, 0, i);
 			data->player.rays[i].direction = NORTH_TEXT;
 			data->player.rays[i].hit_point = (int)round(data->player.rays[i].ray_x) % data->img[NORTH_TEXT].width;
-			if(insdie_wall(data, ((int)(data->player.rays[i].ray_x + 0.00001) / 32), (((int)(data->player.rays[i].ray_y+0.000001) )/ 32), i, data->player.rays[i].hit_point))
+			if(insdie_wall(data, ((int)(data->player.rays[i].ray_x + 0.00001) / 32), (((int)(data->player.rays[i].ray_y+0.000001) )/ 32), i))
 				break;
 		}
 	}
@@ -207,7 +201,7 @@ void ray_ne(t_data *data, double dx, double dy, int i)
 			rotate(data, 0, i);
 			data->player.rays[i].direction = WEST_TEXT;
 			data->player.rays[i].hit_point = (int)round(data->player.rays[i].ray_y) % data->img[WEST_TEXT].width;
-			if(insdie_wall(data, next_xpoint/32, (((int)(data->player.rays[i].ray_y) )/ 32), i, data->player.rays[i].hit_point))
+			if(insdie_wall(data, next_xpoint/32, (((int)(data->player.rays[i].ray_y) )/ 32), i))
 				break;
 		}
 		else
@@ -216,7 +210,7 @@ void ray_ne(t_data *data, double dx, double dy, int i)
 			rotate(data, 0, i);
 			data->player.rays[i].direction = SOUTH_TEXT;
 			data->player.rays[i].hit_point = (int)round(data->player.rays[i].ray_x) % data->img[SOUTH_TEXT].width;
-			if(insdie_wall(data, ((int)(data->player.rays[i].ray_x) / 32), (next_ypoint/32)-1, i, data->player.rays[i].hit_point))
+			if(insdie_wall(data, ((int)(data->player.rays[i].ray_x) / 32), (next_ypoint/32)-1, i))
 				break;
 		}
 	}
@@ -252,7 +246,7 @@ void ray_nw(t_data *data, double dx, double dy, int i)
 			rotate(data, 0, i);
 			data->player.rays[i].direction = EAST_TEXT;
 			data->player.rays[i].hit_point = (int)round(data->player.rays[i].ray_y) % data->img[EAST_TEXT].width;
-			if(insdie_wall(data, ((int)(data->player.rays[i].ray_x + 0.00001) / 32) - 1, (((int)(data->player.rays[i].ray_y+0.00001) )/ 32), i, data->player.rays[i].hit_point))
+			if(insdie_wall(data, ((int)(data->player.rays[i].ray_x + 0.00001) / 32) - 1, (((int)(data->player.rays[i].ray_y+0.00001) )/ 32), i))
 				break;
 		}
 		else
@@ -261,7 +255,7 @@ void ray_nw(t_data *data, double dx, double dy, int i)
 			rotate(data, 0, i);
 			data->player.rays[i].direction = SOUTH_TEXT;
 			data->player.rays[i].hit_point = (int)round(data->player.rays[i].ray_x) % data->img[SOUTH_TEXT].width;
-			if(insdie_wall(data, ((int)(data->player.rays[i].ray_x + 0.00001) / 32), (((int)(data->player.rays[i].ray_y+0.00001) )/ 32) -1, i, data->player.rays[i].hit_point))
+			if(insdie_wall(data, ((int)(data->player.rays[i].ray_x + 0.00001) / 32), (((int)(data->player.rays[i].ray_y+0.00001) )/ 32) -1, i))
 				break;
 
 		}
@@ -298,7 +292,7 @@ void ray_sw(t_data *data, double dx, double dy, int i)
 			rotate(data, 0, i);
 			data->player.rays[i].direction = EAST_TEXT;                           
 			data->player.rays[i].hit_point = (int)round(data->player.rays[i].ray_y) % data->img[EAST_TEXT].width;
-			if(insdie_wall(data, ((int)(data->player.rays[i].ray_x + 0.00001) / 32) - 1, (((int)(data->player.rays[i].ray_y+0.00001) )/ 32), i, data->player.rays[i].hit_point))
+			if(insdie_wall(data, ((int)(data->player.rays[i].ray_x + 0.00001) / 32) - 1, (((int)(data->player.rays[i].ray_y+0.00001) )/ 32), i))
 				break;
 		}
 		else
@@ -307,9 +301,9 @@ void ray_sw(t_data *data, double dx, double dy, int i)
 			rotate(data, 0, i);
 			data->player.rays[i].direction = NORTH_TEXT;
 			data->player.rays[i].hit_point = (int)round(data->player.rays[i].ray_x) % data->img[NORTH_TEXT].width;
-			if(insdie_wall(data, ((int)(data->player.rays[i].ray_x + 0.00001) / 32), (((int)(data->player.rays[i].ray_y+0.00001) )/ 32), i, data->player.rays[i].hit_point))
+			if(insdie_wall(data, ((int)(data->player.rays[i].ray_x + 0.00001) / 32), (((int)(data->player.rays[i].ray_y+0.00001) )/ 32), i))
 				break;
 		}
 	}
-}
-*/
+}*/
+

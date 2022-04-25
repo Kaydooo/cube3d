@@ -29,7 +29,8 @@
 #define X 1
 
 /* Game Settings */
-#define NUMBER_OF_RAYS 768
+#define	HEIGHT 700
+#define WIDTH 900
 #define ROTATION_SPEED 0.04
 #define OneDegreeRad 0.0174533/10//0.0174533
 #define BLOCK_SIZE 32
@@ -127,7 +128,6 @@ typedef	struct s_data{
 	int		map_width;
 	int		map_height;
 	int		config_fd;
-	int		no_rays;
 	double	start_angle;
 	//int map[24][24];
 	char	**map;

@@ -19,24 +19,24 @@ void	draw_obj(t_data *data, int i, int x)
 	while (obj_index-- > 0)
 	{
 		double height;
-		int playerRay = data->no_rays/2;
+		int playerRay = WIDTH/2;
 		double distance;
 
 		if(i <= playerRay)
 			distance = data->player.rays[i].obj_mag[obj_index] * cos(data->player.rays[playerRay].rot - data->player.rays[i].rot);
 		else
 			distance = data->player.rays[i].obj_mag[obj_index] * cos(data->player.rays[i].rot - data->player.rays[playerRay].rot);
-		height = (BLOCK_SIZE * 768)/distance;
-		int drawStart = -height/2 + (768 / 2);
+		height = (BLOCK_SIZE * HEIGHT)/distance;
+		int drawStart = -height/2 + (HEIGHT / 2);
 		if(drawStart < 0)
 			drawStart = 0;
-		int drawEnd = (height/2) + (768 / 2);
-		if(drawEnd >= 768)
-			drawEnd = 768 - 1;
+		int drawEnd = (height/2) + (HEIGHT / 2);
+		if(drawEnd >= HEIGHT)
+			drawEnd = HEIGHT - 1;
 		void	*dst;
 		void	*dst2;
 		double inc = (float)data->img[data->player.rays[i].obj_direction[obj_index]].hieght/height;
-		double texPos = (drawStart - 768/2 + height / 2) * inc;
+		double texPos = (drawStart - HEIGHT/2 + height / 2) * inc;
 		int y1 = drawStart;
 		while(y1<drawEnd)
 		{
@@ -57,28 +57,28 @@ void	draw_3d(t_data *data)
 	int i;
 	double height;
 	int x;
-	int playerRay = data->no_rays/2;
+	int playerRay = WIDTH/2;
 	double distance;
 	i = 0;
 	x = 0;
-	while(i < data->no_rays)
+	while(i < WIDTH)
 	{
 		if(i <= playerRay)
 			distance = data->player.rays[i].mag * cos(data->player.rays[i].rot - data->player.rays[playerRay].rot);
 		else
 			distance = data->player.rays[i].mag * cos(data->player.rays[playerRay].rot - data->player.rays[i].rot);
-		height = (BLOCK_SIZE * BLOCK_SIZE*data->map_height)/distance;
+		height = (BLOCK_SIZE * HEIGHT)/distance;
 	
-		int drawStart = -height/2 + (data->map_height*BLOCK_SIZE / 2);
+		int drawStart = -height/2 + (HEIGHT / 2);
 		if(drawStart < 0)
 			drawStart = 0;
-		int drawEnd = (height/2) + (data->map_height*BLOCK_SIZE / 2);
-		if(drawEnd >= data->map_height*BLOCK_SIZE)
-			drawEnd = data->map_height*BLOCK_SIZE - 1;
+		int drawEnd = (height/2) + (HEIGHT / 2);
+		if(drawEnd >= HEIGHT)
+			drawEnd = HEIGHT - 1;
 		void	*dst;
 		void	*dst2;
 		double inc = (float)data->img[data->player.rays[i].direction].hieght/height;
-		double texPos = (drawStart - data->map_height*BLOCK_SIZE/2 + height / 2) * inc;
+		double texPos = (drawStart - HEIGHT/2 + height / 2) * inc;
 		int y1 = drawStart;
 		while(y1<drawEnd)
 		{
@@ -98,8 +98,8 @@ void	draw_3d(t_data *data)
 
 void	draw_floor_cel(t_data *data)
 {
-	draw_rect(data, 0, 0, data->map_width*BLOCK_SIZE, data->map_height*BLOCK_SIZE/2, data->c_color);
-	draw_rect(data, 0, data->map_height*BLOCK_SIZE/2, data->map_width*BLOCK_SIZE, data->map_height*BLOCK_SIZE/2, data->f_color);
+	draw_rect(data, 0, 0, WIDTH, HEIGHT/2, data->c_color);
+	draw_rect(data, 0, HEIGHT/2, WIDTH, HEIGHT/2, data->f_color);
 }
 
 void	printMap(t_data *data, int count)

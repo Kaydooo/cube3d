@@ -1,10 +1,9 @@
-NO /home/kaydoo/Documents/cub3d_allan/assets/North.xpm 
-SO /home/kaydoo/Documents/cub3d_allan/assets/South.xpm 
-F 0,255,255
-WE /home/kaydoo/Documents/cub3d_allan/assets/West.xpm 
-EA /home/kaydoo/Documents/cub3d_allan/assets/East.xpm 
+NO ./assets/North.xpm 
+SO ./assets/South.xpm 
+WE ./assets/West.xpm 
+EA ./assets/East.xpm 
 C 128,128,128
-
+F 0,255,255
 
 111111111111111111111111
 100005000000000000000001

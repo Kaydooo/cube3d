@@ -64,29 +64,25 @@ void	clear_ray_obj(t_data *data, int reinit)
 {
 	int i = -1;
 
-	while (++i < data->no_rays)
+	while (++i < WIDTH)
 	{
-		if (reinit)
-		{
-			data->player.rays[i].obj_direction = calloc(1, sizeof(int));
-			data->player.rays[i].obj_hit_point = calloc(1, sizeof(int));
-			data->player.rays[i].obj_mag = calloc(1, sizeof(int));
-			data->player.rays[i].obj_x = calloc(1, sizeof(int));
-			data->player.rays[i].obj_y = calloc(1, sizeof(int));
-		}
-		else
-		{
-			data->player.rays[i].obj_num = 0;
-			if (data->player.rays[i].obj_direction)
-				free (data->player.rays[i].obj_direction);
-			if (data->player.rays[i].obj_hit_point)
-				free (data->player.rays[i].obj_hit_point);
-			if (data->player.rays[i].obj_mag)
-				free (data->player.rays[i].obj_mag);
-			if (data->player.rays[i].obj_x)
-				free (data->player.rays[i].obj_x);
-			if (data->player.rays[i].obj_y)
-				free (data->player.rays[i].obj_y);
-		}
+		data->player.rays[i].obj_num = 0;
+		if (data->player.rays[i].obj_direction)
+			free (data->player.rays[i].obj_direction);
+		if (data->player.rays[i].obj_hit_point)
+			free (data->player.rays[i].obj_hit_point);
+		if (data->player.rays[i].obj_mag)
+			free (data->player.rays[i].obj_mag);
+		if (data->player.rays[i].obj_x)
+			free (data->player.rays[i].obj_x);
+		if (data->player.rays[i].obj_y)
+			free (data->player.rays[i].obj_y);
+		if (!reinit)
+			continue;
+		data->player.rays[i].obj_direction = calloc(1, sizeof(int));
+		data->player.rays[i].obj_hit_point = calloc(1, sizeof(int));
+		data->player.rays[i].obj_mag = calloc(1, sizeof(int));
+		data->player.rays[i].obj_x = calloc(1, sizeof(int));
+		data->player.rays[i].obj_y = calloc(1, sizeof(int));
 	}
 }

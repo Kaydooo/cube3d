@@ -25,7 +25,13 @@ int		insdie_wall(t_data *data, int x, int y, int i)
 		x = data->map_width - 1;
 	if( x < 0)
 		x = 0;
-	if (data->map[y][x] - '0' >= DOOR_MAP_C)
+	if (data->map[y][x] >= FLAME_MAP_F + '0')
+	{
+		int pos[2]; pos[Y] = y; pos[X] = x;
+		raycast_sprite(data, i, pos);
+		return (0);
+	}
+	else if (data->map[y][x] - '0' >= DOOR_MAP_C)
 	{
 		index = data->player.rays[i].obj_num++;
 		data->player.rays[i].obj_direction[index] = obj_status(data, x, y, 2);
@@ -47,16 +53,16 @@ int		insdie_wall(t_data *data, int x, int y, int i)
 
 void	init_rays_mag(t_data *data)
 {
+	int i = -1;
 
-	int i = 0;
-
-	while(i < data->no_rays)
+	while(++i < WIDTH)
 	{
 		data->player.rays[i].ray_x = data->player.x + 0.1;
 		data->player.rays[i].ray_y = data->player.y;
-		data->player.rays[i].mag  = sqrt(pow(data->player.rays[i].ray_x - data->player.x, 2) + pow(data->player.rays[i].ray_y - data->player.y, 2));
+		data->player.rays[i].mag  = sqrt(pow(data->player.rays[i].ray_x 
+			- data->player.x, 2) + pow(data->player.rays[i].ray_y 
+				- data->player.y, 2));
 		rotate(data,0, i);
-		i++;
 	}
 }
 
@@ -117,7 +123,6 @@ void	find_player(t_data *data)
 	int x;
 	int y;
 
-	x = 0;
 	y = 0;
 	while(data->map[y])
 	{
@@ -130,7 +135,7 @@ void	find_player(t_data *data)
 				data->player.y = y * BLOCK_SIZE;
 				init_rays_mag(data);
 				data->map[y][x] = '0';
-				break;
+				break; /* Might be better to use 'return' because 'break' will only exit the second while loop */
 			}
 			x++;
 		}
@@ -141,7 +146,7 @@ void	find_player(t_data *data)
 int	main(int argc, char **argv)
 {
 	t_data	*data;
-	data = malloc(sizeof(t_data));
+	data = ft_calloc(1, sizeof(t_data));
 	if (!data)
 		print_error(data, "Malloc Error!");
 	init_vars(data);
