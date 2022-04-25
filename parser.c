@@ -160,6 +160,7 @@ void	calc_map_width_height(t_data *data)
 	data->player.rays = malloc(sizeof(struct s_ray) * data->no_rays);
 	if (!data->player.rays)
 		print_error(data, "Malloc Error!");
+	clear_ray_obj(data, 1);	
 }
 
 void	parse_map_contents(t_data *data)

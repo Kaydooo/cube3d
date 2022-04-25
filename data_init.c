@@ -88,6 +88,12 @@ void	init_vars(t_data *data)
 
 	while(i < 32)
 		data->img[i++].img = NULL;
+	data->player.rays = NULL;
+	// data->player.rays->obj_hit_point = NULL;
+	// data->player.rays->obj_direction = NULL;
+	// data->player.rays->obj_mag = NULL;
+	// data->player.rays->obj_x = NULL;
+	// data->player.rays->obj_y = NULL;
 	data->win = NULL;
 	data->mlx = NULL;
 	data->player.rays = NULL;
