@@ -1,5 +1,30 @@
 #include "cub3d.h"
 
+int	insdie_wall(t_data *data, int x, int y, int i)
+{
+	int	pos[3];
+
+	if (y >= data->map_height)
+		y = data->map_height - 1;
+	if (y < 0)
+		y = 0;
+	if (x >= data->map_width)
+		x = data->map_width - 1;
+	if (x < 0)
+		x = 0;
+	pos[Y] = y;
+	pos[X] = x;
+	pos[2] = i;
+	if (data->map[y][x] - '0' >= FLAME_MAP_F)
+		raycast_sprite(data, i, pos);
+	else if (data->map[y][x] - '0' >= DOOR_MAP_C)
+		store_sprite(data, data->player.rays[i].hit_point,
+			data->player.rays[i].mag, pos);
+	if (data->map[y][x] == '1')
+		return (1);
+	return (0);
+}
+
 static int	check_wall(t_data *data, int side, int i, int *dir, int *nxt_pt)
 {
 	int	x;

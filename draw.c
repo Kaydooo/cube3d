@@ -44,8 +44,7 @@ void	draw_obj(t_data *data, int i, int x)
 			texPos += inc;
 			dst = data->img[0].addr + (y1 * data->img[0].line_length + x * (data->img[0].bits_per_pixel / 8));
 			dst2 = data->img[data->player.rays[i].obj_direction[obj_index]].addr + ((int)texY * data->img[data->player.rays[i].obj_direction[obj_index]].line_length + data->player.rays[i].obj_hit_point[obj_index] * (data->img[data->player.rays[i].obj_direction[obj_index]].bits_per_pixel / 8));
-		
-			if (!get_t(*(int *)dst2))
+			if (!(get_t(*(int *)dst2) || *(unsigned int*)(dst2) == 0x00000000))
 				*(unsigned int*)(dst) = *(unsigned int*)(dst2);
 			y1++;
 		}

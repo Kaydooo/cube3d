@@ -135,32 +135,34 @@ typedef struct s_data
 	char			**map;
 }					t_data;
 
+/* cub3d.c */
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void	add_asset_to_image(t_data *data, int x, int y, int asset);
+void	init_rays_mag(t_data *data);
+
 /* draw_shapes.c */
 void	draw_player(t_data *data, int x, int y, int r);
 void	draw_rect(t_data *data, int x, int y, int width, int height, int color);
 void	draw_line(t_data *data, double x1, double x2, double y1, double y2);
 
-/* cub3d.c */
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-void	add_asset_to_image(t_data *data, int x, int y, int asset);
-int		key_press(int key, t_data *data);
-int		key_release(int key, t_data *data);
-int		insdie_wall(t_data *data, int x, int y, int i);
-void	init_rays_mag(t_data *data);
-
 /* ray_caster.c */
 void	check_line(t_data *data);
+int		insdie_wall(t_data *data, int x, int y, int i);
+
+/* interaction.c */
+int		key_press(int key, t_data *data);
+int		key_release(int key, t_data *data);
+int		mouse_enter(t_data *data);
+int		mouse_leave(t_data *data);
+void	mouse_move(t_data *data, int input);
 
 /* render.c */
 int		render(t_data *data);
-void	door_status(t_data *data);
-void	mouse_move(t_data *data, int input);
 
 /* data_init.c */
 void	data_init(t_data *data);
 void	init_imgs(t_data *data);
 void	init_rays(t_data *data);
-void	init_vars(t_data *data);
 
 /* move_player.c */
 void	rotate(t_data *data, int dir, int i);
@@ -195,6 +197,7 @@ void	validate_map_contents(t_data *data);
 int		obj_status(t_data *data, int x, int y, int to_do);
 void	change_door_status(t_data *data, int count);
 void	change_flame_status(t_data *data, int count);
+void	door_status(t_data *data);
 
 /* sprite.c */
 void	raycast_sprite(t_data *data, int i, int *pos);

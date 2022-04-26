@@ -29,6 +29,28 @@ int	obj_status(t_data *data, int x, int y, int to_do)
 	return (obj_map[y][x]);
 }
 
+void	door_status(t_data *data)
+{	
+	int	door;
+	int	x;
+	int	y;
+
+	door = -1;
+	while (++door < data->player.rays[WIDTH / 2].obj_num)
+	{
+		if (data->player.rays[WIDTH / 2].obj_direction[door] != DOOR_CLOS
+			&& data->player.rays[WIDTH / 2].obj_direction[door] != DOOR_OPEN)
+			continue ;
+		x = data->player.rays[WIDTH / 2].obj_x[door];
+		y = data->player.rays[WIDTH / 2].obj_y[door];
+		if (data->player.rays[WIDTH / 2].obj_direction[door] == DOOR_CLOS)
+			data->map[y][x] = DOOR_MAP_O + '0';
+		else if (data->player.rays[WIDTH / 2].obj_direction[door] == DOOR_OPEN)
+			data->map[y][x] = DOOR_MAP_C + '0';
+		return ;
+	}
+}
+
 void	change_door_status(t_data *data, int count)
 {
 	int	y;
