@@ -1,26 +1,26 @@
 #include "cub3d.h"
 
-int obj_status(t_data *data, int x, int y, int to_do)
+/* codes for to_do
+	1: free obj_map | 2: ignore insert | rest: insert data */
+int	obj_status(t_data *data, int x, int y, int to_do)
 {
-	// codes for to_do
-	// 1: free obj_map | 2: ignore insert | rest: insert data
 	static int	**obj_map;
 	int			i;
 
 	if (!obj_map)
 	{
-		obj_map = calloc(data->map_height, sizeof(int *));
 		i = 0;
+		obj_map = ft_calloc(data->map_height, sizeof(int *));
 		while (i < data->map_height)
-			obj_map[i++] = calloc(data->map_width, sizeof(int));
+			obj_map[i++] = ft_calloc(data->map_width, sizeof(int));
 	}
 	if (to_do == 1)
 	{
 		i = -1;
 		while (++i < data->map_height)
-			if(obj_map[i])
+			if (obj_map[i])
 				free(obj_map[i]);
-		if(obj_map)
+		if (obj_map)
 			free(obj_map);
 		return (0);
 	}
@@ -31,8 +31,8 @@ int obj_status(t_data *data, int x, int y, int to_do)
 
 void	change_door_status(t_data *data, int count)
 {
-	int y;
-	int x;
+	int	y;
+	int	x;
 	int	status;
 
 	if (count % 5 != 0)
@@ -58,8 +58,8 @@ void	change_door_status(t_data *data, int count)
 
 void	change_flame_status(t_data *data, int count)
 {
-	int y;
-	int x;
+	int	y;
+	int	x;
 	int	status;
 
 	if (count % 2 != 0)
@@ -73,9 +73,11 @@ void	change_flame_status(t_data *data, int count)
 			status = obj_status(data, x, y, 2);
 			if (data->map[y][x] - '0' == FLAME_MAP_F && !status)
 				obj_status(data, x, y, FLAME_FRST);
-			else if (data->map[y][x] - '0' == FLAME_MAP_F && status < FLAME_LAST)
-				obj_status(data, x, y, status + 1);				
-			else if (data->map[y][x] - '0' == FLAME_MAP_F && status == FLAME_LAST)
+			else if (data->map[y][x] - '0' == FLAME_MAP_F
+				&& status < FLAME_LAST)
+				obj_status(data, x, y, status + 1);
+			else if (data->map[y][x] - '0' == FLAME_MAP_F
+				&& status == FLAME_LAST)
 				obj_status(data, x, y, FLAME_FRST);
 		}
 	}

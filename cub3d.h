@@ -11,58 +11,59 @@
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
-#define CUB3D_H
+# define CUB3D_H
 
-#include "libs/mlx_linux/mlx.h"
-#include "libs/libft/libft.h"
-#include "libs/gnl/get_next_line.h"
-#include <unistd.h>
-#include <stdio.h>
-#include <math.h>
-#include <stdlib.h>
-#include <limits.h>
-#include <fcntl.h>
-#include <string.h>
-#include <errno.h>
-
-#define Y 0
-#define X 1
+# include "libs/mlx_linux/mlx.h"
+# include "libs/libft/libft.h"
+# include "libs/gnl/get_next_line.h"
+# include <unistd.h>
+# include <stdio.h>
+# include <math.h>
+# include <stdlib.h>
+# include <limits.h>
+# include <fcntl.h>
+# include <string.h>
+# include <errno.h>
 
 /* Game Settings */
-#define	HEIGHT 700
-#define WIDTH 900
-#define ROTATION_SPEED 0.04
-#define OneDegreeRad 0.0174533/10//0.0174533
-#define BLOCK_SIZE 32
-#define SPEED 1
+# define HEIGHT 700
+# define WIDTH 900
+# define ROTATION_SPEED 0.04
+# define ONE_DEGREE_RAD 0.00174533
+# define BLOCK_SIZE 32
+# define SPEED 1
 
 /* Texture Indices */
-#define NORTH_TEXT 6
-#define SOUTH_TEXT 7
-#define WEST_TEXT 8
-#define EAST_TEXT 9
+# define NORTH_TEXT 6
+# define SOUTH_TEXT 7
+# define WEST_TEXT 8
+# define EAST_TEXT 9
 
 /* Door sprite */
-#define DOOR_CLOS 10 // img index
-#define DOOR_OPEN 13 // img index
-#define DOOR_MAP_C 3 // map index
-#define DOOR_MAP_O 4 // map index
+# define DOOR_CLOS 10 // img index
+# define DOOR_OPEN 13 // img index
+# define DOOR_MAP_C 3 // map index
+# define DOOR_MAP_O 4 // map index
 
 /* Flame sprite */
-#define FLAME_FRST 14 // img index of first sprite
-#define FLAME_LAST 31 // img index of last sprite
-#define FLAME_MAP_F 5 // map index
-#define FLAME_MAP_L 7 // map index
+# define FLAME_FRST 14 // img index of first sprite
+# define FLAME_LAST 31 // img index of last sprite
+# define FLAME_MAP_F 5 // map index
+# define FLAME_MAP_L 7 // map index
 
 /* Linux Keys */
-#define KEY_RIGHT 65363
-#define KEY_LEFT 65361
-#define KEY_W 119
-#define KEY_S 115
-#define KEY_A 97
-#define KEY_D 100
-#define DOORS 112
-#define ESC 65307
+# define KEY_RIGHT 65363
+# define KEY_LEFT 65361
+# define KEY_W 119
+# define KEY_S 115
+# define KEY_A 97
+# define KEY_D 100
+# define DOORS 112
+# define ESC 65307
+
+/* Miscellaneous */
+# define Y 0
+# define X 1
 
 /* Mac Keys */
 // #define KEY_RIGHT 124
@@ -74,8 +75,7 @@
 // #define DOORS ?   <-- Define!
 // #define ESC 53
 
-
-typedef	struct s_ray
+typedef struct s_ray
 {
 	double	ray_x;
 	double	ray_y;
@@ -90,49 +90,50 @@ typedef	struct s_ray
 	int		*obj_mag;
 	int		*obj_x;
 	int		*obj_y;
-}t_ray;
+}			t_ray;
 
-typedef	struct s_player{
-	double x;
-	double y;
-	int	rotate_r;
-	int	rotate_l;
-	int	move_fw;
-	int	move_bw;
-	int	strafe_l;
-	int	strafe_r;
-	struct s_ray *rays;
-}t_player;
+typedef struct s_player
+{
+	double			x;
+	double			y;
+	int				rotate_r;
+	int				rotate_l;
+	int				move_fw;
+	int				move_bw;
+	int				strafe_l;
+	int				strafe_r;
+	struct s_ray	*rays;
+}					t_player;
 
-typedef struct	s_image {
+typedef struct s_image
+{
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-	int 	width;
+	int		width;
 	int		hieght;
 }				t_image;
 
-typedef	struct s_data{
-	void	*mlx;
-	void	*win;
-	struct s_image img[32];
-	struct s_player player;
-	char	*NO_PATH;
-	char	*SO_PATH;
-	char	*WE_PATH;
-	char	*EA_PATH;
-	int 	c_color;
-	int 	f_color;
-	int		map_width;
-	int		map_height;
-	int		config_fd;
-	double	start_angle;
-	//int map[24][24];
-	char	**map;
-
-}t_data;
+typedef struct s_data
+{
+	void			*mlx;
+	void			*win;
+	struct s_image	img[32];
+	struct s_player	player;
+	char			*no_path;
+	char			*so_path;
+	char			*we_path;
+	char			*ea_path;
+	int				c_color;
+	int				f_color;
+	int				map_width;
+	int				map_height;
+	int				config_fd;
+	double			start_angle;
+	char			**map;
+}					t_data;
 
 /* draw_shapes.c */
 void	draw_player(t_data *data, int x, int y, int r);
@@ -149,16 +150,11 @@ void	init_rays_mag(t_data *data);
 
 /* ray_caster.c */
 void	check_line(t_data *data);
-void ray_se(t_data *data, double dx, double dy, int i);
-void ray_ne(t_data *data, double dx, double dy, int i);
-void ray_nw(t_data *data, double dx, double dy, int i);
-void ray_sw(t_data *data, double dx, double dy, int i);
-
 
 /* render.c */
 int		render(t_data *data);
 void	door_status(t_data *data);
-void 	mouse_move(t_data *data, int input);
+void	mouse_move(t_data *data, int input);
 
 /* data_init.c */
 void	data_init(t_data *data);
@@ -196,12 +192,13 @@ void	check_if_valid_doors(t_data *data);
 void	validate_map_contents(t_data *data);
 
 /* objectc.c */
-int 	obj_status(t_data *data, int x, int y, int to_do);
+int		obj_status(t_data *data, int x, int y, int to_do);
 void	change_door_status(t_data *data, int count);
 void	change_flame_status(t_data *data, int count);
 
 /* sprite.c */
 void	raycast_sprite(t_data *data, int i, int *pos);
+void	store_sprite(t_data *data, int hitpoint, double mag, int *pos);
 
 /* utils.c */
 void	clear_ray_obj(t_data *data, int reinit);

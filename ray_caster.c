@@ -1,51 +1,55 @@
 #include "cub3d.h"
 
-static int check_wall(t_data *data, int side, int i, int *dir, int *nxt_pt)
+static int	check_wall(t_data *data, int side, int i, int *dir, int *nxt_pt)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	x = (int)(data->player.rays[i].ray_x + 0.00001) / 32;
 	y = (int)(data->player.rays[i].ray_y + 0.00001) / 32;
-	if (dir[0] == SOUTH_TEXT && dir[1] == WEST_TEXT)
+	if (dir[Y] == SOUTH_TEXT && dir[X] == WEST_TEXT)
 	{
 		x = (int)(data->player.rays[i].ray_x) / 32;
-		y = (nxt_pt[0] / 32) - 1;
+		y = (nxt_pt[Y] / 32) - 1;
 		if (side)
 		{
-			x = nxt_pt[1] / 32;
+			x = nxt_pt[X] / 32;
 			y = (int)(data->player.rays[i].ray_y) / 32;
 		}
 	}
-	else if (dir[0] == SOUTH_TEXT && dir[1] == EAST_TEXT && !side)
+	else if (dir[Y] == SOUTH_TEXT && dir[X] == EAST_TEXT && !side)
 		y -= 1;
-	else if (dir[1] == EAST_TEXT && side)
+	else if (dir[X] == EAST_TEXT && side)
 		x -= 1;
 	return (insdie_wall(data, x, y, i));
 }
 
 void	get_next_point(t_data *data, int i, int *nxt_pt, int *dir)
 {
-	(nxt_pt)[1] = (int)(((data->player.rays[i].ray_x + 0.00001) / 32) + 1) * 32;
-	(nxt_pt)[0] = (int)(((data->player.rays[i].ray_y + 0.00001) / 32) + 1) * 32;
-	if (dir[1] == WEST_TEXT && dir[0] == SOUTH_TEXT)
-		(nxt_pt)[0] = (((int)(data->player.rays[i].ray_y + 0.00001) / 32) - 1) * 32;
-	else if (dir[1] == EAST_TEXT && dir[0] == SOUTH_TEXT)
+	nxt_pt[X] = (int)(((data->player.rays[i].ray_x + 0.00001) / 32) + 1) *32;
+	nxt_pt[Y] = (int)(((data->player.rays[i].ray_y + 0.00001) / 32) + 1) *32;
+	if (dir[X] == WEST_TEXT && dir[Y] == SOUTH_TEXT)
+		nxt_pt[Y] = (((int)(data->player.rays[i].ray_y
+						+ 0.00001) / 32) - 1) * 32;
+	else if (dir[X] == EAST_TEXT && dir[Y] == SOUTH_TEXT)
 	{
-		(nxt_pt)[0] = (((int)(data->player.rays[i].ray_y + 0.00001) / 32) - 1) * 32;
-		(nxt_pt)[1] = (((int)(data->player.rays[i].ray_x + 0.00001) / 32) - 1) * 32;
+		nxt_pt[Y] = (((int)(data->player.rays[i].ray_y
+						+ 0.00001) / 32) - 1) * 32;
+		nxt_pt[X] = (((int)(data->player.rays[i].ray_x
+						+ 0.00001) / 32) - 1) * 32;
 	}
-	else if (dir[1] == EAST_TEXT && dir[0] == NORTH_TEXT)
-		(nxt_pt)[1] = (((int)(data->player.rays[i].ray_x + 0.00001) / 32) - 1) * 32;
-	if (dir[1] == WEST_TEXT && dir[0] == NORTH_TEXT)
+	else if (dir[X] == EAST_TEXT && dir[Y] == NORTH_TEXT)
+		nxt_pt[X] = (((int)(data->player.rays[i].ray_x
+						+ 0.00001) / 32) - 1) * 32;
+	if (dir[X] == WEST_TEXT && dir[Y] == NORTH_TEXT)
 		return ;
-	if (data->player.rays[i].ray_y - (double) (nxt_pt)[0] > 32)
-		(nxt_pt)[0] += 32;
-	if (data->player.rays[i].ray_x - (double) (nxt_pt)[1] > 32)
-		(nxt_pt)[1] += 32;
+	if (data->player.rays[i].ray_y - (double) nxt_pt[Y] > 32)
+		nxt_pt[Y] += 32;
+	if (data->player.rays[i].ray_x - (double) nxt_pt[X] > 32)
+		nxt_pt[X] += 32;
 }
 
-void raycast(t_data *data, double *diff, int i, int *dir)
+void	raycast(t_data *data, double *diff, int i, int *dir)
 {
 	double	factor[2];
 	int		nxt_pt[2];
@@ -53,15 +57,15 @@ void raycast(t_data *data, double *diff, int i, int *dir)
 
 	while (1)
 	{
-		diff[1] = data->player.rays[i].ray_x - data->player.x;
-		diff[0] = data->player.rays[i].ray_y - data->player.y;
+		diff[X] = data->player.rays[i].ray_x - data->player.x;
+		diff[Y] = data->player.rays[i].ray_y - data->player.y;
 		get_next_point(data, i, nxt_pt, dir);
-		if (nxt_pt[0] > data->map_height * 32 || nxt_pt[0] < 0 
-			|| nxt_pt[1] > data->map_width * 32 || nxt_pt[1] < 0)
-				break ;
-		factor[1] = 1 + ((nxt_pt[1] - data->player.rays[i].ray_x)) / diff[1];
-		factor[0] = 1 + ((nxt_pt[0] - data->player.rays[i].ray_y)) / diff[0]; 
-		j = (factor[1] <= factor[0]);
+		if (nxt_pt[Y] > data->map_height * 32 || nxt_pt[Y] < 0
+			|| nxt_pt[X] > data->map_width * 32 || nxt_pt[X] < 0)
+			break ;
+		factor[X] = 1 + ((nxt_pt[X] - data->player.rays[i].ray_x)) / diff[X];
+		factor[Y] = 1 + ((nxt_pt[Y] - data->player.rays[i].ray_y)) / diff[Y];
+		j = (factor[X] <= factor[Y]);
 		data->player.rays[i].mag = data->player.rays[i].mag * factor[j];
 		rotate(data, 0, i);
 		data->player.rays[i].direction = dir[j];
@@ -75,34 +79,34 @@ void raycast(t_data *data, double *diff, int i, int *dir)
 	}
 }
 
+/* Y: N/S texture | X: W/E texture */
 void	check_line(t_data *data)
 {
-	double	diff[2]; // y:0 x:1
-	int		dir[2];  // y: N/S texture | x: W/E texture
+	double	diff[2];
+	int		dir[2];
 	int		i;
-	
+
 	i = -1;
-	while(++i < WIDTH)
+	while (++i < WIDTH)
 	{
-		diff[1] = data->player.rays[i].ray_x - data->player.x;
-		diff[0] = data->player.rays[i].ray_y - data->player.y;
+		diff[X] = data->player.rays[i].ray_x - data->player.x;
+		diff[Y] = data->player.rays[i].ray_y - data->player.y;
 		data->player.rays[i].mag = 0.0001;
 		rotate(data, 0, i);
-		dir[0] = NORTH_TEXT; // assuming SE
-		dir[1] = WEST_TEXT;  // assuming SE
-		if(diff[1] >= 0 && diff[0] < 0) 	 // NE
-			dir[0] = SOUTH_TEXT;
-		else if(diff[1] < 0 && diff[0] <= 0) // NW
+		dir[Y] = NORTH_TEXT;
+		dir[X] = WEST_TEXT;
+		if (diff[X] >= 0 && diff[Y] < 0)
+			dir[Y] = SOUTH_TEXT;
+		else if (diff[X] < 0 && diff[Y] <= 0)
 		{
-			dir[0] = SOUTH_TEXT;
-			dir[1] = EAST_TEXT;
+			dir[Y] = SOUTH_TEXT;
+			dir[X] = EAST_TEXT;
 		}
-		else if(diff[1] <= 0 && diff[0] > 0) // SW
-			dir[1] = EAST_TEXT;
+		else if (diff[X] <= 0 && diff[Y] > 0)
+			dir[X] = EAST_TEXT;
 		raycast(data, diff, i, dir);
 	}
 }
-
 
 /*void	check_line(t_data *data)
 {
@@ -306,4 +310,3 @@ void ray_sw(t_data *data, double dx, double dy, int i)
 		}
 	}
 }*/
-

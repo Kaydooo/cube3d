@@ -19,15 +19,14 @@ int	color_atoi(const char *str)
 		num = (num * 10) + (str[i] - '0');
 		i++;
 	}
-	if(i > 5 || num > 255 || sign < 0)
+	if (i > 5 || num > 255 || sign < 0)
 	{
-		free((char*)str);
+		free ((char *)str);
 		return (-1);
 	}
-	free((char*)str);
+	free ((char *)str);
 	return ((int)(num * sign));
 }
-
 
 int	ft_strlen_2d(char **str)
 {
@@ -43,15 +42,15 @@ void	free_2d(char ***str)
 {
 	int	i;
 
+	if (!(*str))
+		return ;
 	i = 0;
-	if (*str)
-	{
-		while ((*str)[i])
-			free((*str)[i++]);
-		free(*str);
-		*str = NULL;
-	}
+	while ((*str)[i])
+		free((*str)[i++]);
+	free(*str);
+	*str = NULL;
 }
+
 void	print_error(t_data *data, char *msg)
 {
 	ft_putstr_fd(msg, 2);
@@ -62,8 +61,9 @@ void	print_error(t_data *data, char *msg)
 
 void	clear_ray_obj(t_data *data, int reinit)
 {
-	int i = -1;
+	int	i;
 
+	i = -1;
 	while (++i < WIDTH)
 	{
 		data->player.rays[i].obj_num = 0;
@@ -78,7 +78,7 @@ void	clear_ray_obj(t_data *data, int reinit)
 		if (data->player.rays[i].obj_y)
 			free (data->player.rays[i].obj_y);
 		if (!reinit)
-			continue;
+			continue ;
 		data->player.rays[i].obj_direction = calloc(1, sizeof(int));
 		data->player.rays[i].obj_hit_point = calloc(1, sizeof(int));
 		data->player.rays[i].obj_mag = calloc(1, sizeof(int));

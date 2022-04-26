@@ -62,13 +62,13 @@ int	handle_elements(t_data *data, char **split_line)
 	if(ft_strlen(split_line[0]) == 2)
 	{
 		if(!strncmp(split_line[0], "NO", 3))
-			data->NO_PATH = ft_strdup(split_line[1]);
+			data->no_path = ft_strdup(split_line[1]);
 		else if(!strncmp(split_line[0], "SO", 3))
-			data->SO_PATH = ft_strdup(split_line[1]);
+			data->so_path = ft_strdup(split_line[1]);
 		else if(!strncmp(split_line[0], "WE", 3))
-			data->WE_PATH = ft_strdup(split_line[1]);
+			data->we_path = ft_strdup(split_line[1]);
 		else if(!strncmp(split_line[0], "EA", 3))
-			data->EA_PATH = ft_strdup(split_line[1]);
+			data->ea_path = ft_strdup(split_line[1]);
 		else
 			return (1);
 	}
@@ -114,7 +114,7 @@ void	check_elements(t_data *data)
 		free(line);
 		i++;
 	}
-	if(!data->f_color || !data->c_color || !data->NO_PATH || !data->SO_PATH || !data->WE_PATH || !data->EA_PATH)
+	if(!data->f_color || !data->c_color || !data->no_path || !data->so_path || !data->we_path || !data->ea_path)
 		print_error(data, "Wrong Config File");
 }
 

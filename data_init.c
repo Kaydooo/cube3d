@@ -2,10 +2,10 @@
 
 void	init_text_imgs(t_data *data)
 {
-	data->img[NORTH_TEXT].img = mlx_xpm_file_to_image(data->mlx, data->NO_PATH, &data->img[NORTH_TEXT].width, &data->img[NORTH_TEXT].hieght);
-	data->img[SOUTH_TEXT].img = mlx_xpm_file_to_image(data->mlx, data->SO_PATH, &data->img[SOUTH_TEXT].width, &data->img[SOUTH_TEXT].hieght);
-	data->img[WEST_TEXT].img = mlx_xpm_file_to_image(data->mlx, data->WE_PATH, &data->img[WEST_TEXT].width, &data->img[WEST_TEXT].hieght);
-	data->img[EAST_TEXT].img = mlx_xpm_file_to_image(data->mlx, data->EA_PATH, &data->img[EAST_TEXT].width, &data->img[EAST_TEXT].hieght);
+	data->img[NORTH_TEXT].img = mlx_xpm_file_to_image(data->mlx, data->no_path, &data->img[NORTH_TEXT].width, &data->img[NORTH_TEXT].hieght);
+	data->img[SOUTH_TEXT].img = mlx_xpm_file_to_image(data->mlx, data->so_path, &data->img[SOUTH_TEXT].width, &data->img[SOUTH_TEXT].hieght);
+	data->img[WEST_TEXT].img = mlx_xpm_file_to_image(data->mlx, data->we_path, &data->img[WEST_TEXT].width, &data->img[WEST_TEXT].hieght);
+	data->img[EAST_TEXT].img = mlx_xpm_file_to_image(data->mlx, data->ea_path, &data->img[EAST_TEXT].width, &data->img[EAST_TEXT].hieght);
 	if(!data->img[NORTH_TEXT].img || !data->img[SOUTH_TEXT].img || !data->img[WEST_TEXT].img || !data->img[EAST_TEXT].img )
 		print_error(data, "Couldnt Open Image.. Wrong texture path !");
 	data->img[NORTH_TEXT].addr = mlx_get_data_addr(data->img[NORTH_TEXT].img, &data->img[NORTH_TEXT].bits_per_pixel, &data->img[NORTH_TEXT].line_length, &data->img[NORTH_TEXT].endian);
@@ -65,7 +65,7 @@ void	init_rays(t_data *data)
 	double angle;
 
 	i = -1;
-	angle = data->start_angle - ((double)WIDTH*OneDegreeRad/2.0);
+	angle = data->start_angle - ((double)WIDTH*ONE_DEGREE_RAD/2.0);
 	while(++i < WIDTH)
 	{
 		data->player.rays[i].rot = angle;
@@ -75,19 +75,19 @@ void	init_rays(t_data *data)
 		data->player.rays[i].obj_mag = ft_calloc(1, sizeof(int));
 		data->player.rays[i].obj_x = ft_calloc(1, sizeof(int));
 		data->player.rays[i].obj_y = ft_calloc(1, sizeof(int));
-		angle += OneDegreeRad;
+		angle += ONE_DEGREE_RAD;
 	}
 }
 
 void	init_vars(t_data *data)
 {
-	int	i;
+//	int	i;
 
 	/* Except for the "start_angle", I don't think
 		we need to init to NULL/0 given that I've used 
 		ft_calloc for data */
-	i = 0;
-	while(i < 32)
+//	i = 0;
+	/*while(i < 32)
 		data->img[i++].img = NULL;
 	data->player.rays = NULL;
 	data->win = NULL;
@@ -99,12 +99,12 @@ void	init_vars(t_data *data)
 	data->player.move_fw = 0;
 	data->player.move_bw = 0;
 	data->player.strafe_l = 0;
-	data->player.strafe_r = 0;
+	data->player.strafe_r = 0;*/
 	data->start_angle = 0.00000001;
-	data->NO_PATH = NULL;
+	/*data->NO_PATH = NULL;
 	data->SO_PATH = NULL;
 	data->WE_PATH = NULL;
-	data->EA_PATH = NULL;
+	data->EA_PATH = NULL;*/
 }
 void	data_init(t_data *data)
 {

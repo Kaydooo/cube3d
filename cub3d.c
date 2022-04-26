@@ -12,40 +12,26 @@
 
 #include "cub3d.h"
 
-int		insdie_wall(t_data *data, int x, int y, int i) 
+int	insdie_wall(t_data *data, int x, int y, int i) 
 {
-	int index;
-	int new_size;
+	int	pos[3];
 
-	if(y >= data->map_height)
+	if (y >= data->map_height)
 		y = data->map_height - 1;
-	if( y < 0)
+	if (y < 0)
 		y = 0;
-	if(x >= data->map_width)
+	if (x >= data->map_width)
 		x = data->map_width - 1;
-	if( x < 0)
+	if (x < 0)
 		x = 0;
-	if (data->map[y][x] >= FLAME_MAP_F + '0')
-	{
-		int pos[2]; pos[Y] = y; pos[X] = x;
+	pos[Y] = y; 
+	pos[X] = x;
+	pos[2] = i;
+	if (data->map[y][x] - '0' >= FLAME_MAP_F)
 		raycast_sprite(data, i, pos);
-		return (0);
-	}
 	else if (data->map[y][x] - '0' >= DOOR_MAP_C)
-	{
-		index = data->player.rays[i].obj_num++;
-		data->player.rays[i].obj_direction[index] = obj_status(data, x, y, 2);
-		data->player.rays[i].obj_hit_point[index] = data->player.rays[i].hit_point;
-		data->player.rays[i].obj_mag[index] = data->player.rays[i].mag;
-		data->player.rays[i].obj_x[index] = x;
-		data->player.rays[i].obj_y[index] = y;
-		new_size = sizeof(int) * (index + 2);
-		data->player.rays[i].obj_direction = realloc(data->player.rays[i].obj_direction, new_size);
-		data->player.rays[i].obj_hit_point = realloc(data->player.rays[i].obj_hit_point, new_size);
-		data->player.rays[i].obj_mag = realloc(data->player.rays[i].obj_mag, new_size);
-		data->player.rays[i].obj_x = realloc(data->player.rays[i].obj_x, new_size);
-		data->player.rays[i].obj_y = realloc(data->player.rays[i].obj_y, new_size);
-	}
+		store_sprite(data, data->player.rays[i].hit_point,
+			data->player.rays[i].mag, pos);
 	if(data->map[y][x] == '1')
 		return (1);
 	return (0);
@@ -152,6 +138,15 @@ int	main(int argc, char **argv)
 	init_vars(data);
 	if(parse_map(data, argc, argv))
 		return (1);
+	int i = -1;
+	while (++i < data->map_height)
+	{
+		ft_putstr_fd(data->map[i], 1);
+		write(1, "\n", 1);
+	}
+	
+	
+	
 	data_init(data);
 	find_player(data);
 	change_door_status(data, 5);
