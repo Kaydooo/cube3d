@@ -386,20 +386,20 @@ void	check_if_valid_doors(t_data *data)
 	int		x;
 	
 	i = 0;
-	x = 0;
 	while(data->map[i])
 	{
 		j = 0;
 		temp = data->map[i];
 		while(data->map[i][j])
 		{
+			x = 0;
 			if(temp[j] == '3')
-			{	
+			{
 				if(i + 1 < data->map_height && i - 1 >= 0)
 					if(data->map[i + 1][j] == '1' && data->map[i - 1][j] == '1')
 						x++;
 				if(j + 1 < data->map_width && j - 1 >= 0)
-					if(data->map[i][j + 1] == '1' && data->map[i][j + 1] == '1')		
+					if(data->map[i][j + 1] == '1' && data->map[i][j - 1] == '1')		
 						x++;
 				if(x == 0)
 					print_error(data, "Wrong Door Postion!");
@@ -414,7 +414,6 @@ void	validate_map_contents(t_data *data)
 {
 	check_chars(data);
 	resize_width(data);
-	//calc_map_width_height(data);
 	check_if_closed_by_walls(data);
 	check_spaces_from_all_dir(data);
 	check_if_valid_doors(data);

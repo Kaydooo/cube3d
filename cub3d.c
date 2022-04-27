@@ -6,7 +6,7 @@
 /*   By: mal-guna <mal-guna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:39:32 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/04/23 12:10:14 by mal-guna         ###   ########.fr       */
+/*   Updated: 2022/04/27 07:01:11 by mal-guna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	main(int argc, char **argv)
 	find_player(data);
 	change_door_status(data, 5);
 	change_flame_status(data, 2);
-	printMap(data, 0);
+	printMap(data);
 	mlx_hook(data->win, 2, 1L << 0, key_press, data);
 	mlx_hook(data->win, 3, 0x2, key_release, data);
 	mlx_hook(data->win, 7, 1L << 4, mouse_enter, data);

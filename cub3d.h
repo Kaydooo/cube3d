@@ -6,7 +6,7 @@
 /*   By: mal-guna <mal-guna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/04/27 04:42:38 by mal-guna         ###   ########.fr       */
+/*   Updated: 2022/04/27 07:01:16 by mal-guna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,7 @@ void	move(t_data *data, int dir);
 
 /* draw.c */
 void	draw_3d(t_data *data);
-void	printMap(t_data *data, int count);
+void	printMap(t_data *data);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	add_asset_to_image(t_data *data, int x, int y, int asset);
 

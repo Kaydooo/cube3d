@@ -101,14 +101,25 @@ void	draw_floor_cel(t_data *data)
 	draw_rect(data, 0, HEIGHT/2, WIDTH, HEIGHT/2, data->f_color);
 }
 
-void	printMap(t_data *data, int count)
+void	printMap(t_data *data)
 {
 	int x;
 	int y;
+	int	mm_x;
+	int	mm_y;
+	// static int playerx;
+	// static int playery;
 
-	if (count)
-		{}
-	x = 0;
+	// if(!playerx)
+	// {
+	// 	playerx = (int)data->player.x;
+	// 	playery = (int)data->player.y;
+	// }
+	// int	mm_end;
+
+	mm_x = 0;
+	mm_y = 0;
+	//x = (int)data->player.x - 5;
 	y = 0;
 	draw_floor_cel(data);
 	check_line(data);
@@ -116,20 +127,30 @@ void	printMap(t_data *data, int count)
 	while(data->map[y])
 	{
 		x = 0;
-		while(data->map[y][x])
+		if(abs(y - ((int)data->player.y)/BLOCK_SIZE) <= 150)
 		{
-			if(data->map[y][x] == '0')
-				draw_rect(data, x*4, y*4, 4, 4, 0xFF000000);
-			if(data->map[y][x] == '1')
-				draw_rect(data, x*4, y*4, 4, 4, 0xFF154360);
-			if(data->map[y][x] == '3')
-				draw_rect(data, x*4, y*4, 4, 4, 0xFF9FE2BF);
-			if(data->map[y][x] == '5')
-				draw_rect(data, x*4, y*4, 4, 4, 0xFF8B0000);
-			x++;
+			mm_x = 0;
+				while(data->map[y][x])
+				{
+					if(abs(x - ((int)data->player.x)/BLOCK_SIZE) <= 150)
+					{
+						//printf("x = %d   y = %d\n", x, y);
+						if(data->map[y][x] == '0')
+							draw_rect(data, mm_x, mm_y, 4, 4, 0xFF000000);
+						if(data->map[y][x] == '1')
+							draw_rect(data, mm_x, mm_y, 4, 4, 0xFF154360);
+						if(data->map[y][x] == '3')
+							draw_rect(data, mm_x, mm_y, 4, 4, 0xFF9FE2BF);
+						if(data->map[y][x] == '5')
+							draw_rect(data, mm_x, mm_y, 4, 4, 0xFF8B0000);
+						mm_x+=4;
+					}
+					x++;
+				}
+			mm_y+=4;
 		}
 		y++;
 	}
-	draw_rect(data,data->player.x/8, data->player.y/8, 3, 3, 0x00FF00FF);//player
+	draw_rect(data, 150, 150, 4, 4, 0x00FF00FF);//player
 	mlx_put_image_to_window(data->mlx, data->win, data->img[0].img,0, 0);
 }
