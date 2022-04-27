@@ -6,7 +6,7 @@
 /*   By: mal-guna <mal-guna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/04/27 07:01:16 by mal-guna         ###   ########.fr       */
+/*   Updated: 2022/04/27 11:57:57 by mal-guna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 
 /* Game Settings */
 # define HEIGHT 700
-# define WIDTH 901
+# define WIDTH 900
 # define ROTATION_SPEED 0.04
 # define ONE_DEGREE_RAD 0.00174533
 # define BLOCK_SIZE 32

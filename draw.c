@@ -105,61 +105,29 @@ void	printMap(t_data *data)
 {
 	int x;
 	int y;
-	int	mm_x;
-	int	mm_y;
-	static int playerx;
-	static int playery;
 
-	if(!playerx)
-	{
-		playerx = 320;
-		playery = 320;
-	}
-	// int	mm_end;
-
-	mm_x = 0;
-	mm_y = 0;
-	//x = (int)data->player.x - 5;
+	x = 0;
 	y = 0;
 	draw_floor_cel(data);
 	check_line(data);
 	draw_3d(data);
-	draw_rect(data, 0, 0, playerx*2/4, playery*2/4, 0xe32636);
-	draw_rect(data, 1, 1, playerx*2/4 - 2, playery*2/4 - 2, 0xf0f8ff);
 	while(data->map[y])
 	{
 		x = 0;
-		if(abs(y - ((int)data->player.y)/BLOCK_SIZE) <= (playery/BLOCK_SIZE))
+		while(data->map[y][x])
 		{
-			//printf("%d\n",y);
-			if(y == 0 && abs(y - ((int)data->player.y)/BLOCK_SIZE) != playery/BLOCK_SIZE)
-			{mm_y = (playery/BLOCK_SIZE - abs(y - ((int)data->player.y)/BLOCK_SIZE)) * 4;
-			}
-				mm_x = 0;
-				while(data->map[y][x])
-				{
-					if(x == 0 && abs(x - ((int)data->player.x)/BLOCK_SIZE) != playerx/BLOCK_SIZE)
-						mm_x = (playerx/BLOCK_SIZE - abs(x - ((int)data->player.x)/BLOCK_SIZE)) * 4;
-					if(abs(x - ((int)data->player.x)/BLOCK_SIZE) <= (playerx/BLOCK_SIZE))
-					{
-						//printf("x = %d   y = %d\n", x, y);
-						if(data->map[y][x] == '0')
-							draw_rect(data, mm_x, mm_y, 4, 4, 0xFF000000);
-						if(data->map[y][x] == '1')
-							draw_rect(data, mm_x, mm_y, 4, 4, 0xFF154360);
-						if(data->map[y][x] == '3')
-							draw_rect(data, mm_x, mm_y, 4, 4, 0xFF9FE2BF);
-						if(data->map[y][x] == '5')
-							draw_rect(data, mm_x, mm_y, 4, 4, 0xFF8B0000);
-						mm_x+=4;
-					}
-					x++;
-				}
-			//printf("%d\n",mm_x);
-			mm_y+=4;
+			if(data->map[y][x] == '0')
+				draw_rect(data, x*4, y*4, 4, 4, 0xFF000000);
+			if(data->map[y][x] == '1')
+				draw_rect(data, x*4, y*4, 4, 4, 0xFF154360);
+			if(data->map[y][x] == '3')
+				draw_rect(data, x*4, y*4, 4, 4, 0xFF9FE2BF);
+			if(data->map[y][x] == '5')
+				draw_rect(data, x*4, y*4, 4, 4, 0xFF8B0000);
+			x++;
 		}
 		y++;
 	}
-	draw_rect(data,playerx/4 , playerx/4 , 4, 4, 0x00FF00FF);//player
+	draw_rect(data,data->player.x/8, data->player.y/8, 3, 3, 0x00FF00FF);//player
 	mlx_put_image_to_window(data->mlx, data->win, data->img[0].img,0, 0);
 }
