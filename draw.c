@@ -107,14 +107,14 @@ void	printMap(t_data *data)
 	int y;
 	int	mm_x;
 	int	mm_y;
-	// static int playerx;
-	// static int playery;
+	static int playerx;
+	static int playery;
 
-	// if(!playerx)
-	// {
-	// 	playerx = (int)data->player.x;
-	// 	playery = (int)data->player.y;
-	// }
+	if(!playerx)
+	{
+		playerx = (int)data->player.x;
+		playery = (int)data->player.y;
+	}
 	// int	mm_end;
 
 	mm_x = 0;
@@ -127,12 +127,12 @@ void	printMap(t_data *data)
 	while(data->map[y])
 	{
 		x = 0;
-		if(abs(y - ((int)data->player.y)/BLOCK_SIZE) <= 150)
+		if(abs(y - ((int)data->player.y)/BLOCK_SIZE) <= (playery/BLOCK_SIZE))
 		{
 			mm_x = 0;
 				while(data->map[y][x])
 				{
-					if(abs(x - ((int)data->player.x)/BLOCK_SIZE) <= 150)
+					if(abs(x - ((int)data->player.x)/BLOCK_SIZE) <= (playerx/BLOCK_SIZE))
 					{
 						//printf("x = %d   y = %d\n", x, y);
 						if(data->map[y][x] == '0')
@@ -147,10 +147,11 @@ void	printMap(t_data *data)
 					}
 					x++;
 				}
+			//printf("%d\n",mm_x);
 			mm_y+=4;
 		}
 		y++;
 	}
-	draw_rect(data, 150, 150, 4, 4, 0x00FF00FF);//player
+	draw_rect(data,(playerx)/8, (playery)/8, 4, 4, 0x00FF00FF);//player
 	mlx_put_image_to_window(data->mlx, data->win, data->img[0].img,0, 0);
 }

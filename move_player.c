@@ -38,7 +38,7 @@ void		strafe_r(t_data *data, double unit_x, double unit_y)
 		index_x = data->map_width - 1;
 	if(index_x < 0)
 		index_x = 0;
-	if((data->map[index_y][index_x] - '0') != 1 && (data->map[index_y][index_x] - '0') != 3)
+	if((data->map[index_y][index_x] - '0') % 2 != 1)
 	{
 		data->player.x -= unit_y * SPEED;
 		data->player.y -= -unit_x * SPEED;
@@ -60,7 +60,7 @@ void		strafe_l(t_data *data, double unit_x, double unit_y)
 		index_x = data->map_width - 1;
 	if(index_x < 0)
 		index_x = 0;
-	if((data->map[index_y][index_x] - '0') != 1 && (data->map[index_y][index_x] - '0') != 3)
+	if((data->map[index_y][index_x] - '0') % 2 != 1)
 	{
 		data->player.x -= -unit_y * SPEED;
 		data->player.y -= unit_x * SPEED;
@@ -82,7 +82,7 @@ void		mv_bw(t_data *data, double unit_x, double unit_y)
 		index_x = data->map_width - 1;
 	if(index_x < 0)
 		index_x = 0;
-	if((data->map[index_y][index_x] - '0') != 1 && (data->map[index_y][index_x] - '0') != 3)
+	if((data->map[index_y][index_x] - '0') % 2 != 1)
 	{
 		data->player.x -= unit_x * SPEED;
 		data->player.y -= unit_y * SPEED;
@@ -104,7 +104,7 @@ void		mv_fw(t_data *data, double unit_x, double unit_y)
 		index_x = data->map_width - 1;
 	if(index_x < 0)
 		index_x = 0;
-	if((data->map[index_y][index_x] - '0') != 1 && (data->map[index_y][index_x] - '0') != 3)
+	if((data->map[index_y][index_x] - '0') % 2 != 1)
 	{
 		data->player.x += unit_x * SPEED;
 		data->player.y += unit_y * SPEED;
