@@ -112,8 +112,8 @@ void	printMap(t_data *data)
 
 	if(!playerx)
 	{
-		playerx = (int)data->player.x;
-		playery = (int)data->player.y;
+		playerx = 320;
+		playery = 320;
 	}
 	// int	mm_end;
 
@@ -124,14 +124,22 @@ void	printMap(t_data *data)
 	draw_floor_cel(data);
 	check_line(data);
 	draw_3d(data);
+	draw_rect(data, 0, 0, playerx*2/4, playery*2/4, 0xe32636);
+	draw_rect(data, 1, 1, playerx*2/4 - 2, playery*2/4 - 2, 0xf0f8ff);
 	while(data->map[y])
 	{
 		x = 0;
 		if(abs(y - ((int)data->player.y)/BLOCK_SIZE) <= (playery/BLOCK_SIZE))
 		{
-			mm_x = 0;
+			//printf("%d\n",y);
+			if(y == 0 && abs(y - ((int)data->player.y)/BLOCK_SIZE) != playery/BLOCK_SIZE)
+			{mm_y = (playery/BLOCK_SIZE - abs(y - ((int)data->player.y)/BLOCK_SIZE)) * 4;
+			}
+				mm_x = 0;
 				while(data->map[y][x])
 				{
+					if(x == 0 && abs(x - ((int)data->player.x)/BLOCK_SIZE) != playerx/BLOCK_SIZE)
+						mm_x = (playerx/BLOCK_SIZE - abs(x - ((int)data->player.x)/BLOCK_SIZE)) * 4;
 					if(abs(x - ((int)data->player.x)/BLOCK_SIZE) <= (playerx/BLOCK_SIZE))
 					{
 						//printf("x = %d   y = %d\n", x, y);
@@ -152,6 +160,6 @@ void	printMap(t_data *data)
 		}
 		y++;
 	}
-	draw_rect(data,(playerx)/8, (playery)/8, 4, 4, 0x00FF00FF);//player
+	draw_rect(data,playerx/4 , playerx/4 , 4, 4, 0x00FF00FF);//player
 	mlx_put_image_to_window(data->mlx, data->win, data->img[0].img,0, 0);
 }
