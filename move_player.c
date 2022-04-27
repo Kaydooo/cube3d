@@ -80,26 +80,26 @@ void	move(t_data *data, int dir)
 	double unit_y;	
 	int max_index[2];
 
-	max_index[X] = data->map_height * BLOCK_SIZE - 1; // The problem of moving through walls and not being able
+	max_index[X] = data->map_width * BLOCK_SIZE - 1; // The problem of moving through walls and not being able
 	max_index[Y] = data->map_height * BLOCK_SIZE - 1; // to walk through spaces is here.	
 	unit_x = (data->player.rays[WIDTH/2].ray_x - data->player.x)/(data->player.rays[WIDTH/2].mag);
 	unit_y = (data->player.rays[WIDTH/2].ray_y - data->player.y)/(data->player.rays[WIDTH/2].mag);
-	if(dir == 1 && (data->map[((int)round(data->player.y + unit_y*15 * SPEED)/BLOCK_SIZE) & max_index[X]][((int)round(data->player.x + unit_x*15 * SPEED)/BLOCK_SIZE ) & max_index[Y]] - '0') % 2 != 1)
+	if(dir == 1 && (data->map[((int)round(data->player.y + unit_y*3 * SPEED)/BLOCK_SIZE) & max_index[Y]][((int)round(data->player.x + unit_x*3 * SPEED)/BLOCK_SIZE ) & max_index[X]] + '0') % 2 != 1)
 	{
 			data->player.x += unit_x * SPEED;
 			data->player.y += unit_y * SPEED;
 	}
-	else if(dir == -1 && (data->map[((int)round(data->player.y - unit_y*15 * SPEED)/BLOCK_SIZE) & max_index[X]][((int)round(data->player.x - unit_x*15 * SPEED)/BLOCK_SIZE) & max_index[Y]] - '0') % 2 != 1)
+	else if(dir == -1 && (data->map[((int)round(data->player.y - unit_y*3 * SPEED)/BLOCK_SIZE) & max_index[Y]][((int)round(data->player.x - unit_x*3 * SPEED)/BLOCK_SIZE) & max_index[X]] + '0') % 2 != 1)
 	{
 		data->player.x -= unit_x * SPEED;
 		data->player.y -= unit_y * SPEED;
 	}
-	else if(dir == 2 && (data->map[((int)round(data->player.y - -unit_x*15 * SPEED)/BLOCK_SIZE) & max_index[Y]][((int)round(data->player.x - unit_y*15 * SPEED)/BLOCK_SIZE) & max_index[X]] - '0') % 2 != 1)
+	else if(dir == 2 && (data->map[((int)round(data->player.y - -unit_x*3 * SPEED)/BLOCK_SIZE) & max_index[Y]][((int)round(data->player.x - unit_y*3 * SPEED)/BLOCK_SIZE) & max_index[X]] + '0') % 2 != 1)
 	{
 		data->player.x -= unit_y * SPEED;
 		data->player.y -= -unit_x * SPEED;
 	}
-	else if(dir == -2 && (data->map[((int)round(data->player.y - unit_x*15 * SPEED)/BLOCK_SIZE) & max_index[Y]][((int)round(data->player.x - - unit_y*15 * SPEED)/BLOCK_SIZE) & max_index[X]] - '0') % 2 != 1)
+	else if(dir == -2 && (data->map[((int)round(data->player.y - unit_x*3 * SPEED)/BLOCK_SIZE) & max_index[Y]][((int)round(data->player.x - - unit_y*3 * SPEED)/BLOCK_SIZE) & max_index[X]] + '0') % 2 != 1)
 	{
 		data->player.x -= -unit_y * SPEED;
 		data->player.y -= unit_x * SPEED;

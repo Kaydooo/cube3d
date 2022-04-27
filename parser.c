@@ -414,6 +414,7 @@ void	validate_map_contents(t_data *data)
 {
 	check_chars(data);
 	resize_width(data);
+	//calc_map_width_height(data);
 	check_if_closed_by_walls(data);
 	check_spaces_from_all_dir(data);
 	check_if_valid_doors(data);

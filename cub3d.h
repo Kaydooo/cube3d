@@ -6,7 +6,7 @@
 /*   By: mal-guna <mal-guna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/04/23 09:07:26 by mal-guna         ###   ########.fr       */
+/*   Updated: 2022/04/27 04:42:38 by mal-guna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 
 /* Game Settings */
 # define HEIGHT 700
-# define WIDTH 900
+# define WIDTH 901
 # define ROTATION_SPEED 0.04
 # define ONE_DEGREE_RAD 0.00174533
 # define BLOCK_SIZE 32
@@ -58,7 +58,7 @@
 # define KEY_S 115
 # define KEY_A 97
 # define KEY_D 100
-# define DOORS 112
+# define DOORS 101 // E
 # define ESC 65307
 
 /* Miscellaneous */
