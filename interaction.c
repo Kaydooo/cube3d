@@ -38,7 +38,7 @@ int	key_release(int key, t_data *data)
 	return (0);
 }
 
-int	mouse_enter(t_data *data)
+/*int	mouse_enter(t_data *data)
 {
 	mouse_move(data, 1);
 	return (0);
@@ -72,4 +72,4 @@ void	mouse_move(t_data *data, int input)
 		mag *= -1;
 	if (mag)
 		rotate(data, mag, 0);
-}
+}*/

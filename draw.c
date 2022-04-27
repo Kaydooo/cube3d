@@ -1,3 +1,4 @@
+
 #include "cub3d.h"
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
@@ -110,6 +111,7 @@ void	printMap(t_data *data, int count)
 		{}
 	x = 0;
 	y = 0;
+	mlx_clear_window(data->mlx, data->win);
 	draw_floor_cel(data);
 	check_line(data);
 	draw_3d(data);
@@ -119,13 +121,13 @@ void	printMap(t_data *data, int count)
 		while(data->map[y][x])
 		{
 			if(data->map[y][x] == '0')
-				draw_rect(data, x*4, y*4, 4, 4, 0xFF000000);
+				draw_rect(data, x*4, y*4, 4, 4, 0x00000000);
 			if(data->map[y][x] == '1')
-				draw_rect(data, x*4, y*4, 4, 4, 0xFF154360);
+				draw_rect(data, x*4, y*4, 4, 4, 0x00154360);
 			if(data->map[y][x] == '3')
-				draw_rect(data, x*4, y*4, 4, 4, 0xFF9FE2BF);
+				draw_rect(data, x*4, y*4, 4, 4, 0x009FE2BF);
 			if(data->map[y][x] == '5')
-				draw_rect(data, x*4, y*4, 4, 4, 0xFF8B0000);
+				draw_rect(data, x*4, y*4, 4, 4, 0x008B0000);
 			x++;
 		}
 		y++;

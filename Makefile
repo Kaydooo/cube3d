@@ -20,7 +20,7 @@ ifeq ($(OS), Linux)
 	MLX_FLAGS = -Llibs/mlx_linux -lmlx -Ilibs/mlx_linux -lXext -lX11 -lm -lz
 	MLX_PATH = libs/mlx_linux
 else
-	MLX_FLAGS = -Lmlx_mac -lmlx -Ilibs/mlx_mac -framework OpenGL -framework AppKit
+	MLX_FLAGS = -Llibs/mlx_mac -lmlx -Ilibs/mlx_mac -framework OpenGL -framework AppKit
 	MLX_PATH = libs/mlx_mac
 endif
 
@@ -32,7 +32,7 @@ $(NAME): $(OBJS)
 	$(MAKE) -C $(MLX_PATH)
 	$(MAKE) -C $(LIBFT_PATH)
 	$(MAKE) -C $(GNL_PATH)
-	$(CC) $(OBJS) $(GNL) $(LIBFT) $(MLX_FLAGS) $(CFLAGS) -o $(NAME)
+	$(CC) $(OBJS) $(MLX_FLAGS) $(GNL) $(LIBFT)  $(CFLAGS) -o $(NAME)
 
 clean:
 	$(MAKE) clean -C $(MLX_PATH)
@@ -41,7 +41,8 @@ clean:
 	rm -rf $(OBJS)
 fclean: clean
 	rm -rf $(NAME)
-	
+	$(MAKE) fclean -C $(LIBFT_PATH)
+	$(MAKE) fclean -C $(GNL_PATH)
 re:	fclean all
 
 .PHONY:	all clean fclean re

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mal-guna <mal-guna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: athekkep <athekkep@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:39:32 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/04/23 12:10:14 by mal-guna         ###   ########.fr       */
+/*   Updated: 2022/04/27 17:45:47 by athekkep         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ int	main(int argc, char **argv)
 	printMap(data, 0);
 	mlx_hook(data->win, 2, 1L << 0, key_press, data);
 	mlx_hook(data->win, 3, 0x2, key_release, data);
-	mlx_hook(data->win, 7, 1L << 4, mouse_enter, data);
-	mlx_hook(data->win, 8, 1L << 5, mouse_leave, data);
+	//mlx_hook(data->win, 7, 1L << 4, mouse_enter, data);
+	//mlx_hook(data->win, 8, 1L << 5, mouse_leave, data);
 	mlx_hook(data->win, 17, 0, close_window, data);
 	mlx_loop_hook(data->mlx, render, data);
 	mlx_loop(data->mlx);

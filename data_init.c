@@ -43,6 +43,8 @@ void	init_imgs(t_data *data)
 	data->img[0].addr = mlx_get_data_addr(data->img[0].img,
 			&data->img[0].bits_per_pixel, &data->img[0].line_length,
 			&data->img[0].endian);
+	data->img[5].img = mlx_xpm_file_to_image(data->mlx, "assets/blackbk768*768.xpm", &data->img[5].width, &data->img[5].hieght);
+	data->img[5].addr = mlx_get_data_addr(data->img[5].img, &data->img[5].bits_per_pixel, &data->img[5].line_length, &data->img[5].endian);
 	put_to_image(data, NORTH_TEXT, data->no_path);
 	put_to_image(data, SOUTH_TEXT, data->so_path);
 	put_to_image(data, WEST_TEXT, data->we_path);
