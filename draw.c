@@ -101,33 +101,58 @@ void	draw_floor_cel(t_data *data)
 	draw_rect(data, 0, HEIGHT/2, WIDTH, HEIGHT/2, data->f_color);
 }
 
-void	printMap(t_data *data)
+void	draw_minimap(t_data *data)
 {
 	int x;
 	int y;
+	int start_draw_x;
+	int start_draw_y;
 
-	x = 0;
+	start_draw_x = 0;
+	start_draw_y = 0;
 	y = 0;
-	draw_floor_cel(data);
-	check_line(data);
-	draw_3d(data);
+	draw_rect(data, 0, 0, (MM_WIDTH+3) *4,(MM_HEIGHT+3) * 4, MM_BORDER);
+	draw_rect(data, 3, 3, (MM_WIDTH+1) *4, (MM_HEIGHT+1) * 4, MM_BACKGROUND);
 	while(data->map[y])
 	{
 		x = 0;
-		while(data->map[y][x])
+		if(abs(y - (int)data->player.y/BLOCK_SIZE) <= MM_HEIGHT/2)
 		{
-			if(data->map[y][x] == '0')
-				draw_rect(data, x*4, y*4, 4, 4, 0xFF000000);
-			if(data->map[y][x] == '1')
-				draw_rect(data, x*4, y*4, 4, 4, 0xFF154360);
-			if(data->map[y][x] == '3')
-				draw_rect(data, x*4, y*4, 4, 4, 0xFF9FE2BF);
-			if(data->map[y][x] == '5')
-				draw_rect(data, x*4, y*4, 4, 4, 0xFF8B0000);
-			x++;
+			if(y - data->player.y/BLOCK_SIZE <= 0)
+				start_draw_y = MM_HEIGHT/2 - abs(y - (int)data->player.y/BLOCK_SIZE);
+			else 
+				start_draw_y = MM_HEIGHT/2 + abs(y - (int)data->player.y/BLOCK_SIZE);
+			while(data->map[y][x])
+			{
+				if(abs(x - (int)data->player.x/BLOCK_SIZE) < MM_WIDTH/2)
+				{
+					if(x - data->player.x/BLOCK_SIZE < 0)
+						start_draw_x = MM_WIDTH/2 - abs(x - (int)data->player.x/BLOCK_SIZE);
+					else if(x - data->player.x/BLOCK_SIZE > 0)
+						start_draw_x = MM_WIDTH/2 + abs(x - (int)data->player.x/BLOCK_SIZE);
+					if(data->map[y][x] == '0')
+						draw_rect(data, start_draw_x*4, start_draw_y*4, 4, 4, MM_GROUND);
+					if(data->map[y][x] == '1')
+						draw_rect(data, start_draw_x*4, start_draw_y*4, 4, 4, MM_WALL);
+					if(data->map[y][x] == '3')
+						draw_rect(data, start_draw_x*4, start_draw_y*4, 4, 4, MM_DOOR);
+					if(data->map[y][x] == '5')
+						draw_rect(data, start_draw_x*4, start_draw_y*4, 4, 4, MM_FLAME);
+				}
+				x++;
+			}
 		}
 		y++;
 	}
-	draw_rect(data,data->player.x/8, data->player.y/8, 3, 3, 0x00FF00FF);//player
+}
+
+void	printMap(t_data *data)
+{
+
+	draw_floor_cel(data);
+	check_line(data);
+	draw_3d(data);
+	draw_minimap(data);
+	draw_rect(data,MM_WIDTH*4/2, MM_HEIGHT*4/2, 4, 4, 0x00FFEEFF);//player
 	mlx_put_image_to_window(data->mlx, data->win, data->img[0].img,0, 0);
 }

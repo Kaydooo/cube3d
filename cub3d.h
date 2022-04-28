@@ -6,7 +6,7 @@
 /*   By: mal-guna <mal-guna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/04/27 11:57:57 by mal-guna         ###   ########.fr       */
+/*   Updated: 2022/04/28 10:34:20 by mal-guna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,16 @@
 # define SOUTH_TEXT 7
 # define WEST_TEXT 8
 # define EAST_TEXT 9
+
+/* Minimap */
+# define MM_BACKGROUND 0x00f0f8ff
+# define MM_BORDER 0x00480607
+# define MM_GROUND 0x00000000
+# define MM_WALL 0x00154360
+# define MM_DOOR 0x009FE2BF
+# define MM_FLAME 0x008B0000
+# define MM_WIDTH 50
+# define MM_HEIGHT 50
 
 /* Door sprite */
 # define DOOR_CLOS 10 // img index
