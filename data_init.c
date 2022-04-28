@@ -5,7 +5,10 @@ static void	put_to_image(t_data *data, int image, char *path)
 	data->img[image].img = mlx_xpm_file_to_image(data->mlx, path,
 			&data->img[image].width, &data->img[image].hieght);
 	if (!data->img[image].img)
-		print_error(data, "Couldn't Open Image.. Wrong image path!");
+		{
+			printf("%d\n",image);
+			print_error(data, "Couldn't Open Image.. Wrong image path!");
+		}
 	data->img[image].addr = mlx_get_data_addr(data->img[image].img,
 			&data->img[image].bits_per_pixel, &data->img[image].line_length,
 			&data->img[image].endian);
@@ -72,7 +75,6 @@ void	init_rays(t_data *data)
 
 void	data_init(t_data *data)
 {
-	data->start_angle = 0.00000001;
 	data->mlx = mlx_init();
 	init_imgs(data);
 	data->win = mlx_new_window(data->mlx, WIDTH, HEIGHT, "Cub3d");

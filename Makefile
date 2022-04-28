@@ -24,7 +24,7 @@ else
 	MLX_PATH = libs/mlx_mac
 endif
 
-NAME = cub3d
+NAME = cub3D
 
 all : $(NAME)
 

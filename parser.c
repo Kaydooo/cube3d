@@ -226,7 +226,7 @@ void	check_chars(t_data *data)
 		while(data->map[i][j])
 		{
 			c = data->map[i][j];
-			if(c != '0' && c != '1' && c != 'N' && c != 'S' && c != 'W' && c != 'E' && c != '2' && c != ' ' && c != '3' && c != '5')
+			if(c != '0' && c != '1' && c != 'N' && c != 'S' && c != 'W' && c != 'E' && c != ' ' && c != '3' && c != '5')
 				{
 					printf("|%c|\n", c);
 					print_error(data, "Map Includes NON-allowed chars232!");
