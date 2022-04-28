@@ -6,7 +6,7 @@
 /*   By: mal-guna <mal-guna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/04/28 12:28:40 by mal-guna         ###   ########.fr       */
+/*   Updated: 2022/04/28 15:31:53 by mal-guna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,8 +142,10 @@ typedef struct s_data
 	int				map_height;
 	int				config_fd;
 	double			start_angle;
+	int				index;
+	int				wrong_door;
 	char			**map;
-}					t_data;
+}				t_data;
 
 /* cub3d.c */
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
@@ -183,23 +185,37 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	add_asset_to_image(t_data *data, int x, int y, int asset);
 
 /* parser.c */
-int		parse_map(t_data *data, int argc, char **argv);
 void	check_map_name(t_data *data, int argc, char **argv);
+void	validate_map_contents(t_data *data);
+int		parse_map(t_data *data, int argc, char **argv);
+
+/* map_contents.c */
+void	check_player_pos(t_data *data, char c, int *x);
+int		contain_walls_or_spaces_only(char	*temp);
+void	check_if_closed_by_walls(t_data *data);
+void	validate_door(t_data *data, int i, int j, int x);
+void	check_if_valid_doors(t_data *data);
+
+/* map_elements.c */
+int		read_color(t_data *data, char **split_line, char type);
 int		handle_color(t_data *data, char **split_line);
 int		handle_elements(t_data *data, char **split_line);
 void	check_elements(t_data *data);
-int		check_if_no_more_map(t_data *data);
-void	calc_map_width_height(t_data *data);
+
+/* parse_map.c */
+void	read_map(t_data *data, char **line, char **map_input);
 void	parse_map_contents(t_data *data);
-void	check_chars(t_data *data);
+
+/* parser_utils.c */
 char	*create_spaces(t_data *data, int number);
 void	resize_width(t_data *data);
-int		contain_walls_or_spaces_only(char	*temp);
-void	check_if_closed_by_walls(t_data *data);
-void	print_map_array(t_data *data);
+void	calc_map_width_height(t_data *data);
+
+/* validate_map.c */
+void	check_chars(t_data *data);
+int		check_if_no_more_map(t_data *data);
+void	check_spaces(t_data *data, int i, int j);
 void	check_spaces_from_all_dir(t_data *data);
-void	check_if_valid_doors(t_data *data);
-void	validate_map_contents(t_data *data);
 
 /* objectc.c */
 int		obj_status(t_data *data, int x, int y, int to_do);
@@ -221,5 +237,8 @@ int		color_atoi(const char *str);
 /* exit.c */
 int		close_window(t_data *data);
 void	free_all(t_data *data);
+
+
+void	check_player_pos(t_data *data, char c, int *x);
 
 #endif
