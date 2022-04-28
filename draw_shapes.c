@@ -6,7 +6,7 @@
 /*   By: athekkep <athekkep@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:39:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/04/28 19:54:31 by athekkep         ###   ########.fr       */
+/*   Updated: 2022/04/28 20:17:09 by athekkep         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,21 @@
 
 void	draw_player(t_data *data, int x, int y, int r)
 {
-	static const double	PI;
-	double				i;
-	double				angle;
-	double				x1;
-	double				y1;
+	double	pi;
+	double	i;
+	double	angle;
+	double	x1;
+	double	y1;
 
+	pi = 3.14159265359;
 	while (r > 0)
 	{
 		i = 0.0;
 		while (i < 360)
 		{
 			angle = i;
-			x1 = r * cos(angle * PI / 180);
-			y1 = r * sin(angle * PI / 180);
+			x1 = r * cos(angle * pi / 180);
+			y1 = r * sin(angle * pi / 180);
 			my_mlx_pixel_put(data, x + x1, y + y1, 0x00FF0000);
 			i += 0.1;
 		}

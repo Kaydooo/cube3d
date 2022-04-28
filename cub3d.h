@@ -6,7 +6,7 @@
 /*   By: athekkep <athekkep@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/04/28 19:42:25 by athekkep         ###   ########.fr       */
+/*   Updated: 2022/04/28 20:15:56 by athekkep         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,14 +76,14 @@
 # define X 1
 
 /* Mac Keys */
-#define KEY_RIGHT 124
-#define KEY_LEFT 123
-#define KEY_W 13
-#define KEY_S 1
-#define KEY_A 0
-#define KEY_D 2
-#define DOORS 14
-#define ESC 53
+# define KEY_RIGHT 124
+# define KEY_LEFT 123
+# define KEY_W 13
+# define KEY_S 1
+# define KEY_A 0
+# define KEY_D 2
+# define DOORS 14
+# define ESC 53
 
 typedef struct s_ray
 {
@@ -154,7 +154,6 @@ void	init_rays_mag(t_data *data);
 /* draw_shapes.c */
 void	draw_player(t_data *data, int x, int y, int r);
 void	draw_rect(t_data *data, int *position, int *dimensions, int color);
-void	draw_line(t_data *data, double x1, double x2, double y1, double y2);
 
 /* draw.c */
 void	draw_3d(t_data *data, int i);
@@ -243,8 +242,6 @@ int		color_atoi(const char *str);
 /* exit.c */
 int		close_window(t_data *data);
 void	free_all(t_data *data);
-
-
 void	check_player_pos(t_data *data, char c, int *x);
 
 #endif
