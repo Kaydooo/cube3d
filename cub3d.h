@@ -6,7 +6,7 @@
 /*   By: athekkep <athekkep@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/04/27 21:31:31 by athekkep         ###   ########.fr       */
+/*   Updated: 2022/04/28 12:02:34 by athekkep         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,9 +152,7 @@ int		insdie_wall(t_data *data, int x, int y, int i);
 /* interaction.c */
 int		key_press(int key, t_data *data);
 int		key_release(int key, t_data *data);
-int		mouse_enter(t_data *data);
-int		mouse_leave(t_data *data);
-void	mouse_move(t_data *data, int input);
+int		mouse_rotate(int key, int x, int y, t_data *data);
 
 /* render.c */
 int		render(t_data *data);
