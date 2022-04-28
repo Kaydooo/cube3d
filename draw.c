@@ -1,3 +1,4 @@
+
 #include "cub3d.h"
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
@@ -149,6 +150,7 @@ void	draw_minimap(t_data *data)
 void	printMap(t_data *data)
 {
 
+	mlx_clear_window(data->mlx, data->win);
 	draw_floor_cel(data);
 	check_line(data);
 	draw_3d(data);

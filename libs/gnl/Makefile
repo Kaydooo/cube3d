@@ -14,14 +14,16 @@ NAME = gnl.a
 
 $(NAME): $(OBJS)
 	@@ar -rsc $@ $^
+	@ranlib $(NAME)
 	@echo gnl.a created!
 
 all : $(NAME)
 
 clean:
-	$(RM) $(NAME)
+	$(RM) $(OBJS)
 
 fclean: clean
+	$(RM) $(NAME)
 
 re: fclean all
 

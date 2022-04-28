@@ -34,7 +34,7 @@ int		handle_color(t_data *data, char **split_line)
 			return (1);
 		}
 		free_2d(&color_split);
-		data->f_color = (0xFF << 24 | color[0] << 16 | color[1] << 8 | color[2]);
+		data->f_color = (0x00 << 24 | color[0] << 16 | color[1] << 8 | color[2]);
 	}
 	else if(!strncmp(split_line[0], "C", 2))
 	{
@@ -48,7 +48,7 @@ int		handle_color(t_data *data, char **split_line)
 			return (1);
 		}
 		free_2d(&color_split);
-		data->c_color = (0xFF << 24 | color[0] << 16 | color[1] << 8 | color[2]);
+		data->c_color = (0x00 << 24 | color[0] << 16 | color[1] << 8 | color[2]);
 	}
 	else
 		return (1);

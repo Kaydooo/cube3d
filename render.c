@@ -21,7 +21,6 @@ int	render(t_data *data)
 	static int	count;
 
 	clear_ray_obj(data, 1);
-	mouse_move(data, -1);
 	check_movement(data);
 	printMap(data);
 	change_door_status(data, count);

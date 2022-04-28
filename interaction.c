@@ -38,38 +38,17 @@ int	key_release(int key, t_data *data)
 	return (0);
 }
 
-int	mouse_enter(t_data *data)
+int	mouse_rotate(int key, int x, int y, t_data *data)
 {
-	mouse_move(data, 1);
-	return (0);
-}
-
-int	mouse_leave(t_data *data)
-{
-	mouse_move(data, 0);
-	return (0);
-}
-
-void	mouse_move(t_data *data, int input)
-{
-	int			x;
-	int			y;
-	int			mag;
-	static int	mouse;
-
-	if (input != -1)
-		mouse = input;
-	mlx_mouse_get_pos(data->mlx, data->win, &x, &y);
-	if (!mouse || x < 1 || x >= WIDTH || y < 1
-		|| y >= data->map_height * BLOCK_SIZE)
-		return ;
-	mag = 4;
-	while (--mag > 0)
-		if (x > (WIDTH / 2) + ((mag * WIDTH) / 8)
-			|| x < (WIDTH / 2) - ((mag * WIDTH) / 8))
-			break ;
-	if (x < WIDTH / 2)
-		mag *= -1;
-	if (mag)
-		rotate(data, mag, 0);
+	if (x || y)
+		{}
+	if (key == 1)
+		rotate(data, -2, 0);
+	if (key == 2)
+		rotate(data, 2, 0);
+	if (key == 4)
+		rotate(data, 3, 0);
+	if (key == 5)
+		rotate(data, -3, 0);
+	return (key);
 }

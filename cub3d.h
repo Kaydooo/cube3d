@@ -6,14 +6,14 @@
 /*   By: mal-guna <mal-guna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/04/28 10:34:20 by mal-guna         ###   ########.fr       */
+/*   Updated: 2022/04/28 12:28:40 by mal-guna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "libs/mlx_linux/mlx.h"
+# include "libs/mlx_mac/mlx.h"
 # include "libs/libft/libft.h"
 # include "libs/gnl/get_next_line.h"
 # include <unistd.h>
@@ -26,8 +26,8 @@
 # include <errno.h>
 
 /* Game Settings */
-# define HEIGHT 700
-# define WIDTH 900
+# define HEIGHT 768
+# define WIDTH 768
 # define ROTATION_SPEED 0.04
 # define ONE_DEGREE_RAD 0.00174533
 # define BLOCK_SIZE 32
@@ -82,7 +82,7 @@
 // #define KEY_S 1
 // #define KEY_A 0
 // #define KEY_D 2
-// #define DOORS ?   <-- Define!
+// #define DOORS 14
 // #define ESC 53
 
 typedef struct s_ray
@@ -162,9 +162,7 @@ int		insdie_wall(t_data *data, int x, int y, int i);
 /* interaction.c */
 int		key_press(int key, t_data *data);
 int		key_release(int key, t_data *data);
-int		mouse_enter(t_data *data);
-int		mouse_leave(t_data *data);
-void	mouse_move(t_data *data, int input);
+int		mouse_rotate(int key, int x, int y, t_data *data);
 
 /* render.c */
 int		render(t_data *data);
