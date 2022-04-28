@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_contents.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: athekkep <athekkep@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mal-guna <m3t9mm@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 14:55:54 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/04/28 20:03:29 by athekkep         ###   ########.fr       */
+/*   Updated: 2022/04/28 22:20:42 by mal-guna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	check_if_closed_by_walls(t_data *data)
 	{
 		temp = ft_strtrim(data->map[i], " ");
 		if (temp[0] != '1' || temp[ft_strlen(temp) - 1] != '1')
-				x = 1;
+			x = 1;
 		if (i == 0)
 			if (contain_walls_or_spaces_only(temp))
 				x = 1;

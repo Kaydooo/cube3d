@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: athekkep <athekkep@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mal-guna <m3t9mm@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 14:40:37 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/04/28 20:06:53 by athekkep         ###   ########.fr       */
+/*   Updated: 2022/04/28 22:19:52 by mal-guna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	validate_map_contents(t_data *data)
 
 int	parse_map(t_data *data, int argc, char **argv)
 {
-	data->index = -1;
 	check_map_name(data, argc, argv);
 	check_elements(data);
 	if (!data->no_path || !data->so_path || !data->we_path || !data->ea_path)

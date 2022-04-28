@@ -1,8 +1,8 @@
 
-C 128,128,123      	
+C 128,128,123
 
-EA ./assets/East.xpm 
-NO ./assets/North.xpm 
+EA ./assets/East.xpm
+NO ./assets/North.xpm
 
 
 

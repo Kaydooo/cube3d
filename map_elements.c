@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_elements.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: athekkep <athekkep@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mal-guna <m3t9mm@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 13:27:35 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/04/28 21:28:53 by athekkep         ###   ########.fr       */
+/*   Updated: 2022/04/28 22:20:04 by mal-guna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ void	check_elements(t_data *data)
 	char	**split_line;
 	char	*temp;
 
-	data->index = 0;
 	while (data->index < 6)
 	{
 		line = get_next_line(data->config_fd);
