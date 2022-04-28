@@ -41,7 +41,7 @@ int	key_release(int key, t_data *data)
 int	mouse_rotate(int key, int x, int y, t_data *data)
 {
 	if (x || y)
-		{}
+		;
 	if (key == 1)
 		rotate(data, -2, 0);
 	if (key == 2)

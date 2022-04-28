@@ -6,7 +6,7 @@
 /*   By: athekkep <athekkep@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/04/28 18:54:21 by athekkep         ###   ########.fr       */
+/*   Updated: 2022/04/28 19:42:25 by athekkep         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,8 +142,10 @@ typedef struct s_data
 	int				map_height;
 	int				config_fd;
 	double			start_angle;
+	int				index;
+	int				wrong_door;
 	char			**map;
-}					t_data;
+}				t_data;
 
 /* cub3d.c */
 void	add_asset_to_image(t_data *data, int x, int y, int asset);
@@ -151,12 +153,12 @@ void	init_rays_mag(t_data *data);
 
 /* draw_shapes.c */
 void	draw_player(t_data *data, int x, int y, int r);
-void	draw_rect(t_data *data, int x, int y, int width, int height, int color);
+void	draw_rect(t_data *data, int *position, int *dimensions, int color);
 void	draw_line(t_data *data, double x1, double x2, double y1, double y2);
 
 /* draw.c */
 void	draw_3d(t_data *data, int i);
-void	printMap(t_data *data);
+void	print_map(t_data *data);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	add_asset_to_image(t_data *data, int x, int y, int asset);
 
@@ -165,6 +167,7 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int		get_t(int trgb);
 double	get_ray_distance(t_data *data, int i, int obj);
 int		img_color(t_data *data, int i, int tex_pos, int obj_index);
+void	init_minimap(t_data *data);
 
 /* ray_caster.c */
 void	check_line(t_data *data);
@@ -188,23 +191,37 @@ void	rotate(t_data *data, int dir, int i);
 void	move(t_data *data, int dir);
 
 /* parser.c */
-int		parse_map(t_data *data, int argc, char **argv);
 void	check_map_name(t_data *data, int argc, char **argv);
+void	validate_map_contents(t_data *data);
+int		parse_map(t_data *data, int argc, char **argv);
+
+/* map_contents.c */
+void	check_player_pos(t_data *data, char c, int *x);
+int		contain_walls_or_spaces_only(char	*temp);
+void	check_if_closed_by_walls(t_data *data);
+void	validate_door(t_data *data, int i, int j, int x);
+void	check_if_valid_doors(t_data *data);
+
+/* map_elements.c */
+int		read_color(t_data *data, char **split_line, char type);
 int		handle_color(t_data *data, char **split_line);
 int		handle_elements(t_data *data, char **split_line);
 void	check_elements(t_data *data);
-int		check_if_no_more_map(t_data *data);
-void	calc_map_width_height(t_data *data);
+
+/* parse_map.c */
+void	read_map(t_data *data, char **line, char **map_input);
 void	parse_map_contents(t_data *data);
-void	check_chars(t_data *data);
+
+/* parser_utils.c */
 char	*create_spaces(t_data *data, int number);
 void	resize_width(t_data *data);
-int		contain_walls_or_spaces_only(char	*temp);
-void	check_if_closed_by_walls(t_data *data);
-void	print_map_array(t_data *data);
+void	calc_map_width_height(t_data *data);
+
+/* validate_map.c */
+void	check_chars(t_data *data);
+int		check_if_no_more_map(t_data *data);
+void	check_spaces(t_data *data, int i, int j);
 void	check_spaces_from_all_dir(t_data *data);
-void	check_if_valid_doors(t_data *data);
-void	validate_map_contents(t_data *data);
 
 /* objectc.c */
 int		obj_status(t_data *data, int x, int y, int to_do);
@@ -226,5 +243,8 @@ int		color_atoi(const char *str);
 /* exit.c */
 int		close_window(t_data *data);
 void	free_all(t_data *data);
+
+
+void	check_player_pos(t_data *data, char c, int *x);
 
 #endif

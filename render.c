@@ -22,7 +22,7 @@ int	render(t_data *data)
 
 	clear_ray_obj(data, 1);
 	check_movement(data);
-	printMap(data);
+	print_map(data);
 	change_door_status(data, count);
 	change_flame_status(data, count);
 	if (count++ == 1001)

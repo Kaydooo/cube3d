@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mal-guna <mal-guna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: athekkep <athekkep@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:39:32 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/04/28 12:26:46 by mal-guna         ###   ########.fr       */
+/*   Updated: 2022/04/28 19:42:38 by athekkep         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	main(int argc, char **argv)
 	find_player(data);
 	change_door_status(data, 5);
 	change_flame_status(data, 2);
-	printMap(data);
+	print_map(data);
 	mlx_mouse_hook(data->win, mouse_rotate, data);
 	mlx_hook(data->win, 2, 1L << 0, key_press, data);
 	mlx_hook(data->win, 3, 0x2, key_release, data);

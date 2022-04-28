@@ -50,41 +50,52 @@ void	draw_3d(t_data *data, int i)
 
 void	draw_floor_cel(t_data *data)
 {
-	draw_rect(data, 0, 0, WIDTH, HEIGHT / 2, data->c_color);
-	draw_rect(data, 0, HEIGHT / 2, WIDTH, HEIGHT / 2, data->f_color);
+	int	position[2];
+	int	dimensions[2];
+
+	position[X] = 0;
+	position[Y] = 0;
+	dimensions[X] = WIDTH;
+	dimensions[Y] = HEIGHT / 2;
+	draw_rect(data, position, dimensions, data->c_color);
+	position[Y] = HEIGHT / 2;
+	draw_rect(data, position, dimensions, data->f_color);
 }
 
 void	draw_minimap(t_data *data, int i)
 {
 	int	pos[2];
 	int	start_draw[2];
+	int	dimensions[2];
 
-	start_draw[X] = 0;
-	start_draw[Y] = 0;
 	pos[Y] = i;
 	pos[X] = -1;
+	dimensions[X] = 4;
+	dimensions[Y] = 4;
 	if (!(abs(pos[Y] - (int)data->player.y / BLOCK_SIZE) <= MM_HEIGHT / 2))
 		return ;
-	start_draw[Y] = MM_HEIGHT / 2 + (pos[Y] - (int)data->player.y / BLOCK_SIZE);
+	start_draw[Y] = (25 + (pos[Y] - (int)data->player.y / BLOCK_SIZE)) * 4;
 	while (data->map[pos[Y]][++pos[X]])
 	{
 		if (!(abs(pos[X] - (int)data->player.x / BLOCK_SIZE) < MM_WIDTH / 2))
 			continue ;
-		start_draw[X] = MM_WIDTH / 2 + (pos[X] - (int)data->player.x / BLOCK_SIZE);
+		start_draw[X] = (25 + (pos[X] - (int)data->player.x / BLOCK_SIZE)) * 4;
 		if (data->map[pos[Y]][pos[X]] == '0')
-			draw_rect(data, start_draw[X] * 4, start_draw[Y] * 4, 4, 4, MM_GROUND);
+			draw_rect(data, start_draw, dimensions, MM_GROUND);
 		if (data->map[pos[Y]][pos[X]] == '1')
-			draw_rect(data, start_draw[X] * 4, start_draw[Y] * 4, 4, 4, MM_WALL);
+			draw_rect(data, start_draw, dimensions, MM_WALL);
 		if (data->map[pos[Y]][pos[X]] == '3')
-			draw_rect(data, start_draw[X] * 4, start_draw[Y] * 4, 4, 4, MM_DOOR);
+			draw_rect(data, start_draw, dimensions, MM_DOOR);
 		if (data->map[pos[Y]][pos[X]] == '5')
-			draw_rect(data, start_draw[X] * 4, start_draw[Y] * 4, 4, 4, MM_FLAME);
+			draw_rect(data, start_draw, dimensions, MM_FLAME);
 	}
 }
 
-void	printMap(t_data *data)
+void	print_map(t_data *data)
 {
 	int	i;
+	int	position[2];
+	int	dimensions[2];
 
 	mlx_clear_window(data->mlx, data->win);
 	draw_floor_cel(data);
@@ -93,10 +104,13 @@ void	printMap(t_data *data)
 	while (++i < WIDTH)
 		draw_3d(data, i);
 	i = -1;
-	draw_rect(data, 0, 0, (MM_WIDTH + 3) * 4, (MM_HEIGHT + 3) * 4, MM_BORDER);
-	draw_rect(data, 3, 3, (MM_WIDTH + 1) * 4, (MM_HEIGHT + 1) * 4, MM_BKGRND);
+	init_minimap(data);
 	while (data->map[++i])
 		draw_minimap(data, i);
-	draw_rect(data, MM_WIDTH * 4 / 2, MM_HEIGHT * 4 / 2, 4, 4, 0x00FFEEFF);
+	position[X] = MM_WIDTH * 4 / 2;
+	position[Y] = MM_HEIGHT * 4 / 2;
+	dimensions[X] = 4;
+	dimensions[Y] = 4;
+	draw_rect(data, position, dimensions, 0x00FFEEFF);
 	mlx_put_image_to_window(data->mlx, data->win, data->img[0].img, 0, 0);
 }
