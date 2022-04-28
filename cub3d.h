@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mal-guna <mal-guna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: athekkep <athekkep@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/04/28 12:28:40 by mal-guna         ###   ########.fr       */
+/*   Updated: 2022/04/28 18:54:21 by athekkep         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@
 # define EAST_TEXT 9
 
 /* Minimap */
-# define MM_BACKGROUND 0x00f0f8ff
+# define MM_BKGRND 0x00f0f8ff
 # define MM_BORDER 0x00480607
 # define MM_GROUND 0x00000000
 # define MM_WALL 0x00154360
@@ -62,28 +62,28 @@
 # define FLAME_MAP_L 7 // map index
 
 /* Linux Keys */
-# define KEY_RIGHT 65363
-# define KEY_LEFT 65361
-# define KEY_W 119
-# define KEY_S 115
-# define KEY_A 97
-# define KEY_D 100
-# define DOORS 101 // E
-# define ESC 65307
+//# define KEY_RIGHT 65363
+//# define KEY_LEFT 65361
+//# define KEY_W 119
+//# define KEY_S 115
+//# define KEY_A 97
+//# define KEY_D 100
+//# define DOORS 101 // E
+//# define ESC 65307
 
 /* Miscellaneous */
 # define Y 0
 # define X 1
 
 /* Mac Keys */
-// #define KEY_RIGHT 124
-// #define KEY_LEFT 123
-// #define KEY_W 13
-// #define KEY_S 1
-// #define KEY_A 0
-// #define KEY_D 2
-// #define DOORS 14
-// #define ESC 53
+#define KEY_RIGHT 124
+#define KEY_LEFT 123
+#define KEY_W 13
+#define KEY_S 1
+#define KEY_A 0
+#define KEY_D 2
+#define DOORS 14
+#define ESC 53
 
 typedef struct s_ray
 {
@@ -146,7 +146,6 @@ typedef struct s_data
 }					t_data;
 
 /* cub3d.c */
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	add_asset_to_image(t_data *data, int x, int y, int asset);
 void	init_rays_mag(t_data *data);
 
@@ -154,6 +153,18 @@ void	init_rays_mag(t_data *data);
 void	draw_player(t_data *data, int x, int y, int r);
 void	draw_rect(t_data *data, int x, int y, int width, int height, int color);
 void	draw_line(t_data *data, double x1, double x2, double y1, double y2);
+
+/* draw.c */
+void	draw_3d(t_data *data, int i);
+void	printMap(t_data *data);
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void	add_asset_to_image(t_data *data, int x, int y, int asset);
+
+/* draw_utils.c */
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+int		get_t(int trgb);
+double	get_ray_distance(t_data *data, int i, int obj);
+int		img_color(t_data *data, int i, int tex_pos, int obj_index);
 
 /* ray_caster.c */
 void	check_line(t_data *data);
@@ -175,12 +186,6 @@ void	init_rays(t_data *data);
 /* move_player.c */
 void	rotate(t_data *data, int dir, int i);
 void	move(t_data *data, int dir);
-
-/* draw.c */
-void	draw_3d(t_data *data);
-void	printMap(t_data *data);
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-void	add_asset_to_image(t_data *data, int x, int y, int asset);
 
 /* parser.c */
 int		parse_map(t_data *data, int argc, char **argv);
