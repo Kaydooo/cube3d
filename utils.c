@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: athekkep <athekkep@42abudhabi.ae>          +#+  +:+       +#+        */
+/*   By: mal-guna <m3t9mm@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 20:14:31 by athekkep          #+#    #+#             */
-/*   Updated: 2022/04/28 20:14:33 by athekkep         ###   ########.fr       */
+/*   Updated: 2022/04/28 22:23:55 by mal-guna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,10 @@ int	color_atoi(const char *str)
 		i++;
 	if (str[i] == '-')
 		sign = -1;
-	while (str[i] != '\0' && ft_isdigit(str[i]))
+	while (str[i] != '\0')
 	{
+		if(!ft_isdigit(str[i]))
+			return (-1);
 		num = (num * 10) + (str[i] - '0');
 		i++;
 	}

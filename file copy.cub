@@ -7,7 +7,7 @@ NO ./assets/North.xpm
 
 
 
-F 0,055,055
+F 0,055,aaa
 SO ./assets/South.xpm 
 WE ./assets/West.xpm 
 
