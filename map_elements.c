@@ -6,7 +6,7 @@
 /*   By: athekkep <athekkep@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 13:27:35 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/04/28 20:04:21 by athekkep         ###   ########.fr       */
+/*   Updated: 2022/04/28 21:28:53 by athekkep         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,8 @@ void	check_elements(t_data *data)
 	char	**split_line;
 	char	*temp;
 
-	while (++data->index < 6)
+	data->index = 0;
+	while (data->index < 6)
 	{
 		line = get_next_line(data->config_fd);
 		if (!line)
@@ -107,5 +108,6 @@ void	check_elements(t_data *data)
 		free(line);
 		if (data->index == -2)
 			print_error(data, "Wrong Config File");
+		data->index++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: athekkep <athekkep@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/04/28 20:15:56 by athekkep         ###   ########.fr       */
+/*   Updated: 2022/04/28 21:17:47 by athekkep         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # define ROTATION_SPEED 0.04
 # define ONE_DEGREE_RAD 0.00174533
 # define BLOCK_SIZE 32
-# define SPEED 1
+# define SPEED 2
 
 /* Texture Indices */
 # define NORTH_TEXT 6
