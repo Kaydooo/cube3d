@@ -6,7 +6,7 @@
 /*   By: athekkep <athekkep@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 20:13:42 by athekkep          #+#    #+#             */
-/*   Updated: 2022/04/29 13:25:26 by athekkep         ###   ########.fr       */
+/*   Updated: 2022/04/29 13:32:10 by athekkep         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	img_color(t_data *data, int i, int tex_pos, int obj_index)
 		hit_point = ray.hit_point;
 	}
 	color = *(unsigned int *)(img.addr + (tex_pos & (img.hieght - 1))
-		* img.line_length + hit_point * img.bits_per_pixel / 8);
+			* img.line_length + hit_point * img.bits_per_pixel / 8);
 	if (!color && obj_index >= 0)
 		return (0x10000000);
 	return (color);
