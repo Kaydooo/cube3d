@@ -6,7 +6,7 @@
 /*   By: athekkep <athekkep@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 20:13:42 by athekkep          #+#    #+#             */
-/*   Updated: 2022/04/29 13:13:37 by athekkep         ###   ########.fr       */
+/*   Updated: 2022/04/29 13:25:26 by athekkep         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int	img_color(t_data *data, int i, int tex_pos, int obj_index)
 	t_ray		ray;
 	t_image		img;
 	int			hit_point;
+	int			color;
 
 	ray = data->player.rays[i];
 	if (obj_index >= 0)
@@ -55,8 +56,11 @@ int	img_color(t_data *data, int i, int tex_pos, int obj_index)
 		img = data->img[ray.direction];
 		hit_point = ray.hit_point;
 	}
-	return (*(unsigned int *)(img.addr + (tex_pos & (img.hieght - 1))
-		* img.line_length + hit_point * img.bits_per_pixel / 8));
+	color = *(unsigned int *)(img.addr + (tex_pos & (img.hieght - 1))
+		* img.line_length + hit_point * img.bits_per_pixel / 8);
+	if (!color && obj_index >= 0)
+		return (0x10000000);
+	return (color);
 }
 
 void	init_minimap(t_data *data)

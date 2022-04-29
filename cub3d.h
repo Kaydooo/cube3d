@@ -6,7 +6,7 @@
 /*   By: athekkep <athekkep@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/04/29 13:14:06 by athekkep         ###   ########.fr       */
+/*   Updated: 2022/04/29 13:27:41 by athekkep         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@
 # define MM_BORDER 0x00480607
 # define MM_GROUND 0x00808080
 # define MM_WALL 0x00154360
-# define MM_DOOR 0x009FE2BF
-# define MM_FLAME 0x008B0000
+# define MM_DOOR 0x00FFB129
+# define MM_FLAME 0x00299CFF
 # define MM_WIDTH 50
 # define MM_HEIGHT 50
 
