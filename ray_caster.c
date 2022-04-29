@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_caster.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: athekkep <athekkep@42abudhabi.ae>          +#+  +:+       +#+        */
+/*   By: athekkep <athekkep@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 20:14:07 by athekkep          #+#    #+#             */
-/*   Updated: 2022/04/28 20:14:09 by athekkep         ###   ########.fr       */
+/*   Updated: 2022/04/29 14:40:32 by athekkep         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,10 +107,10 @@ void	raycast(t_data *data, double *diff, int i, int *dir)
 	rotate(data, 0, i);
 	data->player.rays[i].direction = dir[j];
 	data->player.rays[i].hit_point = (int)
-		round(data->player.rays[i].ray_y) % data->img[dir[j]].width;
+		round(data->player.rays[i].ray_y) % 32; //data->img[dir[j]].width;
 	if (j == 0)
 		data->player.rays[i].hit_point = (int)
-			round(data->player.rays[i].ray_x) % data->img[dir[j]].width;
+			round(data->player.rays[i].ray_x) % 32; //data->img[dir[j]].width;
 	dir[2] = j;
 	if (!check_wall(data, i, dir, nxt_pt))
 		raycast(data, diff, i, dir);
