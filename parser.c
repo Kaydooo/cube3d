@@ -6,7 +6,7 @@
 /*   By: mal-guna <m3t9mm@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 14:40:37 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/04/28 22:19:52 by mal-guna         ###   ########.fr       */
+/*   Updated: 2022/04/29 15:31:50 by mal-guna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ int	parse_map(t_data *data, int argc, char **argv)
 {
 	check_map_name(data, argc, argv);
 	check_elements(data);
-	if (!data->no_path || !data->so_path || !data->we_path || !data->ea_path)
+	if (!data->no_path || !data->so_path || !data->we_path || !data->ea_path || \
+	!data->c_color_count || !data->f_color_count)
 		print_error(data, "Wrong Config File");
 	parse_map_contents(data);
 	validate_map_contents(data);

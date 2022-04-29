@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_elements.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: athekkep <athekkep@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mal-guna <m3t9mm@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 13:27:35 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/04/29 14:20:09 by athekkep         ###   ########.fr       */
+/*   Updated: 2022/04/29 15:48:14 by mal-guna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,13 @@ int	handle_color(t_data *data, char **split_line)
 	{
 		if (read_color(data, split_line, 'F'))
 			return (1);
+		data->f_color_count++;
 	}
 	else if (!strncmp(split_line[0], "C", 2))
 	{
 		if (read_color(data, split_line, 'C'))
 			return (1);
+		data->c_color_count++;
 	}
 	else
 		return (1);
@@ -81,6 +83,12 @@ int	handle_elements(t_data *data, char **split_line)
 	return (0);
 }
 
+void	norm_free(char *str1, char **str2)
+{
+	free_2d(&str2);
+	free(str1);
+}
+
 void	check_elements(t_data *data)
 {
 	char	*line;
@@ -103,8 +111,7 @@ void	check_elements(t_data *data)
 		split_line = ft_split(line, ' ');
 		if (handle_elements(data, split_line))
 			data->index = -2;
-		free_2d(&split_line);
-		free(line);
+		norm_free(line, split_line);
 		if (data->index == -2)
 			print_error(data, "Wrong Config File");
 		data->index++;

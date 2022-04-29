@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: athekkep <athekkep@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mal-guna <m3t9mm@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/04/29 13:27:41 by athekkep         ###   ########.fr       */
+/*   Updated: 2022/04/29 15:45:58 by mal-guna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define HEIGHT 768
 # define WIDTH 768
 # define ROTATION_SPEED 0.04
-# define ONE_DEGREE_RAD 0.0174533/15
+# define ONE_DEGREE_RAD 0.00116355333
 # define BLOCK_SIZE 32
 # define SPEED 1
 
@@ -50,16 +50,16 @@
 # define MM_HEIGHT 50
 
 /* Door sprite */
-# define DOOR_CLOS 10 // img index
-# define DOOR_OPEN 13 // img index
-# define DOOR_MAP_C 3 // map index
-# define DOOR_MAP_O 4 // map index
+# define DOOR_CLOS 10
+# define DOOR_OPEN 13
+# define DOOR_MAP_C 3
+# define DOOR_MAP_O 4
 
 /* Flame sprite */
-# define FLAME_FRST 14 // img index of first sprite
-# define FLAME_LAST 31 // img index of last sprite
-# define FLAME_MAP_F 5 // map index
-# define FLAME_MAP_L 7 // map index
+# define FLAME_FRST 14
+# define FLAME_LAST 31
+# define FLAME_MAP_F 5
+# define FLAME_MAP_L 7
 
 /* Linux Keys */
 //# define KEY_RIGHT 65363
@@ -144,6 +144,8 @@ typedef struct s_data
 	double			start_angle;
 	int				index;
 	int				wrong_door;
+	int				c_color_count;
+	int				f_color_count;
 	char			**map;
 }				t_data;
 

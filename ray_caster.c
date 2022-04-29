@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_caster.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: athekkep <athekkep@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mal-guna <m3t9mm@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 20:14:07 by athekkep          #+#    #+#             */
-/*   Updated: 2022/04/29 14:40:32 by athekkep         ###   ########.fr       */
+/*   Updated: 2022/04/29 16:01:13 by mal-guna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,10 +107,10 @@ void	raycast(t_data *data, double *diff, int i, int *dir)
 	rotate(data, 0, i);
 	data->player.rays[i].direction = dir[j];
 	data->player.rays[i].hit_point = (int)
-		round(data->player.rays[i].ray_y) % 32; //data->img[dir[j]].width;
+		round(data->player.rays[i].ray_y) % 32;
 	if (j == 0)
 		data->player.rays[i].hit_point = (int)
-			round(data->player.rays[i].ray_x) % 32; //data->img[dir[j]].width;
+			round(data->player.rays[i].ray_x) % 32;
 	dir[2] = j;
 	if (!check_wall(data, i, dir, nxt_pt))
 		raycast(data, diff, i, dir);
@@ -176,7 +176,6 @@ void ray_se(t_data *data, double dx, double dy, int i)
 	double	p2;
 	data->player.rays[i].mag = 0.1;
 	rotate(data, 0, i);
-
 	while(1)
 	{
 		dx = data->player.rays[i].ray_x - data->player.x;
@@ -185,7 +184,6 @@ void ray_se(t_data *data, double dx, double dy, int i)
 		p2 = (data->player.rays[i].ray_y + 0.00001) / 32  + 1;
 		next_xpoint = (int) p1 * 32;
 		next_ypoint = (int) p2 * 32;
-
 		if(next_ypoint > data->map_height * 32 || next_xpoint
 		> data->map_width * 32 || next_ypoint < 0 || next_xpoint < 0)
 			break ;
@@ -215,7 +213,6 @@ void ray_se(t_data *data, double dx, double dy, int i)
 		}
 	}
 }
-
 void ray_ne(t_data *data, double dx, double dy, int i)
 {
 	int		next_xpoint;
@@ -266,8 +263,6 @@ void ray_ne(t_data *data, double dx, double dy, int i)
 		}
 	}
 }
-
-
 void ray_nw(t_data *data, double dx, double dy, int i)
 {
 	int		next_xpoint;
@@ -313,11 +308,9 @@ void ray_nw(t_data *data, double dx, double dy, int i)
 			if(insdie_wall(data, ((int)(data->player.rays[i].ray_x + 0.00001) / 32),
 			 (((int)(data->player.rays[i].ray_y+0.00001) )/ 32) -1, i))
 				break;
-
 		}
 	}
 }
-
 void ray_sw(t_data *data, double dx, double dy, int i)
 {
 	int		next_xpoint;
@@ -327,7 +320,6 @@ void ray_sw(t_data *data, double dx, double dy, int i)
 	//printf("4\n");
 	data->player.rays[i].mag = 0.1;
 	rotate(data, 0, i);
-
 	while(1)
 	{
 		dx = data->player.rays[i].ray_x - data->player.x;

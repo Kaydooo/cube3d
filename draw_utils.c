@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: athekkep <athekkep@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mal-guna <m3t9mm@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 20:13:42 by athekkep          #+#    #+#             */
-/*   Updated: 2022/04/29 13:32:10 by athekkep         ###   ########.fr       */
+/*   Updated: 2022/04/29 15:35:02 by mal-guna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,4 @@ void	init_minimap(t_data *data)
 	dimensions[X] = (MM_WIDTH + 3) * 4;
 	dimensions[Y] = (MM_HEIGHT + 3) * 4;
 	draw_rect(data, position, dimensions, MM_BORDER);
-/*	position[X] = 3;
-	position[Y] = 3;
-	dimensions[X] = (MM_WIDTH + 1) * 4;
-	dimensions[Y] = (MM_HEIGHT + 1) * 4;
-	draw_rect(data, position, dimensions, MM_BKGRND);*/
 }
