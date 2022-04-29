@@ -6,7 +6,7 @@
 /*   By: athekkep <athekkep@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:39:32 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/04/28 19:42:38 by athekkep         ###   ########.fr       */
+/*   Updated: 2022/04/29 12:48:38 by athekkep         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void	find_player(t_data *data)
 			if (data->map[y][x] != 'N' && data->map[y][x] != 'S'
 				&& data->map[y][x] != 'W' && data->map[y][x] != 'E')
 				continue ;
-			data->player.x = x * BLOCK_SIZE;
-			data->player.y = y * BLOCK_SIZE;
+			data->player.x = (x * BLOCK_SIZE) + (BLOCK_SIZE / 2);
+			data->player.y = (y * BLOCK_SIZE) + (BLOCK_SIZE / 2);
 			init_rays_mag(data);
 			data->map[y][x] = '0';
 			return ;

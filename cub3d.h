@@ -6,7 +6,7 @@
 /*   By: athekkep <athekkep@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/04/28 21:17:47 by athekkep         ###   ########.fr       */
+/*   Updated: 2022/04/29 13:14:06 by athekkep         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@
 # define HEIGHT 768
 # define WIDTH 768
 # define ROTATION_SPEED 0.04
-# define ONE_DEGREE_RAD 0.00174533
+# define ONE_DEGREE_RAD 0.0174533/15
 # define BLOCK_SIZE 32
-# define SPEED 2
+# define SPEED 1
 
 /* Texture Indices */
 # define NORTH_TEXT 6
@@ -40,9 +40,9 @@
 # define EAST_TEXT 9
 
 /* Minimap */
-# define MM_BKGRND 0x00f0f8ff
+//# define MM_BKGRND 0x11f0f8ff
 # define MM_BORDER 0x00480607
-# define MM_GROUND 0x00000000
+# define MM_GROUND 0x00808080
 # define MM_WALL 0x00154360
 # define MM_DOOR 0x009FE2BF
 # define MM_FLAME 0x008B0000
