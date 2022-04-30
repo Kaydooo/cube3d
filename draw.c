@@ -1,136 +1,128 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: athekkep <athekkep@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/28 20:13:30 by athekkep          #+#    #+#             */
+/*   Updated: 2022/04/29 13:45:24 by athekkep         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+void	draw_obj(t_data *data, int i, int obj_index)
 {
-	void	*dst;
+	double	height;
+	int		draw[2];
+	double	inc;
+	double	tex_pos;
 
-	dst = data->img[0].addr + (y * data->img[0].line_length + x * (data->img[0].bits_per_pixel / 8));
-	*(unsigned int*)dst = color;	
-}
-
-static int	get_t(int trgb)
-{
-	return ((trgb >> 24) & 0xFF);
-}
-
-void	draw_obj(t_data *data, int i, int x)
-{
-	int obj_index = data->player.rays[i].obj_num;
-	while (obj_index-- > 0)
+	height = (BLOCK_SIZE * HEIGHT) / get_ray_distance(data, i, obj_index);
+	draw[0] = -height / 2 + (HEIGHT / 2);
+	if (draw[0] < 0)
+		draw[0] = 0;
+	draw[1] = (height / 2) + (HEIGHT / 2);
+	inc = (float)data->img[data->player.rays[i].obj_direction[obj_index]].hieght
+		/ height;
+	tex_pos = (draw[0] - HEIGHT / 2 + height / 2) * inc;
+	while (draw[0] < draw[1] && draw[0] < HEIGHT)
 	{
-		double height;
-		int playerRay = data->no_rays/2;
-		double distance;
-
-		if(i <= playerRay)
-			distance = data->player.rays[i].obj_mag[obj_index] * cos(data->player.rays[playerRay].rot - data->player.rays[i].rot);
-		else
-			distance = data->player.rays[i].obj_mag[obj_index] * cos(data->player.rays[i].rot - data->player.rays[playerRay].rot);
-		height = (BLOCK_SIZE * 768)/distance;
-		int drawStart = -height/2 + (768 / 2);
-		if(drawStart < 0)
-			drawStart = 0;
-		int drawEnd = (height/2) + (768 / 2);
-		if(drawEnd >= 768)
-			drawEnd = 768 - 1;
-		void	*dst;
-		void	*dst2;
-		double inc = (float)data->img[data->player.rays[i].obj_direction[obj_index]].hieght/height;
-		double texPos = (drawStart - 768/2 + height / 2) * inc;
-		int y1 = drawStart;
-		while(y1<drawEnd)
-		{
-			int texY = (int)texPos & (data->img[data->player.rays[i].obj_direction[obj_index]].hieght - 1);
-			texPos += inc;
-			dst = data->img[0].addr + (y1 * data->img[0].line_length + x * (data->img[0].bits_per_pixel / 8));
-			dst2 = data->img[data->player.rays[i].obj_direction[obj_index]].addr + ((int)texY * data->img[data->player.rays[i].obj_direction[obj_index]].line_length + data->player.rays[i].obj_hit_point[obj_index] * (data->img[data->player.rays[i].obj_direction[obj_index]].bits_per_pixel / 8));
-		
-			if (!get_t(*(int *)dst2))
-				*(unsigned int*)(dst) = *(unsigned int*)(dst2);
-			y1++;
-		}
+		my_mlx_pixel_put(data, i, draw[0]++,
+			img_color(data, i, (int)tex_pos, obj_index));
+		tex_pos += inc;
 	}
 }
 
-void	draw_3d(t_data *data)
+void	draw_3d(t_data *data, int i)
 {
-	int i;
-	double height;
-	int x;
-	int playerRay = data->no_rays/2;
-	double distance;
-	i = 0;
-	x = 0;
-	while(i < data->no_rays)
+	double	height;
+	int		draw[3];
+	double	inc;
+	double	tex_pos;
+
+	height = (BLOCK_SIZE * HEIGHT) / get_ray_distance(data, i, -1);
+	draw[0] = -height / 2 + (HEIGHT / 2);
+	if (draw[0] < 0)
+		draw[0] = 0;
+	draw[1] = (height / 2) + (HEIGHT / 2);
+	inc = (float)data->img[data->player.rays[i].direction].hieght / height;
+	tex_pos = (draw[0] - HEIGHT / 2 + height / 2) * inc;
+	while (draw[0] < draw[1] && draw[0] < HEIGHT)
 	{
-		if(i <= playerRay)
-			distance = data->player.rays[i].mag * cos(data->player.rays[i].rot - data->player.rays[playerRay].rot);
-		else
-			distance = data->player.rays[i].mag * cos(data->player.rays[playerRay].rot - data->player.rays[i].rot);
-		height = (BLOCK_SIZE * BLOCK_SIZE*data->map_height)/distance;
-	
-		int drawStart = -height/2 + (data->map_height*BLOCK_SIZE / 2);
-		if(drawStart < 0)
-			drawStart = 0;
-		int drawEnd = (height/2) + (data->map_height*BLOCK_SIZE / 2);
-		if(drawEnd >= data->map_height*BLOCK_SIZE)
-			drawEnd = data->map_height*BLOCK_SIZE - 1;
-		void	*dst;
-		void	*dst2;
-		double inc = (float)data->img[data->player.rays[i].direction].hieght/height;
-		double texPos = (drawStart - data->map_height*BLOCK_SIZE/2 + height / 2) * inc;
-		int y1 = drawStart;
-		while(y1<drawEnd)
-		{
-			int texY = (int)texPos & (data->img[data->player.rays[i].direction].hieght - 1);
-			texPos += inc;
-			dst = data->img[0].addr + (y1 * data->img[0].line_length + x * (data->img[0].bits_per_pixel / 8));
-			dst2 = data->img[data->player.rays[i].direction].addr + ((int)texY * data->img[data->player.rays[i].direction].line_length + data->player.rays[i].hit_point * (data->img[data->player.rays[i].direction].bits_per_pixel / 8));
-			*(unsigned int*)(dst) = *(unsigned int*)(dst2);
-			y1++;
-		}
-		if (data->player.rays[i].obj_direction[0])
-			draw_obj(data, i, x);
-		x += 1;
-		i++;
+		my_mlx_pixel_put(data, i, draw[0]++,
+			img_color(data, i, (int)tex_pos, -1));
+		tex_pos += inc;
 	}
+	draw[2] = data->player.rays[i].obj_num;
+	while (draw[2]-- > 0)
+		draw_obj(data, i, draw[2]);
 }
 
 void	draw_floor_cel(t_data *data)
 {
-	draw_rect(data, 0, 0, data->map_width*BLOCK_SIZE, data->map_height*BLOCK_SIZE/2, data->c_color);
-	draw_rect(data, 0, data->map_height*BLOCK_SIZE/2, data->map_width*BLOCK_SIZE, data->map_height*BLOCK_SIZE/2, data->f_color);
+	int	position[2];
+	int	dimensions[2];
+
+	position[X] = 0;
+	position[Y] = 0;
+	dimensions[X] = WIDTH;
+	dimensions[Y] = HEIGHT / 2;
+	draw_rect(data, position, dimensions, data->c_color);
+	position[Y] = HEIGHT / 2;
+	draw_rect(data, position, dimensions, data->f_color);
 }
 
-void	printMap(t_data *data, int count)
+void	draw_minimap(t_data *data, int i)
 {
-	int x;
-	int y;
+	int	pos[2];
+	int	start_draw[2];
+	int	dimensions[2];
 
-	if (count)
-		{}
-	x = 0;
-	y = 0;
+	pos[Y] = i;
+	pos[X] = -1;
+	dimensions[X] = 4;
+	dimensions[Y] = 4;
+	if (!(abs(pos[Y] - (int)data->player.y / BLOCK_SIZE) <= MM_HEIGHT / 2))
+		return ;
+	start_draw[Y] = (25 + (pos[Y] - (int)data->player.y / BLOCK_SIZE)) * 4;
+	while (data->map[pos[Y]][++pos[X]])
+	{
+		if (!(abs(pos[X] - (int)data->player.x / BLOCK_SIZE) < MM_WIDTH / 2))
+			continue ;
+		start_draw[X] = (25 + (pos[X] - (int)data->player.x / BLOCK_SIZE)) * 4;
+		if (data->map[pos[Y]][pos[X]] == '0')
+			draw_rect(data, start_draw, dimensions, MM_GROUND);
+		if (data->map[pos[Y]][pos[X]] == '1')
+			draw_rect(data, start_draw, dimensions, MM_WALL);
+		if (data->map[pos[Y]][pos[X]] == '3')
+			draw_rect(data, start_draw, dimensions, MM_DOOR);
+		if (data->map[pos[Y]][pos[X]] == '5')
+			draw_rect(data, start_draw, dimensions, MM_FLAME);
+	}
+}
+
+void	print_map(t_data *data)
+{
+	int	i;
+	int	position[2];
+	int	dimensions[2];
+
+	mlx_clear_window(data->mlx, data->win);
 	draw_floor_cel(data);
 	check_line(data);
-	draw_3d(data);
-	while(data->map[y])
-	{
-		x = 0;
-		while(data->map[y][x])
-		{
-			if(data->map[y][x] == '0')
-				draw_rect(data, x*4, y*4, 4, 4, 0xFF000000);
-			if(data->map[y][x] == '1')
-				draw_rect(data, x*4, y*4, 4, 4, 0xFF154360);
-			if(data->map[y][x] == '3')
-				draw_rect(data, x*4, y*4, 4, 4, 0xFF9FE2BF);
-			if(data->map[y][x] == '5')
-				draw_rect(data, x*4, y*4, 4, 4, 0xFF8B0000);
-			x++;
-		}
-		y++;
-	}
-	draw_rect(data,data->player.x/8, data->player.y/8, 3, 3, 0x00FF00FF);//player
-	mlx_put_image_to_window(data->mlx, data->win, data->img[0].img,0, 0);
+	i = -1;
+	while (++i < WIDTH)
+		draw_3d(data, i);
+	i = -1;
+	init_minimap(data);
+	while (data->map[++i])
+		draw_minimap(data, i);
+	position[X] = MM_WIDTH * 4 / 2;
+	position[Y] = MM_HEIGHT * 4 / 2;
+	dimensions[X] = 4;
+	dimensions[Y] = 4;
+	draw_rect(data, position, dimensions, 0x00FFEEFF);
+	mlx_put_image_to_window(data->mlx, data->win, data->img[0].img, 0, 0);
 }

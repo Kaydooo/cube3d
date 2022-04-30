@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mal-guna <mal-guna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mal-guna <m3t9mm@gmail.com>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/28 20:05:54 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/04/20 18:36:14 by mal-guna         ###   ########.fr       */
+/*   Updated: 2022/04/28 22:21:27 by mal-guna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ size_t	ft_strlen(const char *str)
 {
 	int	i;
 
-	if(!str)
+	if (!str)
 		return (0);
 	i = 0;
 	while (str[i] != '\0')
