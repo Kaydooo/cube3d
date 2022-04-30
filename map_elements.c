@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_elements.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mal-guna <m3t9mm@gmail.com>                +#+  +:+       +#+        */
+/*   By: mal-guna <mal-guna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/28 13:27:35 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/04/29 15:48:14 by mal-guna         ###   ########.fr       */
+/*   Updated: 2022/04/30 09:07:42 by mal-guna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	read_color(t_data *data, char **split_line, char type)
 	int		color[3];
 
 	color_split = ft_split(split_line[1], ',');
+	if (!color_split || !color_split[0] || !color_split[1] || !color_split[2])
+		print_error(data, "Wrong Config File");
 	color[0] = color_atoi(ft_strtrim(color_split[0], " \n"));
 	color[1] = color_atoi(ft_strtrim(color_split[1], " \n"));
 	color[2] = color_atoi(ft_strtrim(color_split[2], " \n"));
