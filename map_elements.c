@@ -18,7 +18,7 @@ int	read_color(t_data *data, char **split_line, char type)
 	int		color[3];
 
 	color_split = ft_split(split_line[1], ',');
-	if (!color_split || !color_split[0] || !color_split[1] || !color_split[2])
+	if (!color_split || ft_strlen_2d(color_split) != 3)
 		print_error(data, "Wrong Config File");
 	color[0] = color_atoi(ft_strtrim(color_split[0], " \n"));
 	color[1] = color_atoi(ft_strtrim(color_split[1], " \n"));
