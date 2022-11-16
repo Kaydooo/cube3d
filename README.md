@@ -1,3 +1,3 @@
 # cub3d
+Simple 3D game inspired by Wolfeinsitein3D using minilibx library and ray-casting.
 
-The goal of the project is to create a video game like Wolfenstein 3D using ray-casting.
