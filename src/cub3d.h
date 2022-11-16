@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mal-guna <m3t9mm@gmail.com>                +#+  +:+       +#+        */
+/*   By: mal-guna <mal-guna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 02:44:28 by mal-guna          #+#    #+#             */
-/*   Updated: 2022/04/29 15:45:58 by mal-guna         ###   ########.fr       */
+/*   Updated: 2022/11/16 10:53:02 by mal-guna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "libs/mlx_mac/mlx.h"
-# include "libs/libft/libft.h"
-# include "libs/gnl/get_next_line.h"
+# include "../libs/mlx_mac/mlx.h"
+# include "../libs/libft/libft.h"
+# include "../libs/gnl/get_next_line.h"
 # include <unistd.h>
 # include <stdio.h>
 # include <math.h>
@@ -62,14 +62,14 @@
 # define FLAME_MAP_L 7
 
 /* Linux Keys */
-//# define KEY_RIGHT 65363
-//# define KEY_LEFT 65361
-//# define KEY_W 119
-//# define KEY_S 115
-//# define KEY_A 97
-//# define KEY_D 100
-//# define DOORS 101 // E
-//# define ESC 65307
+// # define KEY_RIGHT 65363
+// # define KEY_LEFT 65361
+// # define KEY_W 119
+// # define KEY_S 115
+// # define KEY_A 97
+// # define KEY_D 100
+// # define DOORS 101 // E
+// # define ESC 65307
 
 /* Miscellaneous */
 # define Y 0

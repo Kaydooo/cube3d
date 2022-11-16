@@ -2,8 +2,8 @@
 # $@ "include target"
 # $^ "include the full list of prerequisites)"
 
-SRCS = cub3d.c draw_shapes.c ray_caster.c data_init.c move_player.c render.c draw.c utils.c	objects.c parser.c draw_utils.c \
-		exit.c sprite.c interaction.c rotate.c parser_utils.c map_elements.c parse_map.c map_contents.c validate_map.c
+SRCS = src/cub3d.c src/draw_shapes.c src/ray_caster.c src/data_init.c src/move_player.c src/render.c src/draw.c src/utils.c	src/objects.c src/parser.c \
+       src/draw_utils.c src/exit.c src/sprite.c src/interaction.c src/rotate.c src/parser_utils.c src/map_elements.c src/parse_map.c src/map_contents.c src/validate_map.c
 
 OBJS = ${SRCS:.c=.o}
 
